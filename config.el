@@ -148,6 +148,11 @@
 
  :leader
  :desc "Maximize window"
- "em" #'maximize-window)
+ "em" #'maximize-window
+
+ ;; Overwrite dooms defaults
+ :leader
+ :desc "Switch buffer"
+ "bb" #'counsel-switch-buffer)
 
 (load! "~/.doom.d/lisp/dndv5.el")

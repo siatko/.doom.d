@@ -198,7 +198,12 @@
 
  :leader
  :desc "Maximize window"
- "em" #'maximize-window)
+ "em" #'maximize-window
+
+ ;; Overwrite dooms defaults
+ :leader
+ :desc "Switch buffer"
+ "bb" #'counsel-switch-buffer)
 #+END_SRC
 * Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
