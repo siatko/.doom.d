@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: hashget
+# key: hg
+# --
+Hash::get($${1:row}, '$2')$0

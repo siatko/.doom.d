@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: annotation_line
+# key: vl
+# --
+/** @var ${1:String} $${2:variable} */$0

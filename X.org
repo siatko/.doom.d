@@ -1,0 +1,768 @@
+#+TITLE: X
+#+STARTUP: fold
+- M-x org-babel-tangle
+- [[Make all sh files executable][Make all sh files executable]] with C-c C-c
+* Dotfiles
+** alacritty
+*** alacritty.yml
+#+begin_src yaml :tangle ~/.config/alacritty/alacritty.yml :mkdirp yes
+font:
+  normal:
+    family: Hack
+    style: Regular
+
+  bold:
+    family: Hack
+    style: Bold
+
+  italic:
+    family: Hack
+    style: Italic
+
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+
+  size: 8
+
+# Colors (Dracula)
+colors:
+  # Default colors
+  primary:
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
+
+    # Bright and dim foreground colors
+    #
+    # The dimmed foreground color is calculated automatically if it is not present.
+    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # is `false`, the normal foreground color will be used.
+    #dim_foreground: '0x9a9a9a'
+    #bright_foreground: '0xffffff'
+
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
+  cursor:
+    text: '0x44475a'
+    cursor: '0xf8f8f2'
+
+  # Selection colors
+  #
+  # Colors which should be used to draw the selection area. If selection
+  # background is unset, selection color will be the inverse of the cell colors.
+  # If only text is unset the cell text color will remain the same.
+  selection:
+    text: '0xf8f8f2'
+    background: '0x44475a'
+
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xff5555'
+    green:   '0x50fa7b'
+    yellow:  '0xf1fa8c'
+    blue:    '0xbd93f9'
+    magenta: '0xff79c6'
+    cyan:    '0x8be9fd'
+    white:   '0xbfbfbf'
+
+  # Bright colors
+  bright:
+    black:   '0x4d4d4d'
+    red:     '0xff6e67'
+    green:   '0x5af78e'
+    yellow:  '0xf4f99d'
+    blue:    '0xcaa9fa'
+    magenta: '0xff92d0'
+    cyan:    '0x9aedfe'
+    white:   '0xe6e6e6'
+
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  dim:
+    black:   '0x14151b'
+    red:     '0xff2222'
+    green:   '0x1ef956'
+    yellow:  '0xebf85b'
+    blue:    '0x4d5b86'
+    magenta: '0xff46b0'
+    cyan:    '0x59dffc'
+    white:   '0xe6e6d1'
+
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #
+  # Example:
+  #   `- { index: 16, color: '0xff00ff' }`
+  #
+  indexed_colors: []
+
+mouse:
+    hide_when_typing: true
+#+END_SRC
+** bspwm
+*** bspwmrc
+#+begin_src sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes
+#! /bin/sh
+# ein test
+# autostart applications
+# simple x hotkey daemon
+sxhkd &
+# wallpaper
+nitrogen --set-scaled --save /data/Cloud/InstantUpload/OpenCamera/IMG_20200710_091314_HDR.jpg &
+# statusbar
+$HOME/.config/polybar/launch.sh &
+# compositor
+picom -CGb &
+# wlan
+sudo netctl start @home &
+# redshift bluelight filter
+redshift-gtk -l '47.7303:12.8816' &
+# bluetooth
+blueman-applet &
+# wm fix phpstorm
+wmname LG3D &
+# dunst
+dunst &
+# fusuma (gestures)
+fusuma &
+# nextcloud
+nextcloud &
+# emacs
+emacs &
+
+# set workspaces
+bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+
+# style
+bspc config border_width          3
+bspc config window_gap            0
+bspc config bottom_padding        0
+
+bspc config borderless_monocle    true
+bspc config gapless_monocle       false
+bspc config single_monocle        true
+
+bspc config normal_border_color "#282a36"
+bspc config focused_border_color "#50fa7b"
+bspc config urgent_border_color "#282a36"
+bspc config presel_border_color "#282a36"
+
+bspc config ignore_ewmh_focus true
+
+bspc rule -a Firefox follow=false
+bspc rule -a Emacs state=tiled
+#+END_SRC
+** dunst
+*** dunstrc
+#+begin_src config :tangle ~/.config/dunst/dunstrc :mkdirp yes
+[global]
+    monitor = 0
+    follow = mouse
+    geometry = "300x5-30+20"
+    indicate_hidden = yes
+    shrink = no
+    transparency = 0
+    notification_height = 0
+    separator_height = 2
+    padding = 8
+    horizontal_padding = 8
+    frame_width = 3
+    frame_color = "#ffffff"
+    separator_color = frame
+    sort = yes
+    idle_threshold = 120
+    font = Hack Nerd Font 12
+    line_height = 0
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    show_age_threshold = 60
+    word_wrap = yes
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+    icon_position = off
+    max_icon_size = 32
+    icon_path = /usr/share/icons/Papirus/16x16/devices:/usr/share/icons/Papirus/16x16/status
+    sticky_history = yes
+    history_length = 20
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/firefox -new-tab
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    startup_notification = false
+    verbosity = mesg
+    corner_radius = 0
+    force_xinerama = false
+    mouse_left_click = close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
+
+[experimental]
+    per_monitor_dpi = false
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#222222"
+    foreground = "#888888"
+    timeout = 10
+
+[urgency_normal]
+    background = "#285577"
+    foreground = "#ffffff"
+    timeout = 10
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
+    timeout = 0
+#+END_SRC
+** picom
+*** picom.conf
+#+begin_src config :tangle ~/.config/picom/picom.conf :mkdirp yes
+shadow = false;
+no-dnd-shadow = true;
+no-dock-shadow = true;
+clear-shadow = false;
+#+END_SRC
+** polybar
+*** config
+#+begin_src config :tangle ~/.config/polybar/config :mkdirp yes
+[colors]
+background = #E0282a36
+background-alt = #073642
+foreground = #ffb86c
+foreground-alt = #ffffff
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+red = #dc322f
+
+[bar/cerebrum]
+top = true
+width = 100%
+height = 30
+radius = 0.0
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-size = 0
+line-size = 5
+border-color = #00000000
+padding-left = 0
+padding-right = 2
+module-margin-left = 2
+module-margin-right = 2
+font-0 = FontAwesome:size=13;0
+font-1 = Hack:pixelsize=13;0
+modules-left = bspwm
+modules-center =
+modules-right = alsa wlan cpu memory eth temperature_cpu temperature_gpu root data arch-updates battery date
+tray-position = right
+tray-padding = 5
+cursor-click = pointer
+cursor-scroll = ns-resize
+wm-restack = bspwm
+margin-top = 0
+
+[module/temperature_cpu]
+type = internal/temperature
+thermal-zone = 5
+warn-temperature = 85
+format = <ramp> <label>
+format-underline = #ffffff
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+label =  CPU %temperature%
+label-warn =  CPU %temperature%
+label-warn-foreground =  #bd93f9
+label-foreground = #bd93f9
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/temperature_gpu]
+type = internal/temperature
+thermal-zone = 4
+warn-temperature = 85
+format = <ramp> <label>
+format-underline = #ffffff
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+label =  GPU %temperature%
+label-warn =  GPU %temperature%
+label-warn-foreground =  #bd93f9
+label-foreground = #bd93f9
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/arch-updates]
+type = custom/script
+exec = ~/.config/polybar/scripts/arch-updates.sh
+interval = 60
+format-underline = #ffffff
+format-foreground = #50fa7b
+
+[module/root]
+type = internal/fs
+mount-0 = /
+interval = 30
+fixed-values = true
+spacing = 4
+label-mounted =  / %percentage_used%%
+label-mounted-foreground = #f1fa8c
+line-size = 0
+format-mounted-underline = #ffffff
+
+[module/data]
+type = internal/fs
+mount-0 = /data
+interval = 30
+fixed-values = true
+spacing = 4
+label-mounted =  /data %percentage_used%%
+label-mounted-foreground = #f1fa8c
+line-size = 0
+format-mounted-underline = #ffffff
+
+[module/bspwm]
+type = internal/bspwm
+label-focused = %index%
+label-focused-background = #282a36
+label-focused-foreground = #50fa7b
+label-focused-underline= #ffb52a
+label-focused-padding = 2
+label-occupied = %index%
+label-occupied-foreground = #50fa7b
+label-occupied-padding = 2
+label-urgent = %index%
+label-urgent-background = #50fa7b
+label-urgent-padding = 2
+label-empty = %index%
+label-empty-foreground = #ffffff
+label-empty-padding = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format-prefix =
+format =  <label> <ramp-coreload>
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #ffffff
+label = %percentage:2%%
+ramp-coreload-spacing = 0
+ramp-coreload-font = 3
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/memory]
+type = internal/memory
+interval = 5
+format-prefix-foreground = ${colors.foreground-alt}
+label =  %percentage_used%%
+label-foreground = #50fa7b
+format-underline = #ffffff
+
+[module/wlan]
+type = internal/network
+interface = wlo1
+interval = 1
+format-connected = <label-connected>
+format-connected-underline = #ffffff
+label-connected = 
+label-connected-foreground = #ff79c6
+format-disconnected = offline
+
+
+[module/date]
+type = internal/date
+interval = 15
+date = %y%m%d
+time = %H:%M
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+label =   %date%  %time%
+label-foreground = #ffffff
+line-size = 0
+format-underline = #ffffff
+
+[module/alsa]
+type = internal/alsa
+format-volume = <label-volume>
+label-volume = " %percentage%%"
+label-volume-foreground = #8be9fd
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = " muted"
+format-volume-underline = #ffffff
+format-muted-underline = #12345
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = AC
+full-at = 100
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffffff
+format-charging-foreground = #8be9fd
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = #ffffff
+format-discharging-foreground = #8be9fd
+format-full-underline= #ffffff
+format-full-foreground = #8be9df
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full =  
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+bar-capacity-width = 10
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 500
+#+END_SRC
+*** launch.sh
+#+begin_src sh :tangle ~/.config/polybar/launch.sh :mkdirp yes
+#! /usr/bin/env sh
+
+killall -q polybar
+
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+
+MONITOR=eDP-1-1 polybar --reload cerebrum &
+#+END_SRC
+*** scripts
+*** arch-updates.sh
+#+begin_src sh :tangle ~/.config/polybar/scripts/arch-updates.sh :mkdirp yes
+#!/bin/sh
+
+if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
+    updates_arch=0
+fi
+
+if ! updates_aur=$(yay -Qum 2> /dev/null | wc -l); then
+    updates_aur=0
+fi
+
+updates=$(("$updates_arch" + "$updates_aur"))
+
+echo " $updates"
+#+END_SRC
+** rofi
+*** config.rasi
+#+begin_src yaml :tangle ~/.config/rofi/config.rasi :mkdirp yes
+/*Dracula theme based on the Purple official rofi theme*/
+
+.* {
+    font: "Jetbrains Mono 12";
+    foreground: #f8f8f2;
+    background-color: #282a36;
+    active-background: #6272a4;
+    urgent-background: #ff5555;
+    selected-background: @active-background;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
+}
+
+#window {
+    background-color: @background;
+    border:           1;
+    border-radius: 6;
+    border-color: @bordercolor;
+    padding:          5;
+}
+#mainbox {
+    border:  0;
+    padding: 0;
+}
+#message {
+    border:       1px dash 0px 0px ;
+    border-color: @separatorcolor;
+    padding:      1px ;
+}
+#textbox {
+    text-color: @foreground;
+}
+#listview {
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+    border-color: @bordercolor;
+    spacing:      2px ;
+    scrollbar:    false;
+    padding:      2px 0px 0px ;
+}
+#element {
+    border:  0;
+    padding: 1px ;
+}
+#element.normal.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+#element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+#element.normal.active {
+    background-color: @active-background;
+    text-color:       @foreground;
+}
+#element.selected.normal {
+    background-color: @selected-background;
+    text-color:       @foreground;
+}
+#element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @foreground;
+}
+#element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @foreground;
+}
+#element.alternate.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+#element.alternate.urgent {
+    background-color: @urgent-background;
+    text-color:       @foreground;
+}
+#element.alternate.active {
+    background-color: @active-background;
+    text-color:       @foreground;
+}
+#scrollbar {
+    width:        2px ;
+    border:       0;
+    handle-width: 8px ;
+    padding:      0;
+}
+#sidebar {
+    border:       2px dash 0px 0px ;
+    border-color: @separatorcolor;
+}
+#button.selected {
+    background-color: @selected-background;
+    text-color:       @foreground;
+}
+#inputbar {
+    spacing:    0;
+    text-color: @foreground;
+    padding:    1px ;
+}
+#case-indicator {
+    spacing:    0;
+    text-color: @foreground;
+}
+#entry {
+    spacing:    0;
+    text-color: @foreground;
+}
+#prompt {
+    spacing:    0;
+    text-color: @foreground;
+}
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @foreground;
+}
+#+END_SRC
+** sxhkd
+*** sxhkdrc
+#+begin_src config :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
+## Application hotkeys Run rofi application launcher
+super + d
+    rofi -location 0 -show drun -display-drun '' -show-icons -icon-theme papirus
+
+# Run rofi window switcher
+super + w rofi -location 0 -show window -display-window '' -show-icons -icon-theme papirus
+
+# Terminal emulator
+super + Return
+    alacritty
+
+# Open firefox
+super + shift + Return
+    firefox --new-instance --ProfileManager
+
+# File manager
+super + e
+    thunar
+
+# Ping
+shift + F9
+    mh-ping
+
+# Screenshot
+shift + Print
+    gnome-screenshot --interactive
+
+## Media keys
+# Volume
+super + F2
+    pactl set-sink-volume 0 +1%
+super + F1
+    pactl set-sink-volume 0 -1%
+super + F3
+    pactl set-sink-mute 0 toggle
+
+# Screen backlight
+super + shift + F2
+    sudo light -A 5
+super + shift + F1
+    sudo light -U 5
+super + shift + F3
+    sudo light -S 100
+
+
+## sxhkd hotkeys
+# Reload sxhkd configuration files
+super + Escape
+    pkill -USR1 -x sxhkd
+
+
+## bspwm hotkeys
+# Restart bspwm
+super + shift + r
+    killall redshift && bspc wm -r
+
+# Quit bspwm
+super + shift + e
+    bspc quit
+
+# Close and kill
+super + {shift, alt} + q
+    bspc node -{c, k}
+
+# Alternate between the tiled and monocle layout
+super + m
+    bspc desktop -l next
+
+# Send the newest marked node to the newest preselected node
+super + y
+    bspc node newest.marked.local -n newest.!automatic.local
+
+# Swap the current node and the biggest node
+super + g
+    bspc node -s biggest
+
+
+## State/flags
+# Set the window state
+super + {t,shift + t,s,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Set the node flags
+super + ctrl + {m,x,y,z}
+    bspc node -g {marked,locked,sticky,private}
+
+
+## Focus/swap
+# Focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+# Focus the node for the given path jump
+super + {p,b,comma,period}
+    bspc node -f @{parent,brother,first,second}
+
+# Focus the next/previous node in the current desktop
+super + {_,shift + }n
+    bspc node -f {next,prev}.local
+
+# Focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+    bspc desktop -f {prev,next}.local
+
+# Focus the last node/desktop
+super + {grave,Tab}
+    bspc {node,desktop} -f last
+
+# Focus the older or newer node in the focus history
+super + {o,i}
+    bspc wm -h off; \
+    bspc node {older,newer} -f; \
+    bspc wm -h on
+
+# Focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+
+## Preselect
+# Preselect the direction
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+# Preselect the ratio
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# Cancel the preselection for the focused node
+super + ctrl + space
+    bspc node -p cancel
+
+# Cancel the preselection for the focused desktop
+super + ctrl + shift + space
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+## Move/resize
+# Expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# Move a floating window
+super + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+#+END_SRC
+* Make all sh files executable
+#+BEGIN_SRC sh
+chmod u+x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc ~/.config/polybar/launch.sh ~/.config/polybar/scripts/arch-updates.sh
+#+END_SRC

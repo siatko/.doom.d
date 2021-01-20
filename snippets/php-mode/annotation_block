@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: annotation_block
+# key: vb
+# --
+/**
+ * @var ${1:String} $${2:variable}$0
+ */
