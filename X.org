@@ -2,6 +2,13 @@
 #+STARTUP: fold
 - M-x org-babel-tangle
 - [[Make all sh files executable][Make all sh files executable]] with C-c C-c
+* Install AUR helper
+#+BEGIN_SRC sh
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+#+END_SRC
 * Dotfiles
 ** alacritty
 *** alacritty.yml
@@ -762,7 +769,48 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
 #+END_SRC
+** zsh
+*** zshrc
+#+begin_src sh :tangle ~/.zshrc :mkdirp yes
+export ZSH="/home/siatwe/.oh-my-zsh"
+export LC_ALL="en_US.UTF-8"
+export EDITOR='nvim'
+export UPDATE_ZSH_DAYS=30
+
+export ANDROID_HOME=/opt/android-sdk
+export PATH="$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+
+export PATH="$PATH:/home/siatwe/Projects/flutter/bin"
+# set
+ZSH_THEME="eastwood"
+TERM=xterm-256color
+
+#  plugins
+plugins=(
+  git
+)
+
+# aliases
+alias ytd='youtube-dl --extract-audio --audio-format mp3 -i -o "%(title)s.%(ext)s" '
+alias :q="exit"
+alias 55="cd /data/55"
+alias 53="cd /data/53"
+alias pl="pacman -Qqe > ~/.package.list"
+alias ping="ping -c 3"
+alias ds="docker_start_restart"
+
+# Oh my zsh
+source $ZSH/oh-my-zsh.sh
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--layout=reverse'
+#+END_SRC
 * Make all sh files executable
 #+BEGIN_SRC sh
 chmod u+x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc ~/.config/polybar/launch.sh ~/.config/polybar/scripts/arch-updates.sh
 #+END_SRC
+* List all installed packages
+#+BEGIN_SRC sh
+pacman -Qqe
+#+END_SRC
+
