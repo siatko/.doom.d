@@ -148,6 +148,7 @@
 ** Eshell
 #+BEGIN_SRC emacs-lisp
 (use-package! eshell
+  :config
   (setq eshell-prompt-function
         (lambda ()
           (concat (eshell/pwd) " λ "))))

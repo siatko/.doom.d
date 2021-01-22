@@ -106,6 +106,7 @@
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
 
 (use-package! eshell
+  :config
   (setq eshell-prompt-function
         (lambda ()
           (concat (eshell/pwd) " λ "))))
