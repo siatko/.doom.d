@@ -240,6 +240,529 @@ bspc rule -a Emacs state=tiled
     frame_color = "#ff0000"
     timeout = 0
 #+END_SRC
+** fusuma
+*** config.yml
+#+begin_src yaml :tangle ~/.config/fusuma/config.yml :mkdirp yes
+swipe:
+  3:
+    left:
+      command: "bspc desktop -f next"
+    right:
+      command: "bspc desktop -f prev"
+#+END_SRC
+** neovim
+*** init.vim (vscode)
+#+begin_src vim :tangle ~/.config/nvim/init.vim :mkdirp yes
+swipe:
+  3:
+    left:
+      command: "bspc desktop -f next"
+    right:
+      command: "bspc desktop -f prev"
+#+END_SRC
+"                          _
+"   ____  ___  ____ _   __(_)___ ___
+"  / __ \/ _ \/ __ \ | / / / __ `__ \
+" / / / /  __/ /_/ / |/ / / / / / / /
+"/_/ /_/\___/\____/|___/_/_/ /_/ /_/
+"
+"SETTINGS {{{
+set colorcolumn=81                         "set visual ruler for the 81th column
+set ruler                                          "always show current position
+set magic                                 "for regular expressions turn magic on
+set equalalways                                                "same split sizes
+set number                                                    "show line numbers
+set ignorecase                                               "ignore search case
+set smartcase             "disable ignorecase when the first letter is uppercase
+set expandtab             "expandtab, instead of tab, do the same range as space
+set tabstop=4                                                    "define tabstop
+set softtabstop=4                                          "define soft tabstops
+set shiftwidth=4                                                     "shiftwidth
+set smartindent                                                    "smart indent
+set cursorline                                           "highlight current line
+set showmatch                                       "highlight matching brackets
+set lazyredraw                                         "redraw only if necessary
+set nobackup                         "no backup files (auto save file is enough)
+set nowritebackup                                               "no write backup
+set noswapfile                         "no swap files (auto save file is enough)
+set clipboard+=unnamedplus                                    "global copy/paste
+set mouse=                                                    "disable gui mouse
+set updatetime=400                               "update time 1s for auto saving
+set foldmethod=marker                                           "set fold marker
+set splitbelow splitright                  "open horizontal splits at the bottom
+set completeopt=menu,noinsert       "set the first suggestion but dont insert in
+set completeopt-=preview             "don't open the preview split for functions
+set nohlsearch                                      "disable search highlighting
+set incsearch
+set hidden                                                         "for TextEdit
+set shortmess+=c                        "don't give ins-completion-menu messages
+set signcolumn=yes                                      "always show signcolumns
+set termguicolors                                     "enable true color support
+set noshowmode                              "dont show mode (lightline shows it)
+"use persistent history
+if !isdirectory("/tmp/.vim-undo-dir")
+    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+endif
+set undodir=/tmp/.vim-undo-dir                                      "set undodir
+set undofile                                                "set persistent undo
+"}}}
+" MAPPINGS_VISUAL_MODE {{{
+"move highlighted lines up
+xnoremap K :m '<-2<cr>gv=gv
+
+"move highlighted lines down
+xnoremap J :m '>+1<cr>gv=gv
+
+"bind p in visual mode to paste without overriding the current register
+xnoremap p pgvy
+xmap gc  <Plug>VSCodeCommentary
+nmap gc  <Plug>VSCodeCommentary
+omap gc  <Plug>VSCodeCommentary
+nmap gcc <Plug>VSCodeCommentaryLine
+
+"}}}
+#+END_SRC
+*** init.vim (backup)
+#+begin_src vim :tangle ~/.config/nvim/init.vim_bk :mkdirp yes
+"                          _
+"   ____  ___  ____ _   __(_)___ ___
+"  / __ \/ _ \/ __ \ | / / / __ `__ \
+" / / / /  __/ /_/ / |/ / / / / / / /
+"/_/ /_/\___/\____/|___/_/_/ /_/ /_/
+"
+"SETTINGS {{{
+set colorcolumn=81                         "set visual ruler for the 81th column
+set ruler                                          "always show current position
+set magic                                 "for regular expressions turn magic on
+set equalalways                                                "same split sizes
+set number                                                    "show line numbers
+set relativenumber                                    "set relative number scope
+set ignorecase                                               "ignore search case
+set smartcase             "disable ignorecase when the first letter is uppercase
+set expandtab             "expandtab, instead of tab, do the same range as space
+set tabstop=4                                                    "define tabstop
+set softtabstop=4                                          "define soft tabstops
+set shiftwidth=4                                                     "shiftwidth
+set smartindent                                                    "smart indent
+set cursorline                                           "highlight current line
+set showmatch                                       "highlight matching brackets
+set lazyredraw                                         "redraw only if necessary
+set nobackup                         "no backup files (auto save file is enough)
+set nowritebackup                                               "no write backup
+set noswapfile                         "no swap files (auto save file is enough)
+set clipboard+=unnamedplus                                    "global copy/paste
+set mouse=                                                    "disable gui mouse
+set updatetime=400                               "update time 1s for auto saving
+set foldmethod=marker                                           "set fold marker
+set splitbelow splitright                  "open horizontal splits at the bottom
+set completeopt=menu,noinsert       "set the first suggestion but dont insert in
+set completeopt-=preview             "don't open the preview split for functions
+set nohlsearch                                      "disable search highlighting
+set incsearch
+set hidden                                                         "for TextEdit
+set shortmess+=c                        "don't give ins-completion-menu messages
+set signcolumn=yes                                      "always show signcolumns
+set termguicolors                                     "enable true color support
+set noshowmode                              "dont show mode (lightline shows it)
+"use persistent history
+if !isdirectory("/tmp/.vim-undo-dir")
+    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+endif
+set undodir=/tmp/.vim-undo-dir                                      "set undodir
+set undofile                                                "set persistent undo
+"}}}
+" FUNCTIONS {{{
+"less auto compile
+function! LessCSSCompress()
+    "blog
+    "cal system('lessc ./blog/assets/style/main.less ./blog/assets/style/main.css')
+    "con6
+    cal system('lessc ./webroot/less/main.less ./webroot/less/main.css')
+endfunction
+
+"maximize split toggle
+function! MaximizeToggle()
+    if exists("s:maximize_session")
+        exec "source " . s:maximize_session
+        call delete(s:maximize_session)
+        unlet s:maximize_session
+        let &hidden=s:maximize_hidden_save
+        unlet s:maximize_hidden_save
+    else
+        let s:maximize_hidden_save = &hidden
+        let s:maximize_session = tempname()
+        set hidden
+        exec "mksession! " . s:maximize_session
+        only
+    endif
+endfunction
+
+
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! TermToggle(command, height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen(a:command, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction
+
+"}}}
+" MAPPINGS_MAPLEADER {{{
+let mapleader = " "
+"}}}
+" MAPPINGS_NORMAL_MODE {{{
+"open ~/.config/nvim/init.vim in new tab
+nnoremap <leader>ei :tabnew ~/.config/nvim/init.vim<CR>
+
+"reload ~/.config/nvim/init.vim
+nnoremap <leader>si :source ~/.config/nvim/init.vim<CR>
+
+"which-key
+"find
+nnoremap <leader>ff :FZF<cr>
+nnoremap <leader>fs :Ag<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>fh :History:<cr>
+nnoremap <leader>fn :NERDTreeFind<cr>
+nnoremap <leader>fc :Commits<cr>
+"toggle
+nnoremap <leader>tn :NERDTreeToggle<cr>
+nnoremap <leader>tt :call TermToggle("/usr/bin/zsh", 12)<cr>
+nnoremap <leader>tg :call TermToggle("/usr/bin/lazygit", 30)<cr>
+nnoremap <leader>t+ :call MaximizeToggle()<cr>
+" add
+nnoremap <leader>ad "=strftime("%c")<cr>P
+
+"remap fol and eol to work within wrapped lines
+noremap  0 g^
+noremap  $ g$
+
+"faster split navigation
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+"}}}
+" MAPPINGS_VISUAL_MODE {{{
+"move highlighted lines up
+xnoremap K :m '<-2<cr>gv=gv
+
+"move highlighted lines down
+xnoremap J :m '>+1<cr>gv=gv
+
+"bind p in visual mode to paste without overriding the current register
+xnoremap p pgvy
+
+"}}}
+" MAPPINGS_INSERT_MODE {{{
+"pressing <enter> on autocompletion menu doesn't create a new line
+inoremap <expr> <cr> ((pumvisible())?("\<C-y>"):("\<cr>"))
+
+"toggle spell check to de_de
+inoremap <F5> <C-\><C-O>:setlocal spelllang=de_de spell! spell?<CR>
+
+"toggle spell check to en_us
+inoremap <F6> <C-\><C-O>:setlocal spelllang=en_us spell! spell?<CR>
+
+"remap jj to <esc>
+inoremap jj <esc>
+
+"}}}
+" MAPPINGS_COMMAND_MODE {{{
+"write protected files
+cmap w!! %!sudo tee > /dev/null %
+"}}}
+" MAPPINGS_TERMINAL_MODE {{{
+tnoremap <Esc> <C-\><C-n>
+tnoremap :q <C-\><C-n>:q!<CR>
+"}}}
+" MAPPINGS_FILE_TYPES {{{
+autocmd FileType less nmap <buffer> <leader>c :call LessCSSCompress()<cr>
+"}}}
+" AUTOCMD {{{
+"auto save files
+autocmd CursorHold,CursorHoldI * update
+autocmd TextChanged,TextChangedI <buffer> silent write
+
+"split highlight
+augroup SplitHighlight
+    autocmd!
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+
+"highlight all matches when in search mode
+augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter [/\?] :set hlsearch
+    autocmd CmdlineLeave [/\?] :set nohlsearch
+augroup END
+
+"when term starts, auto go into insert mode
+autocmd TermOpen * startinsert
+
+"when term starts, turn off line numbers etc
+autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+
+let g:markdown_folding=1
+au FileType markdown setlocal foldlevel=99
+
+"}}}
+" MISCELLANEOUS_NICE {{{
+"jump to last known buffers cursor position when reopening, if possible
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+"}}}
+" PLUGINS_AUTOINSTALL {{{
+"auto installs the vim-plug plugin manager if needed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd!
+    autocmd VimEnter * PlugInstall
+endif
+"}}}
+" PLUGINS_DEFAULT {{{
+call plug#begin('~/.local/share/nvim/plugged')
+Plug '~/.fzf' "Fuzzy file finder dir
+Plug 'junegunn/fzf.vim' "Fuzzy file finder
+Plug 'tmhedberg/matchit' "Extended % matching for HTML, LaTeX...
+Plug 'tpope/vim-fugitive' "Needed for gv.vim
+Plug 'tpope/vim-surround' "Surroundings: parentheses, brackets, quotes, XML tags, and more
+Plug 'Raimondi/delimitMate' "Provides insert mode auto-completion for quotes, parens, brackets, etc.
+Plug 'tpope/vim-commentary' "Comment stuff out and in
+Plug 'plasticboy/vim-markdown' "Better markdown defaults
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Lsp
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+"}}}
+" PLUGINS_INTERFACE {{{
+Plug 'junegunn/goyo.vim' "Distraction-free writin
+Plug 'Yggdroot/indentLine' "Display indention levels
+Plug 'scrooloose/nerdtree' "File Viewer
+Plug 'itchyny/lightline.vim' "Statusline
+Plug 'kshenoy/vim-signature' "Make marks visible in the gutter
+Plug 'ryanoasis/vim-devicons' "Icons
+Plug 'airblade/vim-gitgutter' "Git annotations beside line numbers
+Plug 'liuchengxu/vim-which-key' "vim-which-key is vim port of emacs-which-key that displays available keybindings in popup
+Plug 'gorodinskiy/vim-coloresque' "Show hex colors
+Plug 'Xuyuanp/nerdtree-git-plugin' "Git integration for NERDTree
+Plug 'ntpeters/vim-better-whitespace' "Show trailing whitespace
+Plug 'nvim-treesitter/nvim-treesitter' "Better syntax highlighting
+Plug 'junegunn/rainbow_parentheses.vim' "Rainbow parentheses
+Plug 'dracula/vim', { 'as': 'dracula' } "Dracula Color Theme
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "Extra syntax and highlight for nerdtree files
+"}}}
+" PLUGINS_PHP {{{
+"Plug 'StanAngeloff/php.vim' "Better syntax highlighting
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'} "Some nice tools for php development
+"}}}
+" PLUGINS_TWIG {{{
+Plug 'lumiliet/vim-twig' "Better syntax highlighting
+"}}}
+" PLUGINS_DART_FLUTTER {{{
+Plug 'thosakwe/vim-flutter' "Vim commands for Flutter, including hot-reload-on-save and more
+Plug 'dart-lang/dart-vim-plugin' "dart-vim-plugin provides filetype detection, syntax highlighting, and indentation for Dart code in Vim
+" }}}
+" PLUGINS_MIXED {{{
+Plug 'mattn/emmet-vim', {'for': ['html', 'twig', 'php', 'js']} "Code completion for html/php
+"}}}
+" PLUGINS_END {{{
+call plug#end()
+"}}}
+" PLUGINS_CONFIGURATION_LIGHTLINE_VIM {{{
+let g:lightline = {
+            \ 'colorscheme': 'dracula',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'coc-status', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'fugitive#head',
+            \   'cocstatus': 'coc#status'
+            \ },
+            \ }
+"}}}
+" PLUGINS_CONFIGURATION_COC.NVIM {{{
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ge <Plug>(coc-diagnostic-next)
+nmap <silent> gE <Plug>(coc-diagnostic-prev)
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use `:Format` to format current buffer and substitute to delete all
+" whitespace, also indent the current buffer, remember position and center
+" current line
+command! -nargs=0 Format :call CocAction('format')
+nnoremap <a-l> ma:Format<cr>:%s/\s\+$//e<cr>`admazz
+
+" Show outline
+nmap <C-F12> :<C-u>CocList outline<cr>
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Coc plugins mappings
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+"}}}
+" PLUGINS_CONFIGURATION_FZF.VIM {{{
+"jump to existing buffer if possible
+let g:fzf_buffers_jump = 1
+
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+
+" The Silver Searcher
+if executable('ag')
+    let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+    set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+
+""let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+"let $FZF_DEFAULT_OPTS='--layout=reverse'
+"}}}
+" PLUGINS_CONFIGURATION_VIM-COLORS-DRACULA {{{
+colorscheme dracula
+"}}}
+" PLUGINS_CONFIGURATION_NERDTREE {{{
+map <leader><space> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen=1
+
+"Close NERDTree when the only left buffer is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"Minimal UI
+let NERDTreeMinimalUI=1
+"}}}
+" PLUGINS_CONFIGURATION_PHPACTOR {{{
+" Include use statement
+nmap <Leader>u :call phpactor#UseAdd()<CR>
+
+" Invoke the context menu
+nmap <Leader>mm :call phpactor#ContextMenu()<CR>
+"}}}
+" PLUGINS_CONFIGURATION_VIM_MARKDOWN {{{
+" let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_conceal = 0
+" let g:vim_markdown_conceal_code_blocks = 0
+" }}}
+" PLUGINS_CONFIGURATION_VIM_WHICH_KEY {{{
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+let g:which_key_map =  {}
+let g:which_key_map.f = { 'name' : '+file' }
+" }}}
+" PLUGINS_CONFIGURATION_NVIM_TREESITTER {{{
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
+" }}}
+#+END_SRC
+*** coc-settings.json
+#+begin_src json :tangle ~/.config/nvim/coc-settings.json :mkdirp yes
+{
+    "coc.preferences.useQuickfixForLocations": true,
+    "diagnostic.warningSign": "",
+    "diagnostic.errorSign": "",
+    "diagnostic.infoSign": "",
+    "diagnostic.hintSign": "",
+    "suggest.completionItemKindLabels": {
+        "keyword": "\uf1de",
+        "variable": "\ue79b", "value": "\uf89f",
+        "operator": "\u03a8",
+        "function": "\u0192",
+        "reference": "\ufa46",
+        "constant": "\uf8fe",
+        "method": "\uf09a",
+        "struct": "\ufb44",
+        "class": "\uf0e8",
+        "interface": "\uf417",
+        "text": "\ue612",
+        "enum": "\uf435",
+        "enumMember": "\uf02b",
+        "module": "\uf40d",
+        "color": "\ue22b",
+        "property": "\ue624",
+        "field": "\uf9be",
+        "unit": "\uf475",
+        "event": "\ufacd",
+        "file": "\uf723",
+        "folder": "\uf114",
+        "snippet": "\ue60b",
+        "typeParameter": "\uf728",
+        "default": "\uf29c"
+    },
+    "languageserver": {
+        "intelephense": {
+            "command": "intelephense",
+            "args": [
+                "--stdio"
+            ],
+            "filetypes": [
+                "php"
+            ],
+            "initializationOptions": {
+                "storagePath": "/tmp/intelephense"
+            }
+        }
+    }
+}
+#+END_SRC
+*** snippets
+**** php.snippets
+#+begin_src snippets :tangle ~/.config/nvim/snippets/php.snippets :mkdirp yes
+snippet t "this->"
+$this->$1
+endsnippet
+#+END_SRC
 ** picom
 *** picom.conf
 #+begin_src config :tangle ~/.config/picom/picom.conf :mkdirp yes
