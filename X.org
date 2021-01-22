@@ -1,7 +1,6 @@
 #+TITLE: X
 #+STARTUP: fold
 - M-x org-babel-tangle
-- [[Make all sh files executable][Make all sh files executable]] with C-c C-c
 * Install AUR helper
 #+BEGIN_SRC sh
 pacman -S --needed git base-devel
@@ -115,7 +114,7 @@ mouse:
 #+END_SRC
 ** bspwm
 *** bspwmrc
-#+begin_src sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes
+#+begin_src sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode (identity #o755)
 #! /bin/sh
 # ein test
 # autostart applications
@@ -987,7 +986,7 @@ animation-discharging-4 = 
 animation-discharging-framerate = 500
 #+END_SRC
 *** launch.sh
-#+begin_src sh :tangle ~/.config/polybar/launch.sh :mkdirp yes
+#+begin_src sh :tangle ~/.config/polybar/launch.sh :mkdirp yes :tangle-mode (identity #o755)
 #! /usr/bin/env sh
 
 killall -q polybar
@@ -997,8 +996,8 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 MONITOR=eDP-1-1 polybar --reload cerebrum &
 #+END_SRC
 *** scripts
-*** arch-updates.sh
-#+begin_src sh :tangle ~/.config/polybar/scripts/arch-updates.sh :mkdirp yes
+**** arch-updates.sh
+#+begin_src sh :tangle ~/.config/polybar/scripts/arch-updates.sh :mkdirp yes :tangle-mode (identity #o755)
 #!/bin/sh
 
 if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
@@ -1333,7 +1332,7 @@ source $ZSH/oh-my-zsh.sh
 export FZF_DEFAULT_OPTS='--layout=reverse'
 #+END_SRC
 * Scripts
-#+begin_src sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes
+#+begin_src sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes :tangle-mode (identity #o755)
 #!/bin/bash
 if xinput list-props 12 | grep "Device Enabled (186):	1" >/dev/null
 then
@@ -1343,11 +1342,6 @@ else
   xinput enable 12
   notify-send -u low -i mouse "Trackpad enabled"
 fi
-#+END_SRC
-* Make all sh files executable
-#+BEGIN_SRC sh
-chmod u+x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc ~/.config/polybar/launch.sh ~/.config/polybar/scripts/arch-updates.sh ~/.doom.d/scripts/toggle-touchpad.sh
-chmod u+x ~/.doom.d/scripts/toggle-touchpad.sh
 #+END_SRC
 * List all installed packages
 #+BEGIN_SRC sh

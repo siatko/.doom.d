@@ -141,9 +141,16 @@
 #+END_SRC
 ** Projectile
 #+BEGIN_SRC emacs-lisp
-(use-package projectile
+(use-package! projectile
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
+#+END_SRC
+** Eshell
+#+BEGIN_SRC emacs-lisp
+(use-package! eshell
+  (setq eshell-prompt-function
+        (lambda ()
+          (concat (eshell/pwd) " λ "))))
 #+END_SRC
 * Functions
 ** Minify JS or LESS

@@ -101,9 +101,14 @@
   :config
   (lsp-treemacs-sync-mode 1))
 
-(use-package projectile
+(use-package! projectile
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
+
+(use-package! eshell
+  (setq eshell-prompt-function
+        (lambda ()
+          (concat (eshell/pwd) " λ "))))
 
 (defun minify-js-or-less ()
   (interactive)
