@@ -621,7 +621,7 @@ echo " $updates"
 #+begin_src config :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
 ## Application hotkeys Run rofi application launcher
 super + d
-    rofi -location 0 -show drun -display-drun '' -show-icons -icon-theme papirus
+   dmenu_run
 
 # Run rofi window switcher
 super + w rofi -location 0 -show window -display-window '' -show-icons -icon-theme papirus
@@ -632,7 +632,7 @@ super + Return
 
 # Open firefox
 super + shift + Return
-    firefox --new-instance --ProfileManager
+    qutebrowser
 
 # File manager
 super + e
@@ -645,6 +645,10 @@ shift + F9
 # Screenshot
 shift + Print
     gnome-screenshot --interactive
+
+# Toggle touchpad
+super + F4
+    sh ~/.doom.d/scripts/toggle-touchpad.sh
 
 ## Media keys
 # Volume
@@ -805,9 +809,22 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--layout=reverse'
 #+END_SRC
+* Scripts
+#+begin_src sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes
+#!/bin/bash
+if xinput list-props 12 | grep "Device Enabled (186):	1" >/dev/null
+then
+  xinput disable 12
+  notify-send -u low -i mouse "Trackpad disabled"
+else
+  xinput enable 12
+  notify-send -u low -i mouse "Trackpad enabled"
+fi
+#+END_SRC
 * Make all sh files executable
 #+BEGIN_SRC sh
-chmod u+x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc ~/.config/polybar/launch.sh ~/.config/polybar/scripts/arch-updates.sh
+chmod u+x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc ~/.config/polybar/launch.sh ~/.config/polybar/scripts/arch-updates.sh ~/.doom.d/scripts/toggle-touchpad.sh
+chmod u+x ~/.doom.d/scripts/toggle-touchpad.sh
 #+END_SRC
 * List all installed packages
 #+BEGIN_SRC sh
@@ -836,6 +853,7 @@ pacman -Qqe
 | dhcpcd                       |
 | dialog                       |
 | discord                      |
+| dmenu                        |
 | docker                       |
 | docker-compose               |
 | dosfstools                   |
@@ -903,14 +921,13 @@ pacman -Qqe
 | polybar                      |
 | pulseaudio-bluetooth         |
 | python                       |
+| python-adblock               |
 | python-pynvim                |
 | qutebrowser-git              |
-| ranger                       |
 | redshift                     |
 | redshiftgui-bin              |
 | reflector                    |
 | ripgrep                      |
-| rofi                         |
 | ruby-fusuma                  |
 | sed                          |
 | sendemail                    |
@@ -947,6 +964,7 @@ pacman -Qqe
 | wmname                       |
 | wpa_supplicant               |
 | xclip                        |
+| xorg-xinput                  |
 | yarn                         |
 | yay                          |
 | youtube-dl                   |

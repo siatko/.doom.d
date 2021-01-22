@@ -20,7 +20,7 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(defvar siatwe/frame-transparency '(95 . 95))
+(defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,siatwe/frame-transparency))
 
@@ -71,7 +71,8 @@
 (use-package! evil
   :config
   (setq-default evil-kill-on-visual-paste nil)
-  (setq evil-escape-key-sequence "jj"))
+  (setq evil-escape-key-sequence "jj")
+  (setq evil-escape-delay 0.3))
 
 (use-package! evil-matchit
   :config
@@ -155,4 +156,4 @@
  :desc "Switch buffer"
  "bb" #'counsel-switch-buffer)
 
-(load! "~/.doom.d/lisp/dndv5.el")
+;;(load! "~/.doom.d/lisp/dndv5.el")
