@@ -1,4 +1,4 @@
-#+TITLE: X
+#+TITLE: Desktop
 #+STARTUP: fold
 - M-x org-babel-tangle
 * Install AUR helper
@@ -12,116 +12,115 @@ makepkg -si
 ** alacritty
 *** alacritty.yml
 #+begin_src yaml :tangle ~/.config/alacritty/alacritty.yml :mkdirp yes
-font:
-  normal:
-    family: Hack
-    style: Regular
+  font:
+    normal:
+      family: Hack
+      style: Regular
 
-  bold:
-    family: Hack
-    style: Bold
+      bold:
+        family: Hack
+        style: Bold
 
-  italic:
-    family: Hack
-    style: Italic
+        italic:
+          family: Hack
+          style: Italic
 
-  bold_italic:
-    family: Hack
-    style: Bold Italic
+          bold_italic:
+            family: Hack
+            style: Bold Italic
 
-  size: 8
+            size: 8
 
-# Colors (Dracula)
-colors:
-  # Default colors
-  primary:
-    background: '0x282a36'
-    foreground: '0xf8f8f2'
+            # Colors (Dracula)
+            colors:
+              # Default colors
+              primary:
+                background: '0x282a36'
+                foreground: '0xf8f8f2'
 
-    # Bright and dim foreground colors
-    #
-    # The dimmed foreground color is calculated automatically if it is not present.
-    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-    # is `false`, the normal foreground color will be used.
-    #dim_foreground: '0x9a9a9a'
-    #bright_foreground: '0xffffff'
+                # Bright and dim foreground colors
+                #
+                # The dimmed foreground color is calculated automatically if it is not present.
+                # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+                # is `false`, the normal foreground color will be used.
+                #dim_foreground: '0x9a9a9a'
+                #bright_foreground: '0xffffff'
 
-  # Cursor colors
-  #
-  # Colors which should be used to draw the terminal cursor. If these are unset,
-  # the cursor color will be the inverse of the cell color.
-  cursor:
-    text: '0x44475a'
-    cursor: '0xf8f8f2'
+                # Cursor colors
+                #
+                # Colors which should be used to draw the terminal cursor. If these are unset,
+                # the cursor color will be the inverse of the cell color.
+                cursor:
+                  text: '0x44475a'
+                  cursor: '0xf8f8f2'
 
-  # Selection colors
-  #
-  # Colors which should be used to draw the selection area. If selection
-  # background is unset, selection color will be the inverse of the cell colors.
-  # If only text is unset the cell text color will remain the same.
-  selection:
-    text: '0xf8f8f2'
-    background: '0x44475a'
+                  # Selection colors
+                  #
+                  # Colors which should be used to draw the selection area. If selection
+                  # background is unset, selection color will be the inverse of the cell colors.
+                  # If only text is unset the cell text color will remain the same.
+                  selection:
+                    text: '0xf8f8f2'
+                    background: '0x44475a'
 
-  # Normal colors
-  normal:
-    black:   '0x000000'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
-    yellow:  '0xf1fa8c'
-    blue:    '0xbd93f9'
-    magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
-    white:   '0xbfbfbf'
+                    # Normal colors
+                    normal:
+                      black:   '0x000000'
+                      red:     '0xff5555'
+                      green:   '0x50fa7b'
+                      yellow:  '0xf1fa8c'
+                      blue:    '0xbd93f9'
+                      magenta: '0xff79c6'
+                      cyan:    '0x8be9fd'
+                      white:   '0xbfbfbf'
 
-  # Bright colors
-  bright:
-    black:   '0x4d4d4d'
-    red:     '0xff6e67'
-    green:   '0x5af78e'
-    yellow:  '0xf4f99d'
-    blue:    '0xcaa9fa'
-    magenta: '0xff92d0'
-    cyan:    '0x9aedfe'
-    white:   '0xe6e6e6'
+                      # Bright colors
+                      bright:
+                        black:   '0x4d4d4d'
+                        red:     '0xff6e67'
+                        green:   '0x5af78e'
+                        yellow:  '0xf4f99d'
+                        blue:    '0xcaa9fa'
+                        magenta: '0xff92d0'
+                        cyan:    '0x9aedfe'
+                        white:   '0xe6e6e6'
 
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  dim:
-    black:   '0x14151b'
-    red:     '0xff2222'
-    green:   '0x1ef956'
-    yellow:  '0xebf85b'
-    blue:    '0x4d5b86'
-    magenta: '0xff46b0'
-    cyan:    '0x59dffc'
-    white:   '0xe6e6d1'
+                        # Dim colors
+                        #
+                        # If the dim colors are not set, they will be calculated automatically based
+                        # on the `normal` colors.
+                        dim:
+                          black:   '0x14151b'
+                          red:     '0xff2222'
+                          green:   '0x1ef956'
+                          yellow:  '0xebf85b'
+                          blue:    '0x4d5b86'
+                          magenta: '0xff46b0'
+                          cyan:    '0x59dffc'
+                          white:   '0xe6e6d1'
 
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '0xff00ff' }`
-  #
-  indexed_colors: []
+                          # Indexed Colors
+                          #
+                          # The indexed colors include all colors from 16 to 256.
+                          # When these are not set, they're filled with sensible defaults.
+                          #
+                          # Example:
+                          #   `- { index: 16, color: '0xff00ff' }`
+                          #
+                          indexed_colors: []
 
-mouse:
-    hide_when_typing: true
+                          mouse:
+                            hide_when_typing: true
 #+END_SRC
 ** bspwm
 *** bspwmrc
 #+begin_src sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode (identity #o755)
 #! /bin/sh
-# ein test
 # autostart applications
 # simple x hotkey daemon
 sxhkd &
 # wallpaper
-nitrogen --set-scaled --save /data/Cloud/InstantUpload/OpenCamera/IMG_20200710_091314_HDR.jpg &
+nitrogen --set-scaled --save /data/Cloud/InstantUpload/OpenCamera/IMG_20210108_071757_HDR.jpg &
 # statusbar
 $HOME/.config/polybar/launch.sh &
 # compositor
@@ -242,23 +241,16 @@ bspc rule -a Emacs state=tiled
 ** fusuma
 *** config.yml
 #+begin_src yaml :tangle ~/.config/fusuma/config.yml :mkdirp yes
-swipe:
-  3:
-    left:
-      command: "bspc desktop -f next"
-    right:
-      command: "bspc desktop -f prev"
+  swipe:
+    3:
+      left:
+        command: "bspc desktop -f next"
+        right:
+          command: "bspc desktop -f prev"
 #+END_SRC
 ** neovim
 *** init.vim (vscode)
 #+begin_src vim :tangle ~/.config/nvim/init.vim :mkdirp yes
-swipe:
-  3:
-    left:
-      command: "bspc desktop -f next"
-    right:
-      command: "bspc desktop -f prev"
-#+END_SRC
 "                          _
 "   ____  ___  ____ _   __(_)___ ___
 "  / __ \/ _ \/ __ \ | / / / __ `__ \
@@ -1012,132 +1004,6 @@ updates=$(("$updates_arch" + "$updates_aur"))
 
 echo " $updates"
 #+END_SRC
-** rofi
-*** config.rasi
-#+begin_src yaml :tangle ~/.config/rofi/config.rasi :mkdirp yes
-/*Dracula theme based on the Purple official rofi theme*/
-
-.* {
-    font: "Jetbrains Mono 12";
-    foreground: #f8f8f2;
-    background-color: #282a36;
-    active-background: #6272a4;
-    urgent-background: #ff5555;
-    selected-background: @active-background;
-    selected-urgent-background: @urgent-background;
-    selected-active-background: @active-background;
-    separatorcolor: @active-background;
-    bordercolor: @active-background;
-}
-
-#window {
-    background-color: @background;
-    border:           1;
-    border-radius: 6;
-    border-color: @bordercolor;
-    padding:          5;
-}
-#mainbox {
-    border:  0;
-    padding: 0;
-}
-#message {
-    border:       1px dash 0px 0px ;
-    border-color: @separatorcolor;
-    padding:      1px ;
-}
-#textbox {
-    text-color: @foreground;
-}
-#listview {
-    fixed-height: 0;
-    border:       2px dash 0px 0px ;
-    border-color: @bordercolor;
-    spacing:      2px ;
-    scrollbar:    false;
-    padding:      2px 0px 0px ;
-}
-#element {
-    border:  0;
-    padding: 1px ;
-}
-#element.normal.normal {
-    background-color: @background;
-    text-color:       @foreground;
-}
-#element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-#element.normal.active {
-    background-color: @active-background;
-    text-color:       @foreground;
-}
-#element.selected.normal {
-    background-color: @selected-background;
-    text-color:       @foreground;
-}
-#element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @foreground;
-}
-#element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @foreground;
-}
-#element.alternate.normal {
-    background-color: @background;
-    text-color:       @foreground;
-}
-#element.alternate.urgent {
-    background-color: @urgent-background;
-    text-color:       @foreground;
-}
-#element.alternate.active {
-    background-color: @active-background;
-    text-color:       @foreground;
-}
-#scrollbar {
-    width:        2px ;
-    border:       0;
-    handle-width: 8px ;
-    padding:      0;
-}
-#sidebar {
-    border:       2px dash 0px 0px ;
-    border-color: @separatorcolor;
-}
-#button.selected {
-    background-color: @selected-background;
-    text-color:       @foreground;
-}
-#inputbar {
-    spacing:    0;
-    text-color: @foreground;
-    padding:    1px ;
-}
-#case-indicator {
-    spacing:    0;
-    text-color: @foreground;
-}
-#entry {
-    spacing:    0;
-    text-color: @foreground;
-}
-#prompt {
-    spacing:    0;
-    text-color: @foreground;
-}
-#inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-}
-#textbox-prompt-colon {
-    expand:     false;
-    str:        ":";
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @foreground;
-}
-#+END_SRC
 ** sxhkd
 *** sxhkdrc
 #+begin_src config :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
@@ -1313,7 +1179,7 @@ TERM=xterm-256color
 
 #  plugins
 plugins=(
-  git
+    git
 )
 
 # aliases
@@ -1336,11 +1202,11 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
 #!/bin/bash
 if xinput list-props 12 | grep "Device Enabled (186):	1" >/dev/null
 then
-  xinput disable 12
-  notify-send -u low -i mouse "Trackpad disabled"
+    xinput disable 12
+    notify-send -u low -i mouse "Trackpad disabled"
 else
-  xinput enable 12
-  notify-send -u low -i mouse "Trackpad enabled"
+    xinput enable 12
+    notify-send -u low -i mouse "Trackpad enabled"
 fi
 #+END_SRC
 * List all installed packages
