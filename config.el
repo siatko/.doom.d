@@ -47,7 +47,7 @@
 
 (setq-default fill-column 80)
 
-(setq org-directory "~/org/")
+(setq org-directory "~/.org/")
 (setq org-ellipsis " ▾")
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
@@ -104,12 +104,6 @@
 (use-package! projectile
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
-
-(use-package! eshell
-  :config
-  (setq eshell-prompt-function
-        (lambda ()
-          (concat (eshell/pwd) " λ "))))
 
 (defun minify-js-or-less ()
   (interactive)

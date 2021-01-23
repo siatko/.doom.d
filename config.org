@@ -71,7 +71,7 @@
 * Org Mode
 ** Defaults
 #+BEGIN_SRC emacs-lisp
-(setq org-directory "~/org/")
+(setq org-directory "~/.org/")
 (setq org-ellipsis " ▾")
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
