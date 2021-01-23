@@ -145,14 +145,6 @@
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
 #+END_SRC
-** Eshell
-#+BEGIN_SRC emacs-lisp
-(use-package! eshell
-  :config
-  (setq eshell-prompt-function
-        (lambda ()
-          (concat (eshell/pwd) " λ "))))
-#+END_SRC
 * Functions
 ** Minify JS or LESS
 #+BEGIN_SRC emacs-lisp
