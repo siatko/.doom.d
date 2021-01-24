@@ -10,8 +10,19 @@
   :hook
   (text-mode . mixed-pitch-mode))
 
-(setq doom-theme 'doom-dracula)
+;; (use-package modus-themes
+;;   :ensure
+;;   :init
+;;   (setq modus-themes-slanted-constructs t
+;;         modus-themes-bold-constructs t)
+;;   (modus-themes-load-themes)
+;;   :config
+;;   (modus-themes-load-vivendi)
+;;   :bind ("<f5>" . modus-themes-toggle))
 
+;;(setq visible-bell 1)
+
+(setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
 
 (defvar siatwe/frame-transparency '(100 . 100))
@@ -52,7 +63,8 @@
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
-  :hook (org-mode . siatwe/org-mode-visual-fill))
+  ;;:hook (org-mode . siatwe/org-mode-visual-fill)
+  )
 
 (use-package org-bullets
   :after org
