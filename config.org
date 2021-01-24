@@ -114,6 +114,11 @@
   (setq org-journal-dir "/data/Cloud/Journal"
         org-journal-encrypt-journal t
         org-journal-date-format "%A, %d. %B %Y"))
+
+(setq org-agenda-span 10
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-1d")
+
 #+END_SRC
 * Packages
 ** Evil

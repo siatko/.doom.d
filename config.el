@@ -86,6 +86,10 @@
         org-journal-encrypt-journal t
         org-journal-date-format "%A, %d. %B %Y"))
 
+(setq org-agenda-span 10
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-1d")
+
 (use-package! evil
   :config
   (setq-default evil-kill-on-visual-paste nil)
