@@ -3,28 +3,20 @@
 (setq calendar-latitude 47.73
       calendar-longitude 12.88)
 
-(use-package doom-themes
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (setq doom-theme 'doom-dracula)
+(setq doom-font (font-spec :family "Hack" :size 20))
+(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
 
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
+(use-package mixed-pitch
+  :hook
+  (text-mode . mixed-pitch-mode))
 
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-  (doom-themes-treemacs-config)
+(setq doom-theme 'doom-dracula)
 
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+(doom-themes-visual-bell-config)
 
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,siatwe/frame-transparency))
-
-(setq doom-font (font-spec :family "Hack" :size 18))
 
 (setq display-line-numbers-type t)
 
@@ -68,11 +60,25 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
+(setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+                                 (timeline . "  % s")
+                                 (todo .
+                                       " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+                                 (tags .
+                                       " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+                                 (search . " %i %-12:c")))
+
+(use-package! org-journal
+  :config
+  (setq org-journal-dir "/data/Cloud/Journal"
+        org-journal-encrypt-journal t
+        org-journal-date-format "%A, %d. %B %Y"))
+
 (use-package! evil
   :config
   (setq-default evil-kill-on-visual-paste nil)
   (setq evil-escape-key-sequence "jj")
-  (setq evil-escape-delay 0.3))
+  (setq evil-escape-delay 0.6))
 
 (use-package! evil-matchit
   :config
@@ -157,3 +163,4 @@
  "bb" #'counsel-switch-buffer)
 
 ;;(load! "~/.doom.d/lisp/dndv5.el")
+(custom-set-variables '(gnus-select-method (quote (nnreddit ""))))

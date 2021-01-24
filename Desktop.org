@@ -1250,6 +1250,7 @@ pacman -Qqe
 | findutils                    |
 | firefox                      |
 | flex                         |
+| fzf                          |
 | gawk                         |
 | gcc                          |
 | gettext                      |
@@ -1263,6 +1264,7 @@ pacman -Qqe
 | grep                         |
 | groff                        |
 | gzip                         |
+| imagemagick                  |
 | lazygit                      |
 | libgccjit                    |
 | libreoffice-fresh            |
@@ -1296,6 +1298,7 @@ pacman -Qqe
 | pacman                       |
 | pacman-contrib               |
 | patch                        |
+| pdfjs                        |
 | php-gd                       |
 | phpstorm                     |
 | phpstorm-jre                 |
@@ -1306,6 +1309,7 @@ pacman -Qqe
 | python                       |
 | python-adblock               |
 | python-pynvim                |
+| python-virtualenv            |
 | qutebrowser-git              |
 | redshift                     |
 | redshiftgui-bin              |

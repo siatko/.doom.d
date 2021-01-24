@@ -6,3 +6,4 @@
 (package! visual-fill-column)
 (package! org-bullets)
 (package! evil-matchit)
+(package! mixed-pitch)
