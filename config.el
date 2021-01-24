@@ -163,4 +163,3 @@
  "bb" #'counsel-switch-buffer)
 
 ;;(load! "~/.doom.d/lisp/dndv5.el")
-(custom-set-variables '(gnus-select-method (quote (nnreddit ""))))
