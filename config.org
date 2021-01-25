@@ -113,6 +113,7 @@
   :config
   (setq org-journal-dir "/data/Cloud/Journal"
         org-journal-encrypt-journal t
+        org-journal-file-type 'yearly
         org-journal-date-format "%A, %d. %B %Y"))
 
 (setq org-agenda-span 10
