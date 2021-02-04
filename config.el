@@ -3,8 +3,8 @@
 (setq calendar-latitude 47.73
       calendar-longitude 12.88)
 
-(setq doom-font (font-spec :family "Hack" :size 20))
-(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
+(setq doom-font (font-spec :family "Hack" :size 16))
+(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 16))
 
 (use-package mixed-pitch
   :hook
@@ -46,7 +46,7 @@
 
 (global-hl-line-mode +1)
 
-(mouse-avoidance-mode)
+;;(mouse-avoidance-mode)
 
 (setq-default fill-column 80)
 

@@ -11,8 +11,8 @@
 ** Fonts
 #+BEGIN_SRC emacs-lisp
 
-(setq doom-font (font-spec :family "Hack" :size 20))
-(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
+(setq doom-font (font-spec :family "Hack" :size 16))
+(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 16))
 
 (use-package mixed-pitch
   :hook
@@ -69,7 +69,7 @@
 #+END_SRC
 ** Mouse Avoidance
 #+BEGIN_SRC emacs-lisp
-(mouse-avoidance-mode)
+;;(mouse-avoidance-mode)
 #+END_SRC
 ** Fill Column
 #+BEGIN_SRC emacs-lisp
