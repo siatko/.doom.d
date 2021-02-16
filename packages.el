@@ -7,4 +7,5 @@
 (package! org-bullets)
 (package! evil-matchit)
 (package! mixed-pitch)
-(package! modus-themes)
+(package! tree-sitter)
+(package! tree-sitter-langs)
