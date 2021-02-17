@@ -128,6 +128,26 @@
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
 
+  (org-link-set-parameters "mpv" :follow #'mpv-play)
+
+  (defun org-mpv-complete-link (&optional arg)
+    (replace-regexp-in-string
+     "file:" "mpv:"
+     (org-link-complete-file arg)
+     t t))
+
+  (defun my:mpv/org-metareturn-insert-playback-position ()
+    (when-let ((item-beg (org-in-item-p)))
+      (when (and (not org-timer-start-time)
+                 (mpv-live-p)
+                 (save-excursion
+                   (goto-char item-beg)
+                   (and (not (org-invisible-p)) (org-at-item-timer-p))))
+        (mpv-insert-playback-position t))))
+
+  (add-hook 'org-open-at-point-functions #'mpv-seek-to-position-at-point)
+  (add-hook 'org-metareturn-hook #'my:mpv/org-metareturn-insert-playback-position)
+
 (defun minify-js-or-less ()
   (interactive)
   (save-window-excursion
@@ -180,8 +200,19 @@
  "bb" #'counsel-switch-buffer)
 
 ;;(load! "~/.doom.d/lisp/dndv5.el")
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(require 'elfeed)
+(defun elfeed-v-mpv (url)
+  "Watch a video from URL in MPV"
+  (async-shell-command (format "mpv %s" (string-replace "=" "\\=" (string-replace "?" "\\?" url)))))
+
+(defun elfeed-view-mpv (&optional use-generic-p)
+  "Youtube-feed link"
+  (interactive "P")
+  (let ((entries (elfeed-search-selected)))
+    (cl-loop for entry in entries
+     do (elfeed-untag entry 'unread)
+     when (elfeed-entry-link entry)
+     do (elfeed-v-mpv it))
+   (mapc #'elfeed-search-update-entry entries)
+   (unless (use-region-p) (forward-line))))
+(define-key elfeed-search-mode-map (kbd "v") 'elfeed-view-mpv)
