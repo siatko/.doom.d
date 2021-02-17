@@ -11,8 +11,8 @@
 ** Fonts
 #+BEGIN_SRC emacs-lisp
 
-(setq doom-font (font-spec :family "Hack" :size 16))
-(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 16))
+(setq doom-font (font-spec :family "Hack" :size 20))
+(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
 
 (use-package mixed-pitch
   :hook
@@ -161,6 +161,22 @@
 (after! elfeed
   (setq elfeed-search-filter "@2-weeks-ago"))
 (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+(require 'elfeed)
+(defun elfeed-v-mpv (url)
+  "Watch a video from URL in MPV"
+  (async-shell-command (format "mpv %s" (string-replace "=" "\\=" (string-replace "?" "\\?" url)))))
+
+(defun elfeed-view-mpv (&optional use-generic-p)
+  "Youtube-feed link"
+  (interactive "P")
+  (let ((entries (elfeed-search-selected)))
+    (cl-loop for entry in entries
+     do (elfeed-untag entry 'unread)
+     when (elfeed-entry-link entry)
+     do (elfeed-v-mpv it))
+   (mapc #'elfeed-search-update-entry entries)
+   (unless (use-region-p) (forward-line))))
+(define-key elfeed-search-mode-map (kbd "v") 'elfeed-view-mpv)
 #+END_SRC
 ** LSP Treemacs
 #+BEGIN_SRC emacs-lisp
@@ -197,6 +213,14 @@
   (add-hook 'org-open-at-point-functions #'mpv-seek-to-position-at-point)
   (add-hook 'org-metareturn-hook #'my:mpv/org-metareturn-insert-playback-position)
 
+#+END_SRC
+** Tree Sitter
+#+BEGIN_SRC emacs-lisp
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+END_SRC
 * Functions
 ** Minify JS or LESS
@@ -262,20 +286,4 @@
 * Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
 ;;(load! "~/.doom.d/lisp/dndv5.el")
-(require 'elfeed)
-(defun elfeed-v-mpv (url)
-  "Watch a video from URL in MPV"
-  (async-shell-command (format "mpv %s" (string-replace "=" "\\=" (string-replace "?" "\\?" url)))))
-
-(defun elfeed-view-mpv (&optional use-generic-p)
-  "Youtube-feed link"
-  (interactive "P")
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-     do (elfeed-untag entry 'unread)
-     when (elfeed-entry-link entry)
-     do (elfeed-v-mpv it))
-   (mapc #'elfeed-search-update-entry entries)
-   (unless (use-region-p) (forward-line))))
-(define-key elfeed-search-mode-map (kbd "v") 'elfeed-view-mpv)
 #+END_SRC
