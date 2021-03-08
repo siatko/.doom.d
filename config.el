@@ -4,11 +4,6 @@
       calendar-longitude 12.88)
 
 (setq doom-font (font-spec :family "Hack" :size 20))
-(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
-
-(use-package mixed-pitch
-  :hook
-  (text-mode . mixed-pitch-mode))
 
 ;; (use-package modus-themes
 ;;   :ensure
@@ -80,14 +75,7 @@
                                        " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
                                  (search . " %i %-12:c")))
 
-(use-package! org-journal
-  :config
-  (setq org-journal-dir "/data/Cloud/Journal"
-        org-journal-encrypt-journal t
-        org-journal-file-type 'yearly
-        org-journal-date-format "%A, %d. %B %Y"))
-
-(setq org-agenda-span 10
+(setq org-agenda-span 'month
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-1d")
 
@@ -222,3 +210,7 @@
  "bb" #'counsel-switch-buffer)
 
 ;;(load! "~/.doom.d/lisp/dndv5.el")
+(add-hook 'org-mode-hook
+          (lambda ()
+            (when (y-or-n-p "Auto Fill mode? ")
+              (turn-on-auto-fill))))
