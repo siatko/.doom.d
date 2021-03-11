@@ -210,6 +210,12 @@
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+END_SRC
+** Git Auto Commit Mode
+#+BEGIN_SRC emacs-lisp
+(use-package! git-auto-commit-mode
+  :config
+  (setq gac-automatically-push-p t))
+#+END_SRC
 * Functions
 ** Minify JS or LESS
 #+BEGIN_SRC emacs-lisp
@@ -274,7 +280,4 @@
 * Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
 ;;(load! "~/.doom.d/lisp/dndv5.el")
-(add-hook 'org-mode-hook
-          (lambda ()
-              (turn-on-auto-fill)))
 #+END_SRC

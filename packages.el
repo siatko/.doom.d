@@ -10,3 +10,4 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! mpv)
+(package! git-auto-commit-mode)

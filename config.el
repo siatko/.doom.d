@@ -158,6 +158,10 @@
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
+(use-package! git-auto-commit-mode
+  :config
+  (setq gac-automatically-push-p t))
+
 (defun minify-js-or-less ()
   (interactive)
   (save-window-excursion
@@ -210,7 +214,3 @@
  "bb" #'counsel-switch-buffer)
 
 ;;(load! "~/.doom.d/lisp/dndv5.el")
-(add-hook 'org-mode-hook
-          (lambda ()
-            (when (y-or-n-p "Auto Fill mode? ")
-              (turn-on-auto-fill))))
