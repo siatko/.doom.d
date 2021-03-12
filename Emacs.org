@@ -171,7 +171,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        yaml                   ; JSON, but readable
 
        :email
-       ;;(mu4e +gmail)
+       mu4e
        ;;notmuch
        ;;(wanderlust +gmail)
 
@@ -230,7 +230,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 *** Personal Information
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Simon Attila Weis"
-      user-mail-address "simonattilaweis@tutanota.com")
+      user-mail-address "siatwe@siatwe.dev")
 (setq calendar-latitude 47.73
       calendar-longitude 12.88)
 #+END_SRC
@@ -503,6 +503,5 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 #+END_SRC
 ** Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
-;;(load! "~/.doom.d/lisp/dndv5.el")
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 #+END_SRC
-
