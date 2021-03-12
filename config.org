@@ -1,8 +1,16 @@
 #+TITLE: Emacs Configuration
+#+property: header-args:emacs-lisp :tangle config.el
+#+property: header-args :mkdirp yes :comments no
 #+STARTUP: fold
 
-* INIT
-#+begin_src emacs-lisp :tangle init.el
+I use the Doom Emacs distribution. This way I don't have to worry about every
+little thing and I can concentrate on the fun stuff.
+
+Org-babel-tangle will generate the $DOOMDIR/{init.el, package.el, config.el}
+files every time we save the file or call =M-x org-babel-tangle= manually.
+
+* INIT.el
+#+BEGIN_SRC emacs-lisp :tangle init.el
 ;;; init.el -*- lexical-binding: t; -*-
 (doom! :input
        ;;chinese
@@ -171,9 +179,10 @@
        :config
        literate
        (default +bindings +smartparens))
-#+end_src
-* PACKAGES
-#+begin_src emacs-lisp :tangle packages.el
+#+END_SRC
+* PACKAGES.el
+Custom packages for which there is no embedding in Doom Emacs yet.
+#+BEGIN_SRC emacs-lisp :tangle packages.el
 ;; -*- no-byte-compile: t; -*-
 (package! key-chord)
 (package! lsp-treemacs)
@@ -187,30 +196,28 @@
 (package! git-auto-commit-mode)
 (package! mixed-pitch)
 (package! anki-editor)
-#+end_src
-* CONFIG
+(package! theme-magic)
+#+END_SRC
+* CONFIG.el
 ** General
 *** Personal Information
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (setq user-full-name "Simon Attila Weis"
       user-mail-address "simonattilaweis@tutanota.com")
 (setq calendar-latitude 47.73
       calendar-longitude 12.88)
 #+END_SRC
 *** Fonts
-#+begin_src emacs-lisp :tangle config.el
-
+#+BEGIN_SRC emacs-lisp
 (setq doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 20))
 (setq doom-font (font-spec :family "Hack" :size 20))
 
 (use-package! mixed-pitch
   :hook
   (text-mode . mixed-pitch-mode))
-
 #+END_SRC
 *** Theme And Transparency
-#+begin_src emacs-lisp :tangle config.el
-
+#+BEGIN_SRC emacs-lisp
 ;; (use-package modus-themes
 ;;   :ensure
 ;;   :init
@@ -221,18 +228,17 @@
 ;;   (modus-themes-load-vivendi)
 ;;   :bind ("<f5>" . modus-themes-toggle))
 
-;;(setq visible-bell 1)
+;; (setq visible-bell 1)
 
 (setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
 
-(defvar siatwe/frame-transparency '(100 . 100))
+(defvar siatwe/frame-transparency '(95 . 95))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,siatwe/frame-transparency))
-
 #+END_SRC
 *** Line Numbers
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type t)
 
 ;; Disable line numbers for specific modes
@@ -244,30 +250,29 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+END_SRC
 *** Raise Performance
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (setq read-process-output-max (* 3072 3072))
 (add-hook 'focus-out-hook #'garbage-collect)
 #+END_SRC
 *** Always Start Maximized
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (toggle-frame-maximized)
 #+END_SRC
 *** Highlight Line
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (global-hl-line-mode +1)
 #+END_SRC
 *** Mouse Avoidance
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 ;;(mouse-avoidance-mode)
 #+END_SRC
 *** Fill Column
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (setq-default fill-column 80)
 #+END_SRC
 ** Org Mode
 *** Defaults
-#+begin_src emacs-lisp :tangle config.el
-
+#+BEGIN_SRC emacs-lisp
 (setq org-directory "~/.org/")
 (setq org-ellipsis " ▾")
 (require 'org-crypt)
@@ -301,12 +306,11 @@
 (setq org-agenda-span 'month
       org-agenda-start-on-weekday nil
       org-agenda-start-day "0d")
-
 #+END_SRC
 ** Packages
 *** Evil
 **** Normal paste behavior
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! evil
   :config
   (setq-default evil-kill-on-visual-paste nil)
@@ -314,14 +318,13 @@
   (setq evil-escape-delay 0.6))
 #+END_SRC
 **** Matchit
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! evil-matchit
   :config
   (global-evil-matchit-mode 1))
 #+END_SRC
 *** Key chord
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! key-chord
   :config
   (setq key-chord-two-keys-delay 0.5)
@@ -331,8 +334,7 @@
   (key-chord-mode 1))
 #+END_SRC
 *** LSP Mode
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! lsp-mode
   :config
   (setq lsp-idle-delay 0.500)
@@ -341,8 +343,7 @@
   (setq lsp-ui-doc-enable nil))
 #+END_SRC
 *** Elfeed
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (after! elfeed
   (setq elfeed-search-filter "@2-weeks-ago"))
 (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
@@ -364,23 +365,19 @@
 (define-key elfeed-search-mode-map (kbd "v") 'elfeed-view-mpv)
 #+END_SRC
 *** LSP Treemacs
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! lsp-treemacs
   :config
   (lsp-treemacs-sync-mode 1))
 #+END_SRC
 *** Projectile
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! projectile
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
 #+END_SRC
 *** MPV
-
-#+begin_src emacs-lisp :tangle config.el
-
+#+BEGIN_SRC emacs-lisp
 (org-link-set-parameters "mpv" :follow #'mpv-play)
 
 (defun org-mpv-complete-link (&optional arg)
@@ -400,11 +397,9 @@
 
 (add-hook 'org-open-at-point-functions #'mpv-seek-to-position-at-point)
 (add-hook 'org-metareturn-hook #'my:mpv/org-metareturn-insert-playback-position)
-
 #+END_SRC
 *** Tree Sitter
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (use-package! tree-sitter
   :config
   (require 'tree-sitter-langs)
@@ -412,9 +407,7 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+END_SRC
 *** Git Auto Commit Mode
-
-#+begin_src emacs-lisp :tangle config.el
-+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (use-package! git-auto-commit-mode
   :config
   (setq-default gac-automatically-push-p t)
@@ -422,8 +415,7 @@
 #+END_SRC
 ** Functions
 *** Minify JS or LESS
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (defun minify-js-or-less ()
   (interactive)
   (save-window-excursion
@@ -438,10 +430,9 @@
 
 (add-hook 'after-save-hook 'minify-js-or-less)
 #+END_SRC
-
 *** Eshell
 
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (defun eshell-add-aliases ()
   "Eshell aliases"
   (dolist (var '(("ff" "find-file $1")
@@ -455,8 +446,7 @@
 
 ** Key Mappings
 *** Evil leader
-
-#+begin_src emacs-lisp :tangle config.el
+#+BEGIN_SRC emacs-lisp
 (map!
 
  :leader
