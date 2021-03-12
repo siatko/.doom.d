@@ -177,7 +177,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        ;;twitter              ; twitter client https://twitter.com/vnought
 
        :config
-       literate
+       ;;literate
        (default +bindings +smartparens))
 #+END_SRC
 * PACKAGES.el
@@ -199,6 +199,18 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! theme-magic)
 #+END_SRC
 * CONFIG.el
+** Auto-tangle configuration files
+Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org][Emacs From Scratch]] and customized to my needs :).
+#+BEGIN_SRC emacs-lisp
+(defun siatwe/org-babel-tangle-config ()
+  (when (string-equal (file-name-directory (buffer-file-name))
+                      (expand-file-name doom-private-dir))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'siatwe/org-babel-tangle-config)))
+#+END_SRC
 ** General
 *** Personal Information
 #+BEGIN_SRC emacs-lisp
@@ -478,3 +490,4 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 #+BEGIN_SRC emacs-lisp
 ;;(load! "~/.doom.d/lisp/dndv5.el")
 #+END_SRC
+
