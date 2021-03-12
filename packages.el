@@ -1,6 +1,4 @@
 ;; -*- no-byte-compile: t; -*-
-;;; $DOOMDIR/packages.el
-
 (package! key-chord)
 (package! lsp-treemacs)
 (package! visual-fill-column)
@@ -11,3 +9,5 @@
 (package! tree-sitter-langs)
 (package! mpv)
 (package! git-auto-commit-mode)
+(package! mixed-pitch)
+(package! anki-editor)
