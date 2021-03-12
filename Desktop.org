@@ -1,6 +1,8 @@
-#+TITLE: Desktop
+#+TITLE: Desktop Configuration
 #+STARTUP: fold
-- M-x org-babel-tangle
+
+=M-x org-babel-tangle=
+
 * Install AUR helper
 #+BEGIN_SRC sh
 pacman -S --needed git base-devel
@@ -11,116 +13,117 @@ makepkg -si
 * Dotfiles
 ** alacritty
 *** alacritty.yml
-#+begin_src yaml :tangle ~/.config/alacritty/alacritty.yml :mkdirp yes
-  font:
-    normal:
-      family: Hack
-      style: Regular
+#+BEGIN_SRC :tangle ~/.config/alacritty/alacritty.yml :mkdirp yes
+font:
+  normal:
+    family: Hack
+    style: Regular
 
-      bold:
-        family: Hack
-        style: Bold
+  bold:
+    family: Hack
+    style: Bold
 
-        italic:
-          family: Hack
-          style: Italic
+  italic:
+    family: Hack
+    style: Italic
 
-          bold_italic:
-            family: Hack
-            style: Bold Italic
+  bold_italic:
+    family: Hack
+    style: Bold Italic
 
-            size: 8
+  size: 10
 
-            # Colors (Dracula)
-            colors:
-              # Default colors
-              primary:
-                background: '0x282a36'
-                foreground: '0xf8f8f2'
+# Colors (Dracula)
+colors:
+  # Default colors
+  primary:
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
 
-                # Bright and dim foreground colors
-                #
-                # The dimmed foreground color is calculated automatically if it is not present.
-                # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-                # is `false`, the normal foreground color will be used.
-                #dim_foreground: '0x9a9a9a'
-                #bright_foreground: '0xffffff'
+    # Bright and dim foreground colors
+    #
+    # The dimmed foreground color is calculated automatically if it is not present.
+    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # is `false`, the normal foreground color will be used.
+    #dim_foreground: '0x9a9a9a'
+    #bright_foreground: '0xffffff'
 
-                # Cursor colors
-                #
-                # Colors which should be used to draw the terminal cursor. If these are unset,
-                # the cursor color will be the inverse of the cell color.
-                cursor:
-                  text: '0x44475a'
-                  cursor: '0xf8f8f2'
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
+  cursor:
+    text: '0x44475a'
+    cursor: '0xf8f8f2'
 
-                  # Selection colors
-                  #
-                  # Colors which should be used to draw the selection area. If selection
-                  # background is unset, selection color will be the inverse of the cell colors.
-                  # If only text is unset the cell text color will remain the same.
-                  selection:
-                    text: '0xf8f8f2'
-                    background: '0x44475a'
+  # Selection colors
+  #
+  # Colors which should be used to draw the selection area. If selection
+  # background is unset, selection color will be the inverse of the cell colors.
+  # If only text is unset the cell text color will remain the same.
+  selection:
+    text: '0xf8f8f2'
+    background: '0x44475a'
 
-                    # Normal colors
-                    normal:
-                      black:   '0x000000'
-                      red:     '0xff5555'
-                      green:   '0x50fa7b'
-                      yellow:  '0xf1fa8c'
-                      blue:    '0xbd93f9'
-                      magenta: '0xff79c6'
-                      cyan:    '0x8be9fd'
-                      white:   '0xbfbfbf'
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xff5555'
+    green:   '0x50fa7b'
+    yellow:  '0xf1fa8c'
+    blue:    '0xbd93f9'
+    magenta: '0xff79c6'
+    cyan:    '0x8be9fd'
+    white:   '0xbfbfbf'
 
-                      # Bright colors
-                      bright:
-                        black:   '0x4d4d4d'
-                        red:     '0xff6e67'
-                        green:   '0x5af78e'
-                        yellow:  '0xf4f99d'
-                        blue:    '0xcaa9fa'
-                        magenta: '0xff92d0'
-                        cyan:    '0x9aedfe'
-                        white:   '0xe6e6e6'
+  # Bright colors
+  bright:
+    black:   '0x4d4d4d'
+    red:     '0xff6e67'
+    green:   '0x5af78e'
+    yellow:  '0xf4f99d'
+    blue:    '0xcaa9fa'
+    magenta: '0xff92d0'
+    cyan:    '0x9aedfe'
+    white:   '0xe6e6e6'
 
-                        # Dim colors
-                        #
-                        # If the dim colors are not set, they will be calculated automatically based
-                        # on the `normal` colors.
-                        dim:
-                          black:   '0x14151b'
-                          red:     '0xff2222'
-                          green:   '0x1ef956'
-                          yellow:  '0xebf85b'
-                          blue:    '0x4d5b86'
-                          magenta: '0xff46b0'
-                          cyan:    '0x59dffc'
-                          white:   '0xe6e6d1'
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  dim:
+    black:   '0x14151b'
+    red:     '0xff2222'
+    green:   '0x1ef956'
+    yellow:  '0xebf85b'
+    blue:    '0x4d5b86'
+    magenta: '0xff46b0'
+    cyan:    '0x59dffc'
+    white:   '0xe6e6d1'
 
-                          # Indexed Colors
-                          #
-                          # The indexed colors include all colors from 16 to 256.
-                          # When these are not set, they're filled with sensible defaults.
-                          #
-                          # Example:
-                          #   `- { index: 16, color: '0xff00ff' }`
-                          #
-                          indexed_colors: []
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #
+  # Example:
+  #   `- { index: 16, color: '0xff00ff' }`
+  #
+  indexed_colors: []
 
-                          mouse:
-                            hide_when_typing: true
+mouse:
+    hide_when_typing: true
 #+END_SRC
 ** bspwm
 *** bspwmrc
-#+begin_src sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode (identity #o755)
+#+BEGIN_SRC sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode
 #! /bin/sh
+#
+# xrandr
+xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1-1 --off --output HDMI-1-1 --off
 # autostart applications
 # simple x hotkey daemon
 sxhkd &
-# wallpaper
-nitrogen --set-scaled --save /data/Cloud/InstantUpload/OpenCamera/IMG_20210108_071757_HDR.jpg &
 # statusbar
 $HOME/.config/polybar/launch.sh &
 # compositor
@@ -129,6 +132,11 @@ picom -CGb &
 sudo netctl start @home &
 # redshift bluelight filter
 redshift-gtk -l '47.7303:12.8816' &
+# optimus-manager
+optimus-manager-qt &
+# wallpaper
+nitrogen --head=0 --set-scaled /data/Cloud/Images/Wallpaper/clouds.jpg &
+nitrogen --head=1 --set-scaled /data/Cloud/Images/Wallpaper/clouds.jpg &
 # bluetooth
 blueman-applet &
 # wm fix phpstorm
@@ -143,7 +151,9 @@ nextcloud &
 emacs &
 
 # set workspaces
-bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+for monitor in $(bspc query -M); do
+    bspc monitor $monitor -d 1 2 3 4
+done
 
 # style
 bspc config border_width          3
@@ -166,7 +176,7 @@ bspc rule -a Emacs state=tiled
 #+END_SRC
 ** dunst
 *** dunstrc
-#+begin_src config :tangle ~/.config/dunst/dunstrc :mkdirp yes
+#+BEGIN_SRC config :tangle ~/.config/dunst/dunstrc :mkdirp yes
 [global]
     monitor = 0
     follow = mouse
@@ -240,17 +250,17 @@ bspc rule -a Emacs state=tiled
 #+END_SRC
 ** fusuma
 *** config.yml
-#+begin_src yaml :tangle ~/.config/fusuma/config.yml :mkdirp yes
-  swipe:
-    3:
-      left:
-        command: "bspc desktop -f next"
-        right:
-          command: "bspc desktop -f prev"
+#+BEGIN_SRC :tangle ~/.config/fusuma/config.yml :mkdirp yes
+swipe:
+  3:
+    left:
+      command: "bspc desktop -f next"
+    right:
+      command: "bspc desktop -f prev"
 #+END_SRC
 ** neovim
 *** init.vim (vscode)
-#+begin_src vim :tangle ~/.config/nvim/init.vim :mkdirp yes
+#+BEGIN_SRC vim :tangle ~/.config/nvim/init.vim :mkdirp yes
 "                          _
 "   ____  ___  ____ _   __(_)___ ___
 "  / __ \/ _ \/ __ \ | / / / __ `__ \
@@ -263,6 +273,7 @@ set ruler                                          "always show current position
 set magic                                 "for regular expressions turn magic on
 set equalalways                                                "same split sizes
 set number                                                    "show line numbers
+set relativenumber                                    "set relative number scope
 set ignorecase                                               "ignore search case
 set smartcase             "disable ignorecase when the first letter is uppercase
 set expandtab             "expandtab, instead of tab, do the same range as space
@@ -297,6 +308,94 @@ endif
 set undodir=/tmp/.vim-undo-dir                                      "set undodir
 set undofile                                                "set persistent undo
 "}}}
+" FUNCTIONS {{{
+"less auto compile
+function! LessCSSCompress()
+    "blog
+    "cal system('lessc ./blog/assets/style/main.less ./blog/assets/style/main.css')
+    "con6
+    cal system('lessc ./webroot/less/main.less ./webroot/less/main.css')
+endfunction
+
+"maximize split toggle
+function! MaximizeToggle()
+    if exists("s:maximize_session")
+        exec "source " . s:maximize_session
+        call delete(s:maximize_session)
+        unlet s:maximize_session
+        let &hidden=s:maximize_hidden_save
+        unlet s:maximize_hidden_save
+    else
+        let s:maximize_hidden_save = &hidden
+        let s:maximize_session = tempname()
+        set hidden
+        exec "mksession! " . s:maximize_session
+        only
+    endif
+endfunction
+
+
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! TermToggle(command, height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen(a:command, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction
+
+"}}}
+" MAPPINGS_MAPLEADER {{{
+let mapleader = " "
+"}}}
+" MAPPINGS_NORMAL_MODE {{{
+"open ~/.config/nvim/init.vim in new tab
+nnoremap <leader>ei :tabnew ~/.config/nvim/init.vim<CR>
+
+"reload ~/.config/nvim/init.vim
+nnoremap <leader>si :source ~/.config/nvim/init.vim<CR>
+
+"which-key
+"find
+nnoremap <leader>ff :FZF<cr>
+nnoremap <leader>fs :Ag<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>fh :History:<cr>
+nnoremap <leader>fn :NERDTreeFind<cr>
+nnoremap <leader>fc :Commits<cr>
+"toggle
+nnoremap <leader>tn :NERDTreeToggle<cr>
+nnoremap <leader>tt :call TermToggle("/usr/bin/zsh", 12)<cr>
+nnoremap <leader>tg :call TermToggle("/usr/bin/lazygit", 30)<cr>
+nnoremap <leader>t+ :call MaximizeToggle()<cr>
+" add
+nnoremap <leader>ad "=strftime("%c")<cr>P
+
+"remap fol and eol to work within wrapped lines
+noremap  0 g^
+noremap  $ g$
+
+"faster split navigation
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+"}}}
 " MAPPINGS_VISUAL_MODE {{{
 "move highlighted lines up
 xnoremap K :m '<-2<cr>gv=gv
@@ -306,15 +405,246 @@ xnoremap J :m '>+1<cr>gv=gv
 
 "bind p in visual mode to paste without overriding the current register
 xnoremap p pgvy
-xmap gc  <Plug>VSCodeCommentary
-nmap gc  <Plug>VSCodeCommentary
-omap gc  <Plug>VSCodeCommentary
-nmap gcc <Plug>VSCodeCommentaryLine
 
 "}}}
+" MAPPINGS_INSERT_MODE {{{
+"pressing <enter> on autocompletion menu doesn't create a new line
+inoremap <expr> <cr> ((pumvisible())?("\<C-y>"):("\<cr>"))
+
+"toggle spell check to de_de
+inoremap <F5> <C-\><C-O>:setlocal spelllang=de_de spell! spell?<CR>
+
+"toggle spell check to en_us
+inoremap <F6> <C-\><C-O>:setlocal spelllang=en_us spell! spell?<CR>
+
+"remap jj to <esc>
+inoremap jj <esc>
+
+"}}}
+" MAPPINGS_COMMAND_MODE {{{
+"write protected files
+cmap w!! %!sudo tee > /dev/null %
+"}}}
+" MAPPINGS_TERMINAL_MODE {{{
+tnoremap <Esc> <C-\><C-n>
+tnoremap :q <C-\><C-n>:q!<CR>
+"}}}
+" MAPPINGS_FILE_TYPES {{{
+autocmd FileType less nmap <buffer> <leader>c :call LessCSSCompress()<cr>
+"}}}
+" AUTOCMD {{{
+"auto save files
+autocmd CursorHold,CursorHoldI * update
+autocmd TextChanged,TextChangedI <buffer> silent write
+
+"split highlight
+augroup SplitHighlight
+    autocmd!
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+
+"highlight all matches when in search mode
+augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter [/\?] :set hlsearch
+    autocmd CmdlineLeave [/\?] :set nohlsearch
+augroup END
+
+"when term starts, auto go into insert mode
+autocmd TermOpen * startinsert
+
+"when term starts, turn off line numbers etc
+autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+
+let g:markdown_folding=1
+au FileType markdown setlocal foldlevel=99
+
+"}}}
+" MISCELLANEOUS_NICE {{{
+"jump to last known buffers cursor position when reopening, if possible
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+"}}}
+" PLUGINS_AUTOINSTALL {{{
+"auto installs the vim-plug plugin manager if needed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd!
+    autocmd VimEnter * PlugInstall
+endif
+"}}}
+" PLUGINS_DEFAULT {{{
+call plug#begin('~/.local/share/nvim/plugged')
+Plug '~/.fzf' "Fuzzy file finder dir
+Plug 'junegunn/fzf.vim' "Fuzzy file finder
+Plug 'tmhedberg/matchit' "Extended % matching for HTML, LaTeX...
+Plug 'tpope/vim-fugitive' "Needed for gv.vim
+Plug 'tpope/vim-surround' "Surroundings: parentheses, brackets, quotes, XML tags, and more
+Plug 'Raimondi/delimitMate' "Provides insert mode auto-completion for quotes, parens, brackets, etc.
+Plug 'tpope/vim-commentary' "Comment stuff out and in
+Plug 'plasticboy/vim-markdown' "Better markdown defaults
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Lsp
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+"}}}
+" PLUGINS_INTERFACE {{{
+Plug 'junegunn/goyo.vim' "Distraction-free writin
+Plug 'Yggdroot/indentLine' "Display indention levels
+Plug 'scrooloose/nerdtree' "File Viewer
+Plug 'itchyny/lightline.vim' "Statusline
+Plug 'kshenoy/vim-signature' "Make marks visible in the gutter
+Plug 'ryanoasis/vim-devicons' "Icons
+Plug 'airblade/vim-gitgutter' "Git annotations beside line numbers
+Plug 'liuchengxu/vim-which-key' "vim-which-key is vim port of emacs-which-key that displays available keybindings in popup
+Plug 'gorodinskiy/vim-coloresque' "Show hex colors
+Plug 'Xuyuanp/nerdtree-git-plugin' "Git integration for NERDTree
+Plug 'ntpeters/vim-better-whitespace' "Show trailing whitespace
+Plug 'nvim-treesitter/nvim-treesitter' "Better syntax highlighting
+Plug 'junegunn/rainbow_parentheses.vim' "Rainbow parentheses
+Plug 'dracula/vim', { 'as': 'dracula' } "Dracula Color Theme
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "Extra syntax and highlight for nerdtree files
+"}}}
+" PLUGINS_PHP {{{
+"Plug 'StanAngeloff/php.vim' "Better syntax highlighting
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'} "Some nice tools for php development
+"}}}
+" PLUGINS_TWIG {{{
+Plug 'lumiliet/vim-twig' "Better syntax highlighting
+"}}}
+" PLUGINS_DART_FLUTTER {{{
+Plug 'thosakwe/vim-flutter' "Vim commands for Flutter, including hot-reload-on-save and more
+Plug 'dart-lang/dart-vim-plugin' "dart-vim-plugin provides filetype detection, syntax highlighting, and indentation for Dart code in Vim
+" }}}
+" PLUGINS_MIXED {{{
+Plug 'mattn/emmet-vim', {'for': ['html', 'twig', 'php', 'js']} "Code completion for html/php
+"}}}
+" PLUGINS_END {{{
+call plug#end()
+"}}}
+" PLUGINS_CONFIGURATION_LIGHTLINE_VIM {{{
+let g:lightline = {
+            \ 'colorscheme': 'dracula',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'coc-status', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'fugitive#head',
+            \   'cocstatus': 'coc#status'
+            \ },
+            \ }
+"}}}
+" PLUGINS_CONFIGURATION_COC.NVIM {{{
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ge <Plug>(coc-diagnostic-next)
+nmap <silent> gE <Plug>(coc-diagnostic-prev)
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use `:Format` to format current buffer and substitute to delete all
+" whitespace, also indent the current buffer, remember position and center
+" current line
+command! -nargs=0 Format :call CocAction('format')
+nnoremap <a-l> ma:Format<cr>:%s/\s\+$//e<cr>`admazz
+
+" Show outline
+nmap <C-F12> :<C-u>CocList outline<cr>
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Coc plugins mappings
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+"}}}
+" PLUGINS_CONFIGURATION_FZF.VIM {{{
+"jump to existing buffer if possible
+let g:fzf_buffers_jump = 1
+
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+
+" The Silver Searcher
+if executable('ag')
+    let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+    set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+
+""let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+"let $FZF_DEFAULT_OPTS='--layout=reverse'
+"}}}
+" PLUGINS_CONFIGURATION_VIM-COLORS-DRACULA {{{
+colorscheme dracula
+"}}}
+" PLUGINS_CONFIGURATION_NERDTREE {{{
+map <leader><space> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen=1
+
+"Close NERDTree when the only left buffer is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"Minimal UI
+let NERDTreeMinimalUI=1
+"}}}
+" PLUGINS_CONFIGURATION_PHPACTOR {{{
+" Include use statement
+nmap <Leader>u :call phpactor#UseAdd()<CR>
+
+" Invoke the context menu
+nmap <Leader>mm :call phpactor#ContextMenu()<CR>
+"}}}
+" PLUGINS_CONFIGURATION_VIM_MARKDOWN {{{
+" let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_conceal = 0
+" let g:vim_markdown_conceal_code_blocks = 0
+" }}}
+" PLUGINS_CONFIGURATION_VIM_WHICH_KEY {{{
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+let g:which_key_map =  {}
+let g:which_key_map.f = { 'name' : '+file' }
+" }}}
+" PLUGINS_CONFIGURATION_NVIM_TREESITTER {{{
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
+" }}}
 #+END_SRC
 *** init.vim (backup)
-#+begin_src vim :tangle ~/.config/nvim/init.vim_bk :mkdirp yes
+#+BEGIN_SRC vim :tangle ~/.config/nvim/init.vim_bk :mkdirp yes
 "                          _
 "   ____  ___  ____ _   __(_)___ ___
 "  / __ \/ _ \/ __ \ | / / / __ `__ \
@@ -698,7 +1028,7 @@ EOF
 " }}}
 #+END_SRC
 *** coc-settings.json
-#+begin_src json :tangle ~/.config/nvim/coc-settings.json :mkdirp yes
+#+BEGIN_SRC json :tangle ~/.config/nvim/coc-settings.json :mkdirp yes
 {
     "coc.preferences.useQuickfixForLocations": true,
     "diagnostic.warningSign": "",
@@ -749,14 +1079,14 @@ EOF
 #+END_SRC
 *** snippets
 **** php.snippets
-#+begin_src snippets :tangle ~/.config/nvim/snippets/php.snippets :mkdirp yes
+#+BEGIN_SRC snippets :tangle ~/.config/nvim/snippets/php.snippets :mkdirp yes
 snippet t "this->"
 $this->$1
 endsnippet
 #+END_SRC
 ** picom
 *** picom.conf
-#+begin_src config :tangle ~/.config/picom/picom.conf :mkdirp yes
+#+BEGIN_SRC config :tangle ~/.config/picom/picom.conf :mkdirp yes
 shadow = false;
 no-dnd-shadow = true;
 no-dock-shadow = true;
@@ -764,9 +1094,9 @@ clear-shadow = false;
 #+END_SRC
 ** polybar
 *** config
-#+begin_src config :tangle ~/.config/polybar/config :mkdirp yes
+#+BEGIN_SRC config :tangle ~/.config/polybar/config :mkdirp yes
 [colors]
-background = #E0282a36
+background = #282a36
 background-alt = #073642
 foreground = #ffb86c
 foreground-alt = #ffffff
@@ -776,6 +1106,7 @@ alert = #bd2c40
 red = #dc322f
 
 [bar/cerebrum]
+monitor=${env:MONITOR:}
 top = true
 width = 100%
 height = 30
@@ -783,7 +1114,12 @@ radius = 0.0
 fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
-border-size = 0
+; Values applied to all borders
+; Individual side values can be defined using:
+;   border-{left,top,right,bottom}-size
+;   border-{left,top,right,bottom}-color
+# border-bottom-size = 1
+# border-bottom-color = #50ffffff
 line-size = 5
 border-color = #00000000
 padding-left = 0
@@ -807,7 +1143,7 @@ type = internal/temperature
 thermal-zone = 5
 warn-temperature = 85
 format = <ramp> <label>
-format-underline = #ffffff
+# format-underline = #ffffff
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 label =  CPU %temperature%
@@ -824,7 +1160,7 @@ type = internal/temperature
 thermal-zone = 4
 warn-temperature = 85
 format = <ramp> <label>
-format-underline = #ffffff
+# format-underline = #ffffff
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 label =  GPU %temperature%
@@ -840,7 +1176,7 @@ ramp-foreground = ${colors.foreground-alt}
 type = custom/script
 exec = ~/.config/polybar/scripts/arch-updates.sh
 interval = 60
-format-underline = #ffffff
+# format-underline = #ffffff
 format-foreground = #50fa7b
 
 [module/root]
@@ -852,7 +1188,7 @@ spacing = 4
 label-mounted =  / %percentage_used%%
 label-mounted-foreground = #f1fa8c
 line-size = 0
-format-mounted-underline = #ffffff
+# format-mounted-underline = #ffffff
 
 [module/data]
 type = internal/fs
@@ -863,7 +1199,7 @@ spacing = 4
 label-mounted =  /data %percentage_used%%
 label-mounted-foreground = #f1fa8c
 line-size = 0
-format-mounted-underline = #ffffff
+# format-mounted-underline = #ffffff
 
 [module/bspwm]
 type = internal/bspwm
@@ -888,7 +1224,7 @@ interval = 1
 format-prefix =
 format =  <label> <ramp-coreload>
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #ffffff
+# format-underline = #ffffff
 label = %percentage:2%%
 ramp-coreload-spacing = 0
 ramp-coreload-font = 3
@@ -907,14 +1243,14 @@ interval = 5
 format-prefix-foreground = ${colors.foreground-alt}
 label =  %percentage_used%%
 label-foreground = #50fa7b
-format-underline = #ffffff
+# format-underline = #ffffff
 
 [module/wlan]
 type = internal/network
 interface = wlo1
 interval = 1
 format-connected = <label-connected>
-format-connected-underline = #ffffff
+# format-connected-underline = #ffffff
 label-connected = 
 label-connected-foreground = #ff79c6
 format-disconnected = offline
@@ -930,7 +1266,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 label =   %date%  %time%
 label-foreground = #ffffff
 line-size = 0
-format-underline = #ffffff
+# format-underline = #ffffff
 
 [module/alsa]
 type = internal/alsa
@@ -939,7 +1275,7 @@ label-volume = " %percentage%%"
 label-volume-foreground = #8be9fd
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = " muted"
-format-volume-underline = #ffffff
+# format-volume-underline = #ffffff
 format-muted-underline = #12345
 
 [module/battery]
@@ -948,12 +1284,12 @@ battery = BAT1
 adapter = AC
 full-at = 100
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffffff
+# format-charging-underline = #ffffff
 format-charging-foreground = #8be9fd
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #ffffff
+# format-discharging-underline = #ffffff
 format-discharging-foreground = #8be9fd
-format-full-underline= #ffffff
+# format-full-underline= #ffffff
 format-full-foreground = #8be9df
 label-charging = %percentage%%
 label-discharging = %percentage%%
@@ -978,7 +1314,7 @@ animation-discharging-4 = 
 animation-discharging-framerate = 500
 #+END_SRC
 *** launch.sh
-#+begin_src sh :tangle ~/.config/polybar/launch.sh :mkdirp yes :tangle-mode (identity #o755)
+#+BEGIN_SRC sh :tangle ~/.config/polybar/launch.sh :mkdirp yes :tangle-mode (identity #o755)
 #! /usr/bin/env sh
 
 killall -q polybar
@@ -989,7 +1325,7 @@ MONITOR=eDP-1-1 polybar --reload cerebrum &
 #+END_SRC
 *** scripts
 **** arch-updates.sh
-#+begin_src sh :tangle ~/.config/polybar/scripts/arch-updates.sh :mkdirp yes :tangle-mode (identity #o755)
+#+BEGIN_SRC sh :tangle ~/.config/polybar/scripts/arch-updates.sh :mkdirp yes :tangle-mode (identity #o755)
 #!/bin/sh
 
 if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
@@ -1006,10 +1342,10 @@ echo " $updates"
 #+END_SRC
 ** sxhkd
 *** sxhkdrc
-#+begin_src config :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
+#+BEGIN_SRC config :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
 ## Application hotkeys Run rofi application launcher
 super + d
-   dmenu_run
+   rofi -show run -display-run ""
 
 # Run rofi window switcher
 super + w rofi -location 0 -show window -display-window '' -show-icons -icon-theme papirus
@@ -1069,7 +1405,7 @@ super + shift + r
 
 # Quit bspwm
 super + shift + e
-    bspc quit
+    sudo systemctl suspend
 
 # Close and kill
 super + {shift, alt} + q
@@ -1129,6 +1465,14 @@ super + {o,i}
 super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} '^{1-9,10}'
 
+# These two keybinds determine index by list order of desktops from current monitor
+super + {1-9}
+    D={1-9}; \
+    bspc desktop -f "$(bspc query -D -m | sed -n "$D p")"
+
+super + shift + {1-9}
+    D={1-9}; \
+    bspc node -d "$(bspc query -D -m | sed -n "$D p")"
 
 ## Preselect
 # Preselect the direction
@@ -1163,7 +1507,7 @@ super + {Left,Down,Up,Right}
 #+END_SRC
 ** zsh
 *** zshrc
-#+begin_src sh :tangle ~/.zshrc :mkdirp yes
+#+BEGIN_SRC sh :tangle ~/.zshrc :mkdirp yes
 export ZSH="/home/siatwe/.oh-my-zsh"
 export LC_ALL="en_US.UTF-8"
 export EDITOR='nvim'
@@ -1198,7 +1542,7 @@ source $ZSH/oh-my-zsh.sh
 export FZF_DEFAULT_OPTS='--layout=reverse'
 #+END_SRC
 * Scripts
-#+begin_src sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes :tangle-mode (identity #o755)
+#+BEGIN_SRC sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes :tangle-mode (identity #o755)
 #!/bin/bash
 if xinput list-props 12 | grep "Device Enabled (186):	1" >/dev/null
 then
