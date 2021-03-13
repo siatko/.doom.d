@@ -116,7 +116,7 @@ mouse:
 #+END_SRC
 ** bspwm
 *** bspwmrc
-#+BEGIN_SRC sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode
+#+BEGIN_SRC sh :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode (identity #o755)
 #! /bin/sh
 #
 # xrandr
@@ -135,8 +135,7 @@ redshift-gtk -l '47.7303:12.8816' &
 # optimus-manager
 optimus-manager-qt &
 # wallpaper
-nitrogen --head=0 --set-scaled /data/Cloud/Images/Wallpaper/clouds.jpg &
-nitrogen --head=1 --set-scaled /data/Cloud/Images/Wallpaper/clouds.jpg &
+nitrogen --head=0..1 --set-scaled /data/Cloud/Images/Wallpaper/clouds.jpg
 # bluetooth
 blueman-applet &
 # wm fix phpstorm
@@ -1321,7 +1320,13 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-MONITOR=eDP-1-1 polybar --reload cerebrum &
+if type "xrandr"; then
+  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    MONITOR=$m polybar --reload cerebrum &
+  done
+else
+  polybar --reload cerebrum &
+fi
 #+END_SRC
 *** scripts
 **** arch-updates.sh
