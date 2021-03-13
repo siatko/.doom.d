@@ -1368,7 +1368,7 @@ shift + F9
 
 # Screenshot
 shift + Print
-    gnome-screenshot --interactive
+    flameshot gui
 
 # Toggle touchpad
 super + F4
@@ -1561,6 +1561,7 @@ pacman -Qqe
 #+RESULTS:
 | alacritty                   |
 | alsa-utils                  |
+| anki                        |
 | arandr                      |
 | autoconf                    |
 | automake                    |
@@ -1587,21 +1588,25 @@ pacman -Qqe
 | file                        |
 | file-roller                 |
 | findutils                   |
+| firefox                     |
+| flameshot                   |
 | flex                        |
 | gamemode                    |
 | gawk                        |
 | gcc                         |
+| geeqie                      |
 | geforcenow-nativefier       |
 | gettext                     |
 | git                         |
 | gnome-keyring               |
-| gnome-screenshot            |
+| google-chrome               |
 | gptfdisk                    |
 | grep                        |
 | groff                       |
 | gzip                        |
 | hsetroot                    |
 | imagemagick                 |
+| isync                       |
 | lib32-giflib                |
 | lib32-gnutls                |
 | lib32-gst-plugins-base-libs |
@@ -1629,15 +1634,17 @@ pacman -Qqe
 | linux                       |
 | linux-firmware              |
 | linux-headers               |
-| lutris                      |
 | m4                          |
 | make                        |
 | minecraft-launcher          |
 | mpg123                      |
 | mpv                         |
+| mu                          |
 | ncdu                        |
 | netctl                      |
 | nextcloud-client            |
+| nitrogen                    |
+| nodejs-less                 |
 | nvidia                      |
 | ocl-icd                     |
 | openal                      |
@@ -1648,6 +1655,8 @@ pacman -Qqe
 | papirus-icon-theme          |
 | patch                       |
 | php                         |
+| phpstorm                    |
+| phpstorm-jre                |
 | picom                       |
 | pkgconf                     |
 | polybar                     |
@@ -1655,7 +1664,10 @@ pacman -Qqe
 | pulseaudio                  |
 | pulseaudio-alsa             |
 | pulseaudio-bluetooth        |
+| python-adblock              |
+| python-pywal                |
 | python-undervolt            |
+| qutebrowser                 |
 | redshift                    |
 | ripgrep                     |
 | rofi                        |
@@ -1666,6 +1678,7 @@ pacman -Qqe
 | steam                       |
 | sudo                        |
 | sxhkd                       |
+| teamviewer                  |
 | telegram-desktop            |
 | texinfo                     |
 | texlive-bibtexextra         |
@@ -1683,11 +1696,12 @@ pacman -Qqe
 | thunar                      |
 | thunar-archive-plugin       |
 | ttf-hack                    |
+| ttf-iosevka                 |
 | ttf-ms-fonts                |
 | vim                         |
 | vlc                         |
 | which                       |
-| wine-staging                |
+| wmname                      |
 | wpa_supplicant              |
 | xclip                       |
 | xf86-video-vesa             |
@@ -1736,5 +1750,6 @@ pacman -Qqe
 | xorg-xwud                   |
 | yay                         |
 | youtube-dl                  |
+| yuicompressor               |
 | zip                         |
 | zsh                         |
