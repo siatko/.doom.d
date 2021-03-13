@@ -206,7 +206,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! git-auto-commit-mode)
 (package! mixed-pitch)
 (package! anki-editor)
-(package! theme-magic)
 #+END_SRC
 * CONFIG.el
 ** Auto-tangle configuration files
@@ -230,7 +229,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 *** Personal Information
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Simon Attila Weis"
-      user-mail-address "siatwe@siatwe.dev")
+      user-mail-address "me@siatwe.dev")
 (setq calendar-latitude 47.73
       calendar-longitude 12.88)
 #+END_SRC
@@ -300,7 +299,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 ** Org Mode
 *** Defaults
 #+BEGIN_SRC emacs-lisp
-(setq org-directory "~/.org/")
+(setq org-directory "/data/Cloud/Emacs/org")
 (setq org-ellipsis " ▾")
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
@@ -333,6 +332,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 (setq org-agenda-span 'month
       org-agenda-start-on-weekday nil
       org-agenda-start-day "0d")
+(setq org-log-done 'time)
 #+END_SRC
 ** Packages
 *** Evil
