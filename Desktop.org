@@ -1095,9 +1095,9 @@ clear-shadow = false;
 *** config
 #+BEGIN_SRC config :tangle ~/.config/polybar/config :mkdirp yes
 [colors]
-background = #282a36
+background = #66282a36
 background-alt = #073642
-foreground = #ffb86c
+foreground = #ffffff
 foreground-alt = #ffffff
 primary = #ffb52a
 secondary = #e60053
@@ -1113,12 +1113,6 @@ radius = 0.0
 fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
-; Values applied to all borders
-; Individual side values can be defined using:
-;   border-{left,top,right,bottom}-size
-;   border-{left,top,right,bottom}-color
-# border-bottom-size = 1
-# border-bottom-color = #50ffffff
 line-size = 5
 border-color = #00000000
 padding-left = 0
@@ -1142,13 +1136,12 @@ type = internal/temperature
 thermal-zone = 5
 warn-temperature = 85
 format = <ramp> <label>
-# format-underline = #ffffff
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 label =  CPU %temperature%
 label-warn =  CPU %temperature%
 label-warn-foreground =  #bd93f9
-label-foreground = #bd93f9
+label-foreground = ${colors.foreground}
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
@@ -1159,13 +1152,12 @@ type = internal/temperature
 thermal-zone = 4
 warn-temperature = 85
 format = <ramp> <label>
-# format-underline = #ffffff
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 label =  GPU %temperature%
 label-warn =  GPU %temperature%
 label-warn-foreground =  #bd93f9
-label-foreground = #bd93f9
+label-foreground = ${colors.foreground}
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
@@ -1175,8 +1167,7 @@ ramp-foreground = ${colors.foreground-alt}
 type = custom/script
 exec = ~/.config/polybar/scripts/arch-updates.sh
 interval = 60
-# format-underline = #ffffff
-format-foreground = #50fa7b
+format-foreground = ${colors.foreground}
 
 [module/root]
 type = internal/fs
@@ -1185,9 +1176,8 @@ interval = 30
 fixed-values = true
 spacing = 4
 label-mounted =  / %percentage_used%%
-label-mounted-foreground = #f1fa8c
+label-mounted-foreground = ${colors.foreground}
 line-size = 0
-# format-mounted-underline = #ffffff
 
 [module/data]
 type = internal/fs
@@ -1196,16 +1186,15 @@ interval = 30
 fixed-values = true
 spacing = 4
 label-mounted =  /data %percentage_used%%
-label-mounted-foreground = #f1fa8c
+label-mounted-foreground = ${colors.foreground}
 line-size = 0
-# format-mounted-underline = #ffffff
 
 [module/bspwm]
 type = internal/bspwm
 label-focused = %index%
 label-focused-background = #282a36
 label-focused-foreground = #50fa7b
-label-focused-underline= #ffb52a
+#label-focused-underline= #ffb52a
 label-focused-padding = 2
 label-occupied = %index%
 label-occupied-foreground = #50fa7b
@@ -1241,7 +1230,7 @@ type = internal/memory
 interval = 5
 format-prefix-foreground = ${colors.foreground-alt}
 label =  %percentage_used%%
-label-foreground = #50fa7b
+label-foreground = ${colors.foreground}
 # format-underline = #ffffff
 
 [module/wlan]
@@ -1251,7 +1240,7 @@ interval = 1
 format-connected = <label-connected>
 # format-connected-underline = #ffffff
 label-connected = 
-label-connected-foreground = #ff79c6
+label-connected-foreground = ${colors.foreground}
 format-disconnected = offline
 
 
@@ -1263,7 +1252,7 @@ time = %H:%M
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 label =   %date%  %time%
-label-foreground = #ffffff
+label-foreground = ${colors.foreground}
 line-size = 0
 # format-underline = #ffffff
 
@@ -1271,11 +1260,11 @@ line-size = 0
 type = internal/alsa
 format-volume = <label-volume>
 label-volume = " %percentage%%"
-label-volume-foreground = #8be9fd
+label-volume-foreground = ${colors.foreground}
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = " muted"
 # format-volume-underline = #ffffff
-format-muted-underline = #12345
+format-muted-underline = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
@@ -1284,12 +1273,12 @@ adapter = AC
 full-at = 100
 format-charging = <animation-charging> <label-charging>
 # format-charging-underline = #ffffff
-format-charging-foreground = #8be9fd
+format-charging-foreground = ${colors.foreground}
 format-discharging = <ramp-capacity> <label-discharging>
 # format-discharging-underline = #ffffff
-format-discharging-foreground = #8be9fd
+format-discharging-foreground = ${colors.foreground}
 # format-full-underline= #ffffff
-format-full-foreground = #8be9df
+format-full-foreground = ${colors.foreground}
 label-charging = %percentage%%
 label-discharging = %percentage%%
 label-full =  
