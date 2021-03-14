@@ -135,7 +135,7 @@ redshift-gtk -l '47.7303:12.8816' &
 # optimus-manager
 optimus-manager-qt &
 # wallpaper
-nitrogen --head=0..1 --set-scaled /data/Cloud/Images/Wallpaper/clouds.jpg
+feh --bg-center /data/Cloud/Images/Wallpaper/clouds.jpg /data/Cloud/Images/Wallpaper/clouds.jpg &
 # bluetooth
 blueman-applet &
 # wm fix phpstorm
@@ -1106,7 +1106,7 @@ red = #dc322f
 
 [bar/cerebrum]
 monitor=${env:MONITOR:}
-top = true
+bottom = true
 width = 100%
 height = 30
 radius = 0.0
@@ -1114,7 +1114,10 @@ fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 line-size = 5
+border-top-size = 5
+border-top-color = #66282a36
 border-color = #00000000
+padding-top = 5
 padding-left = 0
 padding-right = 2
 module-margin-left = 2
