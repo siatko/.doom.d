@@ -1126,7 +1126,7 @@ font-0 = FontAwesome:size=13;0
 font-1 = Hack:pixelsize=13;0
 modules-left = bspwm
 modules-center =
-modules-right = alsa wlan cpu memory eth temperature_cpu temperature_gpu root data arch-updates battery date
+modules-right = pulseaudio wlan cpu memory eth temperature_cpu temperature_gpu root data arch-updates battery date
 tray-position = right
 tray-padding = 5
 cursor-click = pointer
@@ -1195,8 +1195,8 @@ line-size = 0
 [module/bspwm]
 type = internal/bspwm
 label-focused = %index%
-label-focused-background = #282a36
-label-focused-foreground = #50fa7b
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.secondary}
 #label-focused-underline= #ffb52a
 label-focused-padding = 2
 label-occupied = %index%
@@ -1259,15 +1259,17 @@ label-foreground = ${colors.foreground}
 line-size = 0
 # format-underline = #ffffff
 
-[module/alsa]
-type = internal/alsa
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+use-ui-max = false
+interval = 5
 format-volume = <label-volume>
 label-volume = " %percentage%%"
 label-volume-foreground = ${colors.foreground}
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = " muted"
-# format-volume-underline = #ffffff
-format-muted-underline = ${colors.foreground}
+click-right = pavucontrol
 
 [module/battery]
 type = internal/battery
