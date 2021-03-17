@@ -148,7 +148,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        ;;nim                  ; python + lisp at the speed of c
        ;;nix                  ; I hereby declare "nix geht mehr!"
        ;;ocaml                ; an objective camel
-       (org +present)         ; organize your plain life in plain text
+       (org +present +hugo)         ; organize your plain life in plain text
        (php +lsp)             ; perl's insecure younger brother
        ;;plantuml             ; diagrams for confusing people more
        ;;purescript           ; javascript, but functional
@@ -206,6 +206,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! git-auto-commit-mode)
 (package! mixed-pitch)
 (package! anki-editor)
+(package! org-web-tools)
 #+END_SRC
 * CONFIG.el
 ** Auto-tangle configuration files
@@ -244,18 +245,6 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 #+END_SRC
 *** Theme And Transparency
 #+BEGIN_SRC emacs-lisp
-;; (use-package modus-themes
-;;   :ensure
-;;   :init
-;;   (setq modus-themes-slanted-constructs t
-;;         modus-themes-bold-constructs t)
-;;   (modus-themes-load-themes)
-;;   :config
-;;   (modus-themes-load-vivendi)
-;;   :bind ("<f5>" . modus-themes-toggle))
-
-;; (setq visible-bell 1)
-
 (setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
 
@@ -301,6 +290,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 #+BEGIN_SRC emacs-lisp
 (setq org-directory "/data/Cloud/Emacs/org")
 (setq org-ellipsis " ▾")
+(require 'org-web-tools)
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
 (setq calendar-week-start-day 1)
@@ -465,6 +455,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
   (dolist (var '(("ff" "find-file $1")
                  ("55" "cd /data/55/ $*")
                  ("53" "cd /data/53/ $*")
+                 ("ytd" "youtube-dl --extract-audio --audio-format mp3 -i -o '%(title)s.%(ext)s' $1")
                  ("dotfiles" "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $*")))
     (add-to-list 'eshell-command-aliases-list var)))
 
@@ -503,5 +494,13 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 #+END_SRC
 ** Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+(require 'url-util)
+(defun youtube-dl (url)
+  "Download"
+  (interactive "sURL: ")
+  (shell-command
+   (concat "youtube-dl --extract-audio --audio-format mp3 -i -o '%(title)s.%(ext)s' "
+           (string-replace "?" "\?"
+                           (string-replace "/" "\/" url)))))
 #+END_SRC
