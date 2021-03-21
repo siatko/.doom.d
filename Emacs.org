@@ -71,7 +71,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        dired                  ; making dired pretty [functional]
        electric               ; smarter, keyword-based electric-indent
        ibuffer                ; interactive buffer management
-       undo                   ; persistent, smarter undo for your inevitable mistakes
+       (undo +tree)           ; persistent, smarter undo for your inevitable mistakes
        vc                     ; version-control and Emacs, sitting in a tree
 
        :term
@@ -324,6 +324,11 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
       org-agenda-start-day "0d")
 (setq org-log-done 'time)
 #+END_SRC
+** Eshell
+#+BEGIN_SRC emacs-lisp
+(evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history       )
+;;(eshell-git-prompt-use-theme 'powerline)
+#+END_SRC
 ** Packages
 *** Evil
 **** Normal paste behavior
@@ -461,7 +466,19 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 
 (add-hook 'eshell-post-command-hook 'eshell-add-aliases)
 #+END_SRC
-
+*** Download YT Video(s) as mp3
+#+BEGIN_SRC emacs-lisp
+(defun youtube-dl-via-id-to-mp3 (url)
+  "Turn a youtube URL into a mp3 file. Works also for playlists."
+  (interactive "sURL: ")
+  (save-match-data
+    (if (string-match
+         "\\(?:\\.be/\\|v=\\|v%3D\\|^\\)\\([-_a-zA-Z0-9]\\{11\\}\\)" url)
+        (async-shell-command
+         (concat "youtube-dl --extract-audio --audio-format mp3 -i -o '%(title)s.%(ext)s' "
+                 (match-string 1 url)))
+      (message "This does not seem to be a valid Youtube URL."))))
+#+END_SRC
 ** Key Mappings
 *** Evil leader
 #+BEGIN_SRC emacs-lisp
@@ -495,12 +512,4 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 ** Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-(require 'url-util)
-(defun youtube-dl (url)
-  "Download"
-  (interactive "sURL: ")
-  (shell-command
-   (concat "youtube-dl --extract-audio --audio-format mp3 -i -o '%(title)s.%(ext)s' "
-           (string-replace "?" "\?"
-                           (string-replace "/" "\/" url)))))
 #+END_SRC
