@@ -236,7 +236,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 #+END_SRC
 *** Fonts
 #+BEGIN_SRC emacs-lisp
-(setq doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 20))
+(setq doom-variable-pitch-font (font-spec :family "Iosevka" :size 20))
 (setq doom-font (font-spec :family "Hack" :size 20))
 
 (use-package! mixed-pitch
