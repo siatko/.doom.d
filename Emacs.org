@@ -37,7 +37,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        ;;indent-guides        ; highlighted indent columns
-       ;;ligatures            ; ligatures and symbols to make your code pretty again
+       (ligatures +extra)     ; ligatures and symbols to make your code pretty again
        ;;minimap              ; show a map of the code on the side
        (modeline +light)      ; snazzy, Atom-inspired modeline, plus API
        nav-flash              ; blink cursor line after big motions
@@ -236,9 +236,8 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 #+END_SRC
 *** Fonts
 #+BEGIN_SRC emacs-lisp
-(setq doom-variable-pitch-font (font-spec :family "Iosevka" :size 20))
-(setq doom-font (font-spec :family "Hack" :size 20))
-
+(setq doom-font (font-spec :family "JetBrainsMono" :size 20))
+(setq doom-variable-pitch-font (font-spec :family "Overpass" :size 20))
 (use-package! mixed-pitch
   :hook
   (text-mode . mixed-pitch-mode))
@@ -512,4 +511,5 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 ** Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+(setq +ivy-buffer-preview t)
 #+END_SRC
