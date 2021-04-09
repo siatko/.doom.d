@@ -247,7 +247,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 (setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
 
-(defvar siatwe/frame-transparency '(95 . 95))
+(defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,siatwe/frame-transparency))
 #+END_SRC
