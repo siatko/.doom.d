@@ -291,6 +291,8 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 (setq org-ellipsis " ▾")
 (require 'org-web-tools)
 (require 'org-crypt)
+(after! org
+  (add-to-list 'org-modules 'org-habit))
 (org-crypt-use-before-save-magic)
 (setq calendar-week-start-day 1)
 (setq org-tags-exclude-from-inheritance '("crypt"))
@@ -323,6 +325,10 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
       org-agenda-start-day "0d")
 (setq org-log-done 'time)
 #+END_SRC
+
+#+RESULTS:
+: time
+
 ** Eshell
 #+BEGIN_SRC emacs-lisp
 (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history       )
