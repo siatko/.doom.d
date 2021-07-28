@@ -287,7 +287,7 @@ Stolen from [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.or
 ** Org Mode
 *** Defaults
 #+BEGIN_SRC emacs-lisp
-(setq org-directory "/data/Cloud/Emacs/org")
+(setq org-directory "~/.org")
 (setq org-ellipsis " ▾")
 (require 'org-web-tools)
 (require 'org-crypt)

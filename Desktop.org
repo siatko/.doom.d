@@ -2156,6 +2156,7 @@ ToolPluginsDisabled=
 canvasState=OPENGL_SUCCESS
 #+END_SRC
 * Scripts
+** Toggle touchpad
 #+BEGIN_SRC sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes :tangle-mode (identity #o755)
 #!/bin/bash
 if xinput list-props 12 | grep "Device Enabled (186):	1" >/dev/null
@@ -2166,6 +2167,11 @@ else
     xinput enable 12
     notify-send -u low -i mouse "Trackpad enabled"
 fi
+#+END_SRC
+** Geforce Now Launcher
+#+BEGIN_SRC sh :tangle ~/.doom.d/scripts/geforcenow.sh :mkdirp yes :tangle-mode (identity #o755)
+#!/bin/bash
+LC_ALL="de_DE.utf8" geforcenow
 #+END_SRC
 * List all installed packages
 #+BEGIN_SRC sh :export both
