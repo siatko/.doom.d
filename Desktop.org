@@ -135,7 +135,7 @@ redshift-gtk -l '47.7303:12.8816' &
 # optimus-manager
 optimus-manager-qt &
 # wallpaper
-feh --bg-center /data/Cloud/Images/SelfMadeWallpaper/ice.png /data/Cloud/Images/SelfMadeWallpaper/ice.png
+feh --bg-center ~/Cloud/Images/SelfMadeWallpaper/ice.png /data/Cloud/Images/SelfMadeWallpaper/ice.png
 # bluetooth
 blueman-applet &
 # wm fix phpstorm
@@ -150,6 +150,8 @@ nextcloud &
 emacs &
 # ptxconf (wacom)
 ptxconf &
+# volume control
+volctl &
 
 # set workspaces
 for monitor in $(bspc query -M); do
@@ -1125,10 +1127,10 @@ padding-right = 2
 module-margin-left = 2
 module-margin-right = 2
 font-0 = FontAwesome:size=13;0
-font-1 = Hack:pixelsize=13;0
+font-1 = JetBrainsMono:pixelsize=13;0
 modules-left = bspwm
 modules-center =
-modules-right = pulseaudio wlan cpu memory eth temperature_cpu temperature_gpu root data arch-updates battery date
+modules-right = wlan cpu memory eth temperature_cpu temperature_gpu root arch-updates battery date
 tray-position = right
 tray-padding = 5
 cursor-click = pointer
