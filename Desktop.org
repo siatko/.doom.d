@@ -135,7 +135,8 @@ redshift-gtk -l '47.7303:12.8816' &
 # optimus-manager
 optimus-manager-qt &
 # wallpaper
-feh --bg-center ~/Cloud/Images/SelfMadeWallpaper/ice.png /data/Cloud/Images/SelfMadeWallpaper/ice.png
+wget https://source.unsplash.com/random/2560x1440/?nasa -O ~/.wallpaper.jpg
+feh --bg-center ~/.wallpaper.jpg
 # bluetooth
 blueman-applet &
 # wm fix phpstorm

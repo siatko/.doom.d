@@ -148,7 +148,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        ;;nim                  ; python + lisp at the speed of c
        ;;nix                  ; I hereby declare "nix geht mehr!"
        ;;ocaml                ; an objective camel
-       (org +present +hugo)         ; organize your plain life in plain text
+       (org +dragndrop +present +hugo)         ; organize your plain life in plain text
        (php +lsp)             ; perl's insecure younger brother
        ;;plantuml             ; diagrams for confusing people more
        ;;purescript           ; javascript, but functional
@@ -308,9 +308,9 @@ Custom packages for which there is no embedding in Doom Emacs yet.
                                        " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
                                  (search . " %i %-12:c")))
 
-(setq org-agenda-span 'month
+(setq org-agenda-span 100
       org-agenda-start-on-weekday nil
-      org-agenda-start-day "0d")
+      org-agenda-start-day "-3d")
 (setq org-log-done 'time)
 #+END_SRC
 
