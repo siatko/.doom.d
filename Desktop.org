@@ -1111,7 +1111,7 @@ red = #dc322f
 
 [bar/cerebrum]
 monitor=${env:MONITOR:}
-bottom = true
+top = true
 width = 100%
 height = 30
 radius = 0.0
@@ -1129,10 +1129,10 @@ module-margin-left = 2
 module-margin-right = 2
 font-0 = FontAwesome:size=13;0
 font-1 = JetBrainsMono:pixelsize=13;0
-modules-left = bspwm
+modules-right = wlan cpu memory eth temperature_cpu temperature_gpu root arch-updates battery date bspwm
 modules-center =
-modules-right = wlan cpu memory eth temperature_cpu temperature_gpu root arch-updates battery date
-tray-position = right
+modules-left =
+tray-position = left
 tray-padding = 5
 cursor-click = pointer
 cursor-scroll = ns-resize
