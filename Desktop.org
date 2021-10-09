@@ -1547,29 +1547,44 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
 ** rofi
 *** config.rasi
 #+BEGIN_SRC rofi :tangle ~/.config/rofi/config.rasi :mkdirp yes
- * {
-    font: "Hack 12";
-    foreground: #f8f8f2;
-    background-color: #282a36;
-    active-background: #6272a4;
-    urgent-background: #ff5555;
+* {
+    /* Dracula theme colour palette */
+    drac-bgd: #282a36;
+    drac-cur: #44475a;
+    drac-fgd: #f8f8f2;
+    drac-cmt: #6272a4;
+    drac-cya: #8be9fd;
+    drac-grn: #50fa7b;
+    drac-ora: #ffb86c;
+    drac-pnk: #ff79c6;
+    drac-pur: #bd93f9;
+    drac-red: #ff5555;
+    drac-yel: #f1fa8c;
+
+    font: "Jetbrains Mono 12";
+
+    foreground: @drac-fgd;
+    background: @drac-bgd;
+    active-background: @drac-pnk;
+    urgent-background: @drac-red;
+
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
     selected-active-background: @active-background;
     separatorcolor: @active-background;
-    bordercolor: @active-background;
+    bordercolor: #6272a4;
 }
 
 #window {
     background-color: @background;
-    border:           0;
-    border-radius:    0;
+    border:           3;
+    border-radius: 0;
     border-color: @bordercolor;
     padding:          5;
 }
 #mainbox {
     border:  0;
-    padding: 0;
+    padding: 5;
 }
 #message {
     border:       1px dash 0px 0px ;
@@ -1601,7 +1616,7 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
 }
 #element.normal.active {
     background-color: @active-background;
-    text-color:       @foreground;
+    text-color:       @background;
 }
 #element.selected.normal {
     background-color: @selected-background;
@@ -1613,7 +1628,7 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
 }
 #element.selected.active {
     background-color: @selected-active-background;
-    text-color:       @foreground;
+    text-color:       @background;
 }
 #element.alternate.normal {
     background-color: @background;
@@ -1652,11 +1667,11 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
 }
 #entry {
     spacing:    0;
-    text-color: @foreground;
+    text-color: @drac-cya;
 }
 #prompt {
     spacing:    0;
-    text-color: @foreground;
+    text-color: @drac-grn;
 }
 #inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
@@ -1665,7 +1680,7 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
     expand:     false;
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
-    text-color: @foreground;
+    text-color: @drac-grn;
 }
 #+END_SRC
 ** krita
@@ -2157,159 +2172,239 @@ ToolPluginsDisabled=
 [General]
 canvasState=OPENGL_SUCCESS
 #+END_SRC
-* Scripts
-** Toggle touchpad
-#+BEGIN_SRC sh :tangle ~/.doom.d/scripts/toggle-touchpad.sh :mkdirp yes :tangle-mode (identity #o755)
-#!/bin/bash
-if xinput list-props 12 | grep "Device Enabled (186):	1" >/dev/null
-then
-    xinput disable 12
-    notify-send -u low -i mouse "Trackpad disabled"
-else
-    xinput enable 12
-    notify-send -u low -i mouse "Trackpad enabled"
-fi
-#+END_SRC
-** Geforce Now Launcher
-#+BEGIN_SRC sh :tangle ~/.doom.d/scripts/geforcenow.sh :mkdirp yes :tangle-mode (identity #o755)
-#!/bin/bash
-LC_ALL="de_DE.utf8" geforcenow
-#+END_SRC
 * List all installed packages
-#+BEGIN_SRC sh :export both
+#+BEGIN_SRC sh :export raw
 pacman -Qqe
 #+END_SRC
 
 #+RESULTS:
-| alacritty             |
-| alsa-utils            |
-| arandr                |
-| autoconf              |
-| automake              |
-| base                  |
-| binutils              |
-| bison                 |
-| blueman               |
-| bluez                 |
-| bluez-utils           |
-| bspwm                 |
-| dhcpcd                |
-| dialog                |
-| dosfstools            |
-| dunst                 |
-| efibootmgr            |
-| emacs                 |
-| fakeroot              |
-| feh                   |
-| file                  |
-| findutils             |
-| flameshot             |
-| flex                  |
-| gawk                  |
-| gcc                   |
-| geeqie                |
-| geforcenow-nativefier |
-| gettext               |
-| git                   |
-| gnome-keyring         |
-| gptfdisk              |
-| grep                  |
-| groff                 |
-| gzip                  |
-| input-wacom-dkms-git  |
-| krita                 |
-| libtool               |
-| light                 |
-| lightdm               |
-| lightdm-gtk-greeter   |
-| linux                 |
-| linux-firmware        |
-| linux-headers         |
-| m4                    |
-| make                  |
-| netctl                |
-| nextcloud-client      |
-| openssh               |
-| optimus-manager       |
-| optimus-manager-qt    |
-| pacman                |
-| patch                 |
-| picom                 |
-| pkgconf               |
-| polybar               |
-| poppler-glib          |
-| ptxconf-git           |
-| pulseaudio            |
-| pulseaudio-alsa       |
-| pulseaudio-bluetooth  |
-| qutebrowser           |
-| redshift              |
-| ripgrep               |
-| rofi                  |
-| sed                   |
-| spotify               |
-| sudo                  |
-| sxhkd                 |
-| telegram-desktop      |
-| texinfo               |
-| thunar                |
-| thunar-archive-plugin |
-| ttf-hack              |
-| ttf-iosevka           |
-| unzip                 |
-| vim                   |
-| wacom-utility         |
-| which                 |
-| wpa_supplicant        |
-| xclip                 |
-| xf86-video-vesa       |
-| xorg-bdftopcf         |
-| xorg-docs             |
-| xorg-font-util        |
-| xorg-fonts-100dpi     |
-| xorg-fonts-75dpi      |
-| xorg-fonts-encodings  |
-| xorg-iceauth          |
-| xorg-mkfontscale      |
-| xorg-server           |
-| xorg-server-common    |
-| xorg-server-devel     |
-| xorg-server-xephyr    |
-| xorg-server-xnest     |
-| xorg-server-xvfb      |
-| xorg-sessreg          |
-| xorg-setxkbmap        |
-| xorg-smproxy          |
-| xorg-x11perf          |
-| xorg-xauth            |
-| xorg-xbacklight       |
-| xorg-xcmsdb           |
-| xorg-xcursorgen       |
-| xorg-xdpyinfo         |
-| xorg-xdriinfo         |
-| xorg-xev              |
-| xorg-xgamma           |
-| xorg-xhost            |
-| xorg-xinput           |
-| xorg-xkbcomp          |
-| xorg-xkbevd           |
-| xorg-xkbutils         |
-| xorg-xkill            |
-| xorg-xlsatoms         |
-| xorg-xlsclients       |
-| xorg-xmodmap          |
-| xorg-xpr              |
-| xorg-xprop            |
-| xorg-xrandr           |
-| xorg-xrdb             |
-| xorg-xrefresh         |
-| xorg-xset             |
-| xorg-xsetroot         |
-| xorg-xvinfo           |
-| xorg-xwayland         |
-| xorg-xwd              |
-| xorg-xwininfo         |
-| xorg-xwud             |
-| yay                   |
-| zip                   |
-| zsh                   |
+| alacarte                    |
+| alacritty                   |
+| alsa-utils                  |
+| arandr                      |
+| arduino                     |
+| arduino-beta-bin            |
+| autoconf                    |
+| automake                    |
+| baobab                      |
+| base                        |
+| binutils                    |
+| bison                       |
+| blueman                     |
+| bluez                       |
+| bluez-utils                 |
+| brave-bin                   |
+| bspwm                       |
+| cheese                      |
+| chrome-gnome-shell          |
+| dhcpcd                      |
+| dialog                      |
+| discord                     |
+| dosfstools                  |
+| dunst                       |
+| efibootmgr                  |
+| emacs-git                   |
+| eog                         |
+| epiphany                    |
+| evince                      |
+| fakeroot                    |
+| fd                          |
+| feh                         |
+| file                        |
+| file-roller                 |
+| findutils                   |
+| flameshot                   |
+| flex                        |
+| gawk                        |
+| gcc                         |
+| gedit                       |
+| geforcenow-electron         |
+| gettext                     |
+| git                         |
+| gnome-backgrounds           |
+| gnome-books                 |
+| gnome-boxes                 |
+| gnome-calculator            |
+| gnome-calendar              |
+| gnome-characters            |
+| gnome-clocks                |
+| gnome-color-manager         |
+| gnome-contacts              |
+| gnome-control-center        |
+| gnome-disk-utility          |
+| gnome-documents             |
+| gnome-font-viewer           |
+| gnome-keyring               |
+| gnome-logs                  |
+| gnome-maps                  |
+| gnome-menus                 |
+| gnome-music                 |
+| gnome-photos                |
+| gnome-remote-desktop        |
+| gnome-screenshot            |
+| gnome-session               |
+| gnome-settings-daemon       |
+| gnome-shell                 |
+| gnome-shell-extensions      |
+| gnome-software              |
+| gnome-system-monitor        |
+| gnome-terminal              |
+| gnome-themes-extra          |
+| gnome-tweaks                |
+| gnome-user-docs             |
+| gnome-user-share            |
+| gnome-video-effects         |
+| gnome-weather               |
+| gptfdisk                    |
+| grep                        |
+| grilo-plugins               |
+| groff                       |
+| gvfs                        |
+| gvfs-afc                    |
+| gvfs-goa                    |
+| gvfs-google                 |
+| gvfs-gphoto2                |
+| gvfs-mtp                    |
+| gvfs-nfs                    |
+| gvfs-smb                    |
+| gzip                        |
+| joplin-appimage             |
+| lib32-giflib                |
+| lib32-gnutls                |
+| lib32-gst-plugins-base-libs |
+| lib32-gtk3                  |
+| lib32-libgcrypt             |
+| lib32-libjpeg-turbo         |
+| lib32-libpng                |
+| lib32-libpulse              |
+| lib32-libva                 |
+| lib32-libxcomposite         |
+| lib32-libxinerama           |
+| lib32-libxslt               |
+| lib32-mpg123                |
+| lib32-nvidia-utils          |
+| lib32-ocl-icd               |
+| lib32-openal                |
+| lib32-v4l-utils             |
+| libtool                     |
+| light                       |
+| lightdm                     |
+| lightdm-gtk-greeter         |
+| linux                       |
+| linux-firmware              |
+| linux-headers               |
+| lutris                      |
+| m4                          |
+| make                        |
+| minecraft-launcher          |
+| mpg123                      |
+| mupdf                       |
+| mutter                      |
+| nautilus                    |
+| netctl                      |
+| networkmanager              |
+| nextcloud-client            |
+| nushell                     |
+| nvidia                      |
+| ocl-icd                     |
+| openal                      |
+| openssh                     |
+| optimus-manager             |
+| optimus-manager-qt          |
+| orca                        |
+| otf-overpass                |
+| pacman                      |
+| pacman-contrib              |
+| patch                       |
+| picom                       |
+| pkgconf                     |
+| polybar                     |
+| proton-ge-custom-bin        |
+| pulseaudio                  |
+| pulseaudio-alsa             |
+| pulseaudio-bluetooth        |
+| python-adblock              |
+| qutebrowser                 |
+| reflector                   |
+| ripgrep                     |
+| rofi                        |
+| ruby-fusuma                 |
+| rygel                       |
+| sed                         |
+| simple-scan                 |
+| spotify                     |
+| steam                       |
+| sudo                        |
+| sushi                       |
+| sxhkd                       |
+| sxiv                        |
+| texinfo                     |
+| totem                       |
+| touchegg                    |
+| tracker                     |
+| tracker-miners              |
+| tracker3                    |
+| tracker3-miners             |
+| ttf-hack                    |
+| ttf-jetbrains-mono          |
+| ttf-ms-fonts                |
+| vim                         |
+| vino                        |
+| visual-studio-code-bin      |
+| wget                        |
+| which                       |
+| wine-staging                |
+| wpa_supplicant              |
+| xclip                       |
+| xdg-user-dirs-gtk           |
+| xf86-video-vesa             |
+| xorg-bdftopcf               |
+| xorg-docs                   |
+| xorg-font-util              |
+| xorg-fonts-100dpi           |
+| xorg-fonts-75dpi            |
+| xorg-fonts-encodings        |
+| xorg-iceauth                |
+| xorg-mkfontscale            |
+| xorg-server                 |
+| xorg-server-common          |
+| xorg-server-devel           |
+| xorg-server-xephyr          |
+| xorg-server-xnest           |
+| xorg-server-xvfb            |
+| xorg-sessreg                |
+| xorg-setxkbmap              |
+| xorg-smproxy                |
+| xorg-x11perf                |
+| xorg-xauth                  |
+| xorg-xbacklight             |
+| xorg-xcmsdb                 |
+| xorg-xcursorgen             |
+| xorg-xdpyinfo               |
+| xorg-xdriinfo               |
+| xorg-xev                    |
+| xorg-xgamma                 |
+| xorg-xhost                  |
+| xorg-xinput                 |
+| xorg-xkbcomp                |
+| xorg-xkbevd                 |
+| xorg-xkbutils               |
+| xorg-xkill                  |
+| xorg-xlsatoms               |
+| xorg-xlsclients             |
+| xorg-xmodmap                |
+| xorg-xpr                    |
+| xorg-xprop                  |
+| xorg-xrandr                 |
+| xorg-xrdb                   |
+| xorg-xrefresh               |
+| xorg-xset                   |
+| xorg-xsetroot               |
+| xorg-xvinfo                 |
+| xorg-xwayland               |
+| xorg-xwd                    |
+| xorg-xwininfo               |
+| xorg-xwud                   |
+| yay                         |
+| yelp                        |
+| zsh                         |
