@@ -235,7 +235,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
 
-(defvar siatwe/frame-transparency '(100 . 100))
+(defvar siatwe/frame-transparency '(90 . 90))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,siatwe/frame-transparency))
 #+END_SRC
