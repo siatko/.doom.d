@@ -135,8 +135,9 @@ redshift-gtk -l '47.7303:12.8816' &
 # optimus-manager
 optimus-manager-qt &
 # wallpaper
-wget https://source.unsplash.com/random/2560x1440/?nasa -O ~/.wallpaper.jpg
-feh --bg-center ~/.wallpaper.jpg
+TIMESTAMP=$(date +%s)
+wget https://source.unsplash.com/random/2560x1440/?nasa -O ~/.doom.d/wallpaper/wallpaper-"$TIMESTAMP".jpg
+feh --bg-center ~/.doom.d/wallpaper/wallpaper-"$TIMESTAMP".jpg
 # bluetooth
 blueman-applet &
 # wm fix phpstorm
