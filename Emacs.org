@@ -308,6 +308,11 @@ Custom packages for which there is no embedding in Doom Emacs yet.
                                        " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
                                  (search . " %i %-12:c")))
 
+(setq org-agenda-format-date (lambda (date) (concat "\n"
+                                                    (make-string (window-width) 9472)
+                                                    "\n"
+                                                    (org-agenda-format-date-aligned date))))
+
 (setq org-agenda-span 100
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-3d")
