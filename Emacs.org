@@ -26,7 +26,9 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        (company +childframe)  ; the ultimate code completion backend
        ;;helm                 ; the *other* search engine for love and life
        ;;ido                  ; the other *other* search engine...
-       (ivy +fuzzy +icons +prescient) ; a search engine for love and life
+       ;;(ivy +fuzzy +icons +prescient) ; a search engine for love and life
+       vertico                ; the search engine of the future
+
 
        :ui
        ;;deft                 ; notational velocity for Emacs
