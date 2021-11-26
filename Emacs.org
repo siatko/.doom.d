@@ -503,11 +503,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
  :leader
  :desc "Maximize window"
  "em" #'maximize-window
-
- ;; Overwrite dooms defaults
- :leader
- :desc "Switch buffer"
- "bb" #'counsel-switch-buffer)
 #+END_SRC
 ** Custom Lisp Files
 #+BEGIN_SRC emacs-lisp
