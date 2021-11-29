@@ -209,6 +209,8 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! mixed-pitch)
 (package! anki-editor)
 (package! org-web-tools)
+(package! app-launcher
+  :recipe (:host github :repo "SebastienWae/app-launcher"))
 #+END_SRC
 * CONFIG.el
 ** General
