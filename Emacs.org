@@ -211,6 +211,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! org-web-tools)
 (package! app-launcher
   :recipe (:host github :repo "SebastienWae/app-launcher"))
+
 #+END_SRC
 * CONFIG.el
 ** General
@@ -501,6 +502,10 @@ Custom packages for which there is no embedding in Doom Emacs yet.
  :leader
  :desc "Adjust font size"
  "ea" #'+hydra/text-zoom/body
+
+ :leader
+ :desc "Launch app-launcher"
+ "d" #'app-launcher-run-app
 
  :leader
  :desc "Maximize window"
