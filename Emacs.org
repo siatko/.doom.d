@@ -212,6 +212,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! app-launcher
   :recipe (:host github :repo "SebastienWae/app-launcher"))
 (package! hackernews)
+(package! org-tanglesync)
 #+END_SRC
 * CONFIG.el
 ** General
@@ -437,6 +438,9 @@ Custom packages for which there is no embedding in Doom Emacs yet.
   :config
   (setq-default gac-automatically-push-p t)
   (setq-default gac-automatically-add-new-files-p t))
+#+END_SRC
+*** Org Tanglesync
+#+BEGIN_SRC emacs-lisp
 #+END_SRC
 ** Functions
 *** Minify JS or LESS
