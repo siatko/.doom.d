@@ -11,8 +11,9 @@ cd paru
 makepkg -si
 #+END_SRC
 * Dotfiles
-** alacritty
-*** alacritty.yml
+** X with bspwm
+*** alacritty
+**** alacritty.yml
 #+BEGIN_SRC text :tangle ~/.config/alacritty/alacritty.yml :mkdirp yes
 font:
   normal:
@@ -114,8 +115,8 @@ colors:
 mouse:
     hide_when_typing: true
 #+END_SRC
-** bspwm
-*** bspwmrc
+*** bspwm
+**** bspwmrc
 #+BEGIN_SRC text :tangle ~/.config/bspwm/bspwmrc :mkdirp yes :tangle-mode (identity #o755)
 #! /bin/sh
 #
@@ -177,8 +178,8 @@ bspc config ignore_ewmh_focus true
 bspc rule -a Firefox follow=false
 bspc rule -a Emacs state=tiled
 #+END_SRC
-** dunst
-*** dunstrc
+*** dunst
+**** dunstrc
 #+BEGIN_SRC config :tangle ~/.config/dunst/dunstrc :mkdirp yes
 [global]
     monitor = 0
@@ -251,8 +252,8 @@ bspc rule -a Emacs state=tiled
     frame_color = "#ff0000"
     timeout = 0
 #+END_SRC
-** fusuma
-*** config.yml
+*** fusuma
+**** config.yml
 #+BEGIN_SRC text :tangle ~/.config/fusuma/config.yml :mkdirp yes
 swipe:
   3:
@@ -261,8 +262,8 @@ swipe:
     right:
       command: "bspc desktop -f prev"
 #+END_SRC
-** neovim
-*** init.vim (vscode)
+*** neovim
+**** init.vim (vscode)
 #+BEGIN_SRC vim :tangle ~/.config/nvim/init.vim :mkdirp yes
 "                          _
 "   ____  ___  ____ _   __(_)___ ___
@@ -646,7 +647,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 " }}}
 #+END_SRC
-*** init.vim (backup)
+**** init.vim (backup)
 #+BEGIN_SRC vim :tangle ~/.config/nvim/init.vim_bk :mkdirp yes
 "                          _
 "   ____  ___  ____ _   __(_)___ ___
@@ -1030,7 +1031,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 " }}}
 #+END_SRC
-*** coc-settings.json
+**** coc-settings.json
 #+BEGIN_SRC json :tangle ~/.config/nvim/coc-settings.json :mkdirp yes
 {
     "coc.preferences.useQuickfixForLocations": true,
@@ -1080,23 +1081,23 @@ EOF
     }
 }
 #+END_SRC
-*** snippets
-**** php.snippets
+**** snippets
+***** php.snippets
 #+BEGIN_SRC snippets :tangle ~/.config/nvim/snippets/php.snippets :mkdirp yes
 snippet t "this->"
 $this->$1
 endsnippet
 #+END_SRC
-** picom
-*** picom.conf
+*** picom
+**** picom.conf
 #+BEGIN_SRC config :tangle ~/.config/picom/picom.conf :mkdirp yes
 shadow = false;
 no-dnd-shadow = true;
 no-dock-shadow = true;
 clear-shadow = false;
 #+END_SRC
-** polybar
-*** config
+*** polybar
+**** config
 #+BEGIN_SRC text :tangle ~/.config/polybar/config :mkdirp yes
 [colors]
 background = #DF282a36
@@ -1310,7 +1311,7 @@ animation-discharging-3 = 
 animation-discharging-4 = 
 animation-discharging-framerate = 500
 #+END_SRC
-*** launch.sh
+**** launch.sh
 #+BEGIN_SRC sh :tangle ~/.config/polybar/launch.sh :mkdirp yes :tangle-mode (identity #o755)
 #! /usr/bin/env sh
 
@@ -1326,8 +1327,8 @@ else
   polybar --reload cerebrum &
 fi
 #+END_SRC
-*** scripts
-**** arch-updates.sh
+**** scripts
+***** arch-updates.sh
 #+BEGIN_SRC sh :tangle ~/.config/polybar/scripts/arch-updates.sh :mkdirp yes :tangle-mode (identity #o755)
 #!/bin/sh
 
@@ -1343,8 +1344,8 @@ updates=$(("$updates_arch" + "$updates_aur"))
 
 echo " $updates"
 #+END_SRC
-** sxhkd
-*** sxhkdrc
+*** sxhkd
+**** sxhkdrc
 #+BEGIN_SRC text :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
 ## Application hotkeys Run rofi application launcher
 #super + d
@@ -1509,8 +1510,8 @@ super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
 
 #+END_SRC
-** zsh
-*** zshrc
+*** zsh
+**** zshrc
 #+BEGIN_SRC sh :tangle ~/.zshrc :mkdirp yes
 export ZSH="/home/siatwe/.oh-my-zsh"
 export LC_ALL="en_US.UTF-8"
@@ -1545,10 +1546,10 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--layout=reverse'
 #+END_SRC
-** rofi
-*** config.rasi
+*** rofi
+**** config.rasi
 #+BEGIN_SRC rofi :tangle ~/.config/rofi/config.rasi :mkdirp yes
-* {
+\* {
     /* Dracula theme colour palette */
     drac-bgd: #282a36;
     drac-cur: #44475a;
@@ -1685,494 +1686,158 @@ export FZF_DEFAULT_OPTS='--layout=reverse'
 }
 
 #+END_SRC
-** krita
-*** kritarc
-#+BEGIN_SRC config :tangle ~/.config/kritarc :mkdirp yes
-ArtColorSel.ColorSpace=0
-ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0.27920845421747104
-ArtColorSel.LightPieces=11
-ArtColorSel.NumRings=7
-ArtColorSel.RingPieces=12
-ArtColorSel.SelColorH=0.6011436740528949
-ArtColorSel.SelColorS=0.1248933470479424
-ArtColorSel.SelColorX=0.27920845421747104
-ArtColorSel.defaultHueSteps=12
-ArtColorSel.defaultSaturationSteps=7
-ArtColorSel.defaultValueScaleSteps=11
-ArtColorSel.enforceGamutMask=false
-ArtColorSel.lumaB=0.0722
-ArtColorSel.lumaG=0.7152
-ArtColorSel.lumaGamma=2.2
-ArtColorSel.lumaR=0.2126
-ArtColorSel.showBgColor=true
-ArtColorSel.showValueScale=false
-BackgroundColorForNewImage=255,255,255
-BackgroundOpacityForNewImage=255
-BackgroundStyleForNewImage=0
-CanvasOnlyActive=false
-GamutMasks.viewMode=0
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="0" r="0" space="sRGB-elle-V2-srgbtrc.icc" b="0"/>\n</LastBackGroundColor>\n
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0.274509817361832" r="0.254901975393295" space="sRGB-elle-V2-srgbtrc.icc" b="0.301960796117783"/>\n</LastForeGroundColor>\n
-LastPreset=j)_Watercolor_Texture
-LineSmoothingDelayDistance=50
-LineSmoothingDistance=50
-LineSmoothingFinishStabilizedCurve=true
-LineSmoothingScalableDistance=true
-LineSmoothingSmoothPressure=false
-LineSmoothingStabilizeSensors=true
-LineSmoothingTailAggressiveness=0.15
-LineSmoothingType=1
-LineSmoothingUseDelayDistance=true
-NumberOfLayersForNewImage=2
-SpecificColorSelector/UsePercentage=false
-baseLength=60
-canvasState=OPENGL_SUCCESS
-colorDepthDef=U8
-colorModelDef=RGBA
-colorProfileDef=sRGB-elle-V2-srgbtrc.icc
-defaultPalette=Default
-favoritePresetsTag=Paint
-globalSnapBoundingBox=false
-globalSnapExtension=false
-globalSnapImageBounds=true
-globalSnapImageCenter=true
-globalSnapIntersection=false
-globalSnapNode=false
-globalSnapOrthogonal=false
-globalSnapToPixel=false
-gridmaincolor=99,99,99
-gridmainstyle=0
-gridsubdivisioncolor=150,150,150
-gridsubdivisionstyle=1
-guidesColor=99,99,99
-guidesLineStyle=0
-imageHeightDef=2160
-imageResolutionDef=600
-imageWidthDef=3840
-levelOfDetailEnabled=false
-logviewer_enabled=false
-moveToolUnit=0
-numberOfOnionSkins=10
-oninSkinTintColorForward=0,255,0
-onionSkinOpacity_-1=173
-onionSkinOpacity_-10=22
-onionSkinOpacity_-2=163
-onionSkinOpacity_-3=147
-onionSkinOpacity_-4=130
-onionSkinOpacity_-5=107
-onionSkinOpacity_-6=86
-onionSkinOpacity_-7=66
-onionSkinOpacity_-8=48
-onionSkinOpacity_-9=35
-onionSkinOpacity_0=178
-onionSkinOpacity_1=173
-onionSkinOpacity_10=22
-onionSkinOpacity_2=163
-onionSkinOpacity_3=147
-onionSkinOpacity_4=130
-onionSkinOpacity_5=107
-onionSkinOpacity_6=86
-onionSkinOpacity_7=66
-onionSkinOpacity_8=48
-onionSkinOpacity_9=35
-onionSkinState_-1=true
-onionSkinState_-10=false
-onionSkinState_-2=true
-onionSkinState_-3=false
-onionSkinState_-4=false
-onionSkinState_-5=false
-onionSkinState_-6=false
-onionSkinState_-7=false
-onionSkinState_-8=false
-onionSkinState_-9=false
-onionSkinState_0=true
-onionSkinState_1=true
-onionSkinState_10=false
-onionSkinState_2=true
-onionSkinState_3=false
-onionSkinState_4=false
-onionSkinState_5=false
-onionSkinState_6=false
-onionSkinState_7=false
-onionSkinState_8=false
-onionSkinState_9=false
-onionSkinTintColorBackward=255,0,0
-onionSkinTintFactor=191
-presethistory=c)_Pencil-2,b)_Basic-3_Flow,b)_Basic-1,j)_Watercolor_Texture
-scratchpadVisible=true
-showAdditionalOnionSkinsSettings=true
-toolbarslider_1=opacity
-toolbarslider_2=size
-toolbarslider_3=flow
-toolbarslider_4=flow
+** Gnome
+Save settings with: dconf dump / > dconf-settings.ini
+Load settings with: dconf load / < dconf-settings.ini
+*** dconf-settings.ini
+#+BEGIN_SRC text :tangle ~/dconf-settings.ini :mkdirp yes
+[org/blueman/general]
+window-properties=[953, 1035, 962, 40]
 
-[GradientChooser]
-global/itemSize=medium
-global/itemSizeCustom=32
-global/viewMode=icon
+[org/blueman/plugins/autoconnect]
+services=[('/org/bluez/hci0/dev_F8_DF_15_82_BA_62', '00000000-0000-0000-0000-000000000000')]
 
-[KisToolCrop]
-allowGrow=false
-decoration=1
-growCenter=false
+[org/blueman/plugins/powermanager]
+auto-power-on=@mb true
 
-[KisToolPath]
-outlineType=1
-patternTransformScale=100
+[org/blueman/plugins/recentconns]
+recent-connections=[{'adapter': '28:3A:4D:14:AF:08', 'address': 'AC:12:2F:7A:EB:95', 'alias': 'Soundcore Life A1', 'icon': 'audio-headset', 'name': 'Audio and input profiles', 'uuid': '00000000-0000-0000-0000-000000000000', 'time': '1638025836.3839362'}, {'adapter': '28:3A:4D:14:AF:08', 'address': 'F8:DF:15:82:BA:62', 'alias': 'SRS-XB31', 'icon': 'audio-card', 'name': 'Audio and input profiles', 'uuid': '00000000-0000-0000-0000-000000000000', 'time': '1639931035.8129606'}, {'adapter': '28:3A:4D:14:AF:08', 'address': '4C:87:5D:99:FE:93', 'alias': 'Bose On-Ear Wireless', 'icon': 'audio-headphones', 'name': 'Audio and input profiles', 'uuid': '00000000-0000-0000-0000-000000000000', 'time': '1640117253.6985168'}]
 
-[KisToolSelectContiguous]
-feather=0
-fuzziness=20
-sizemod=0
+[org/gnome/baobab/ui]
+window-size=(960, 600)
+window-state=87168
 
-[KisToolSelectMagnetic]
-anchorgap=20
-filterradius=3
-searchradius=30
-threshold=100
+[org/gnome/control-center]
+last-panel='keyboard'
 
-[KisToolSelectRectangular]
-roundCornersX=0
-roundCornersY=0
+[org/gnome/desktop/app-folders]
+folder-children=['Utilities', 'YaST']
 
-[KisToolSelectSimilar]
-fuzziness=20
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
 
-[KritaFill/KisToolFill]
-featherAmount=0
-growSelection=0
-patternScale=100
-thresholdAmount=80
+[org/gnome/desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
 
-[KritaFill/KisToolGradient]
-antialiasThreshold=0
+[org/gnome/desktop/background]
+picture-uri='file:///home/siatwe/Pictures/BingWallpaper/20211225-RPIR_DE-DE7116285365_UHD.jpg'
 
-[MainWindow]
-DP-1 eDP-1 Height 1920x1080=1045
-DP-1 eDP-1 Width 1920x1080=1920
-State=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AAAAFABHAHIAaQBkAEQAbwBjAGsAZQByAAAAAAD/////AAABLQD////7AAAAHgBIAGkAcwB0AG8AZwByAGEAbQBEAG8AYwBrAGUAcgAAAAAA/////wAAAEcA////+wAAACoAQQBuAGkAbQBhAHQAaQBvAG4AQwB1AHIAdgBlAHMARABvAGMAawBlAHIAAAAAAP////8AAAB4AP////sAAAAyAFMAdgBnAFMAeQBtAGIAbwBsAEMAbwBsAGwAZQBjAHQAaQBvAG4ARABvAGMAawBlAHIAAAAAAP////8AAAB6AP////sAAAAWAFQAbwB1AGMAaABEAG8AYwBrAGUAcgAAAAJMAAABMQAAABMA////+wAAABoAQQByAHIAYQBuAGcAZQBEAG8AYwBrAGUAcgAAAAAA/////wAAADgA////+wAAADoAYwBvAG0AaQBjAHMAXwBwAHIAbwBqAGUAYwB0AF8AbQBhAG4AYQBnAGUAcgBfAGQAbwBjAGsAZQByAAAAAAD/////AAAAuQD////7AAAAKgBxAHUAaQBjAGsAXwBzAGUAdAB0AGkAbgBnAHMAXwBkAG8AYwBrAGUAcgAAAAAA/////wAAAHwA////+wAAABYAUABhAGcAZQByAEQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAJgBsAGEAcwB0AGQAbwBjAHUAbQBlAG4AdABzAGQAbwBjAGsAZQByAAAAAAD/////AAAAegD////7AAAAEgBHAGEAbQB1AHQATQBhAHMAawAAAAAA/////wAAAScA////+wAAABIATABvAGcARABvAGMAawBlAHIAAAAAAP////8AAAB7AP////sAAAAQAFMAbgBhAHAAcwBoAG8AdAEAAAM7AAAAtgAAAHgA////AAAAAgAACgAAAAC8/AEAAAAB+wAAABoAVABvAG8AbABCAGEAcgBEAG8AYwBrAGUAcgAAAAAA/////wAAAAAAAAAAAAAAAwAAAAAAAAAA/AEAAAAE+wAAABwARgBsAGkAcABiAG8AbwBrAEQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAHgBBAG4AaQBtAGEAdABpAG8AbgBEAG8AYwBrAGUAcgAAAAAA/////wAAARQA////+wAAACAATwBuAGkAbwBuAFMAawBpAG4AcwBEAG8AYwBrAGUAcgAAAAAA/////wAAAUUA////+wAAABwAVABpAG0AZQBsAGkAbgBlAEQAbwBjAGsAZQByAAAAAAD/////AAAARgD///8AAAYlAAADsQAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAAB4AQgByAHUAcwBoAGUAcwBBAG4AZABTAHQAdQBmAGYBAAAAwf////8AAAAAAAAAAA==
-eDP-1 DP-1 Window-Maximized 1920x1080=true
-ko_geometry=AdnQywADAAAAAAAAAAAAAAAAB38AAAQ3AAAAAAAAACUAAAWfAAADFAAAAAECAAAAB4AAAAAAAAAAJQAAB38AAAQ3
+[org/gnome/desktop/calendar]
+show-weekdate=true
 
-[MainWindow][DockWidget AnimationCurvesDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=421
-width=448
-xPosition=0
-yPosition=0
+[org/gnome/desktop/input-sources]
+per-window=false
+sources=[('xkb', 'de+deadgraveacute')]
+xkb-options=@as []
 
-[MainWindow][DockWidget AnimationDocker]
-Collapsed=false
-DockArea=8
-Locked=false
-height=160
-width=280
-xPosition=0
-yPosition=0
+[org/gnome/desktop/interface]
+clock-show-weekday=true
+font-antialiasing='grayscale'
+font-hinting='slight'
+gtk-im-module='gtk-im-context-simple'
+show-battery-percentage=true
 
-[MainWindow][DockWidget ArrangeDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=426
-width=303
-xPosition=0
-yPosition=0
+[org/gnome/desktop/notifications]
+application-children=['discord', 'gnome-power-panel']
 
-[MainWindow][DockWidget ArtisticColorSelector]
-Collapsed=false
-DockArea=2
-Locked=false
-height=284
-width=334
-xPosition=0
-yPosition=0
+[org/gnome/desktop/notifications/application/discord]
+application-id='discord.desktop'
 
-[MainWindow][DockWidget ChannelDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
 
-[MainWindow][DockWidget ColorSelectorNg]
-Collapsed=false
-DockArea=2
-Locked=false
-height=162
-width=262
-xPosition=0
-yPosition=19
+[org/gnome/desktop/peripherals/touchpad]
+speed=0.41176470588235303
+tap-to-click=true
+two-finger-scrolling-enabled=true
 
-[MainWindow][DockWidget CompositionDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=300
-width=400
-xPosition=0
-yPosition=0
+[org/gnome/desktop/screensaver]
+picture-uri='file:///home/siatwe/Pictures/BingWallpaper/20211225-RPIR_DE-DE7116285365_UHD.jpg'
 
-[MainWindow][DockWidget DigitalMixer]
-Collapsed=false
-DockArea=2
-Locked=false
-height=30
-width=100
-xPosition=0
-yPosition=0
+[org/gnome/desktop/wm/keybindings]
+close=['<Shift><Super>q']
+maximize=['<Super>f']
+move-to-workspace-1=['<Shift><Super>exclam']
+move-to-workspace-2=['<Shift><Super>quotedbl']
+move-to-workspace-3=['<Shift><Super>section']
+move-to-workspace-4=['<Shift><Super>dollar']
+switch-to-workspace-2=['<Super>1']
+switch-to-workspace-3=['<Super>2']
+switch-to-workspace-4=['<Super>3']
+switch-windows=['<Super>4']
+switch-windows-backward=['<Shift><Super>4']
+toggle-fullscreen=['<Shift><Super>f']
 
-[MainWindow][DockWidget GamutMask]
-Collapsed=false
-DockArea=2
-Locked=false
-height=322
-width=363
-xPosition=0
-yPosition=0
+[org/gnome/evolution-data-server]
+migrated=true
+network-monitor-gio-name=''
 
-[MainWindow][DockWidget GridDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=527
-width=258
-xPosition=0
-yPosition=0
+[org/gnome/mutter]
+dynamic-workspaces=false
 
-[MainWindow][DockWidget HistogramDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
+[org/gnome/settings-daemon/plugins/media-keys]
+area-screenshot-clip=['<Shift><Super>s']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+help=@as []
+home=['<Super>e']
+screensaver=@as []
+volume-down=['<Super>F1']
+volume-mute=['<Super>F3']
+volume-up=['<Super>F2']
+www=['<Shift><Super>Return']
 
-[MainWindow][DockWidget History]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>Return'
+command='alacritty'
+name='Open Terminal'
 
-[MainWindow][DockWidget KisLayerBox]
-Collapsed=false
-DockArea=2
-Locked=false
-height=252
-width=262
-xPosition=0
-yPosition=19
+[org/gnome/shell]
+disable-user-extensions=false
+disabled-extensions=['window-list@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['x11gestures@joseexposito.github.io', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'trayIconsReloaded@selfmade.pl', 'BingWallpaper@ineffable-gmail.com']
+favorite-apps=['brave-browser.desktop', 'emacs.desktop', 'steam.desktop', 'net.lutris.Lutris.desktop', 'org.gnome.Nautilus.desktop']
+had-bluetooth-devices-setup=true
+welcome-dialog-last-shown-version='41.2'
 
-[MainWindow][DockWidget LogDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=260
-width=400
-xPosition=0
-yPosition=0
+[org/gnome/shell/extensions/bingwallpaper]
+bing-json='[{"startdate":"20211218","fullstartdate":"202112182300","enddate":"20211219","url":"/th?id=OHR.AtigunPassAurora_DE-DE3356780566_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.AtigunPassAurora_DE-DE3356780566","copyright":"Polarlichter über der Brooks Range in Alaska, USA (© Noppawat Tom Charoensinphon/Getty Images)","copyrightlink":"https://www.bing.com/search?q=Polarlicht&form=hpcapt&filters=HpDate%3a%2220211218_2300%22","title":"Lichtspiele auf einer einsamen Landstraße","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211218_AtigunPassAurora%22&FORM=HPQUIZ","wp":true,"hsh":"417390534d399d1b8f5c4f38fb7e9f83","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211219","fullstartdate":"202112192300","enddate":"20211220","url":"/th?id=OHR.SiberianSunset_DE-DE3817505986_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.SiberianSunset_DE-DE3817505986","copyright":"Sonnenlicht im Wald von Westsibirien, in der Nähe der Stadt Raduschny, Russland (© Leonid Ikan/Shutterstock)","copyrightlink":"https://www.bing.com/search?q=Raduschny&form=hpcapt&filters=HpDate%3a%2220211219_2300%22","title":"Sonnenstrahlen auf sibirischem Schnee","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211219_SiberianSunset%22&FORM=HPQUIZ","wp":true,"hsh":"52eafc69df83c75afe48b3c44ea53657","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211220","fullstartdate":"202112202300","enddate":"20211221","url":"/th?id=OHR.SonnenuhrHoheward_DE-DE4384227149_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.SonnenuhrHoheward_DE-DE4384227149","copyright":"Sonnenuhr auf der Halde Hoheward, Herten, Nordrhein-Westfalen (© Hans Blossey/imageBROKER/Alamy Stock Photo)","copyrightlink":"https://www.bing.com/search?q=Sonnenuhr+Halde+Hoheward&form=hpcapt&filters=HpDate%3a%2220211220_2300%22","title":"Heute ist der kürzeste Tag des Jahres","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211220_SonnenuhrHoheward%22&FORM=HPQUIZ","wp":true,"hsh":"615149d6990a872bb3f5c439de40c991","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211221","fullstartdate":"202112212300","enddate":"20211222","url":"/th?id=OHR.AnnecyFrance_DE-DE5055803332_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.AnnecyFrance_DE-DE5055803332","copyright":"Projizierte Winterszene auf der Fassade des Palais de l’Isle, Annecy, Département Haute-Savoie, Frankreich (© blickwinkel/Alamy)","copyrightlink":"https://www.bing.com/search?q=Annecy%2c+Stadt&form=hpcapt&filters=HpDate%3a%2220211221_2300%22","title":"Alpenstadt in vorweihnachtlichem Glanz","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211221_AnnecyFrance%22&FORM=HPQUIZ","wp":true,"hsh":"0051de410e38b6070475173c560c2274","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211222","fullstartdate":"202112222300","enddate":"20211223","url":"/th?id=OHR.KhomyakMountain_DE-DE5380523637_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.KhomyakMountain_DE-DE5380523637","copyright":"Bäume am Nordhang des Berges Khomyak in den Karpaten, Ukraine (© panaramka/Getty Images)","copyrightlink":"https://www.bing.com/search?q=Ukrainische+Waldkarpaten&form=hpcapt&filters=HpDate%3a%2220211222_2300%22","title":"„Weihnachtsbäume“ in den Karpaten","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211222_KhomyakMountain%22&FORM=HPQUIZ","wp":true,"hsh":"ca475c6885fc7ec3e2ae13fc4b9c9596","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211223","fullstartdate":"202112232300","enddate":"20211224","url":"/th?id=OHR.Rauchnachte_DE-DE6731714422_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.Rauchnachte_DE-DE6731714422","copyright":"Weihnachtsbaum am Weissensee in der Nähe von Ehrwald in Tirol, Österreich (© nagelestock/Alamy)","copyrightlink":"https://www.bing.com/search?q=Heiligabend&form=hpcapt&filters=HpDate%3a%2220211223_2300%22","title":"„O Tannenbaum, o Tannenbaum“","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211223_Rauchnachte%22&FORM=HPQUIZ","wp":true,"hsh":"24f491dee51f0f38dc285bf83208b1f7","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211224","fullstartdate":"202112242300","enddate":"20211225","url":"/th?id=OHR.CarolinensielChristmas_DE-DE8776603262_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.CarolinensielChristmas_DE-DE8776603262","copyright":"Schwimmender Weihnachtsbaum im Museumshafen Carolinensiel, Niedersachsen (© Manfred Habel/mauritius images GmbH/Alamy Stock Photo)","copyrightlink":"https://www.bing.com/search?q=Schwimmender+Weihnachtsbaum+in+Carolinensiel&form=hpcapt&filters=HpDate%3a%2220211224_2300%22","title":"Frohe Weihnachten!","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211224_CarolinensielChristmas%22&FORM=HPQUIZ","wp":true,"hsh":"50c6b5423979338236f85f35e083bc85","drk":1,"top":1,"bot":1,"hs":[]},{"startdate":"20211225","fullstartdate":"202112252300","enddate":"20211226","url":"/th?id=OHR.RPIR_DE-DE7116285365_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","urlbase":"/th?id=OHR.RPIR_DE-DE7116285365","copyright":"Eisbahn am Royal Pavilion in Brighton, England (© Chris Gorman/Getty Images)","copyrightlink":"https://www.bing.com/search?q=Royal+Pavilion+Bauwerk&form=hpcapt&filters=HpDate%3a%2220211225_2300%22","title":"Happy Boxing Day!","quiz":"/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20211225_RPIR%22&FORM=HPQUIZ","wp":false,"hsh":"f541e0a60f30647b4e60503570f337f0","drk":1,"top":1,"bot":1,"hs":[]}]'
+download-folder='/home/siatwe/Pictures/BingWallpaper/'
+selected-image='current'
+state='{"maxlongdate":202112252300,"title":"Eisbahn am Royal Pavilion in Brighton, England","explanation":"Bing Wallpaper of the Day for 2021-12-25","copyright":"© Chris Gorman/Getty Images","longstartdate":"202112252300","imageinfolink":"https://www.bing.com/search?q=Royal+Pavilion+Bauwerk&form=hpcapt&filters=HpDate%3a%2220211225_2300%22","imageURL":"https://www.bing.com/th?id=OHR.RPIR_DE-DE7116285365_UHD.jpg","filename":"/home/siatwe/Pictures/BingWallpaper/20211225-RPIR_DE-DE7116285365_UHD.jpg"}'
 
-[MainWindow][DockWidget OnionSkinsDocker]
-Collapsed=false
-DockArea=8
-Locked=false
-height=282
-width=336
-xPosition=0
-yPosition=0
+[org/gnome/shell/keybindings]
+switch-to-application-1=@as []
+switch-to-application-2=@as []
+switch-to-application-3=@as []
+switch-to-application-4=@as []
 
-[MainWindow][DockWidget OverviewDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
+[org/gnome/shell/world-clocks]
+locations=@av []
 
-[MainWindow][DockWidget PaletteDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=422
-width=647
-xPosition=0
-yPosition=0
+[org/gnome/software]
+check-timestamp=int64 1640509034
 
-[MainWindow][DockWidget PatternDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=315
-width=256
-xPosition=0
-yPosition=0
+[org/gnome/tweaks]
+show-extensions-notice=false
 
-[MainWindow][DockWidget PresetDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=187
-width=262
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget PresetHistory]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget SmallColorSelector]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget Snapshot]
-Collapsed=false
-DockArea=2
-Locked=false
-height=163
-width=262
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget SpecificColorSelector]
-Collapsed=false
-DockArea=2
-Locked=false
-height=207
-width=268
-xPosition=0
-yPosition=0
-
-[MainWindow][DockWidget SvgSymbolCollectionDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget TasksetDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=300
-width=400
-xPosition=0
-yPosition=0
-
-[MainWindow][DockWidget TimelineDocker]
-Collapsed=false
-DockArea=8
-Locked=false
-height=30
-width=100
-xPosition=0
-yPosition=0
-
-[MainWindow][DockWidget ToolBox]
-Collapsed=false
-DockArea=1
-Locked=false
-height=926
-width=73
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget TouchDocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=0
-width=0
-xPosition=0
-yPosition=0
-
-[MainWindow][DockWidget comics_project_manager_docker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget lastdocumentsdocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget quick_settings_docker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[MainWindow][DockWidget sharedtooldocker]
-Collapsed=false
-DockArea=2
-Locked=false
-height=461
-width=640
-xPosition=0
-yPosition=19
-
-[SvgSymbolCollection]
-currentCollection=0
-
-[advancedColorSelector]
-gamma=2.2
-lumaG=0.7152
-lumaR=0.2126
-showColorSelector=true
-
-[crashprevention]
-CreatingCanvas=false
-
-[krita]
-ColorSpaceExtensionsPlugins=\\0
-ColorSpaceExtensionsPluginsDisabled=
-ColorSpacePlugins=\\0
-ColorSpacePluginsDisabled=
-DockerPlugins=,,,,,,,,,,,,,,,,,,,,,,,
-DockerPluginsDisabled=
-FlakePlugins=,
-FlakePluginsDisabled=
-ShapePlugins=,
-ShapePluginsDisabled=
-ToolPlugins=,,,,,,,,,,,,
-ToolPluginsDisabled=
-#+END_SRC
-*** kritadisplayrc
-#+BEGIN_SRC config :tangle ~/.config/kritadisplayrc :mkdirp yes
-[General]
-canvasState=OPENGL_SUCCESS
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=157
+sort-column='name'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-position=(344, 89)
+window-size=(1231, 902)
 #+END_SRC
 * List all installed packages
 #+BEGIN_SRC sh :export raw
