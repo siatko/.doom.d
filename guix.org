@@ -1,0 +1,155 @@
+#+TITLE: Guix
+
+#+BEGIN_SRC scheme
+(use-modules
+ (gnu)
+ (nongnu packages linux)
+ (gnu packages version-control)
+ (gnu packages emacs)
+ (gnu packages linux)
+ (gnu packages audio)
+ (gnu packages pulseaudio)
+ (gnu packages xorg)
+ (gnu packages certs)
+ (gnu packages wm)
+ (gnu packages networking)
+ (gnu packages ssh)
+ (gnu packages terminals)
+ (gnu packages gnome)
+ (gnu packages xdisorg)
+ (gnu packages vim))
+
+(use-service-modules
+ cups
+ desktop
+ networking
+ ssh
+ nix
+ xorg)
+
+;; Allow members of the "video" group to change the screen brightness.
+(define %backlight-udev-rule
+  (udev-rule
+   "90-backlight.rules"
+   (string-append "ACTION==\"add\", SUBSYSTEM==\"backlight\", "
+                  "RUN+=\"/run/current-system/profile/bin/chgrp video /sys/class/backlight/%k/brightness\""
+                  "\n"
+                  "ACTION==\"add\", SUBSYSTEM==\"backlight\", "
+                  "RUN+=\"/run/current-system/profile/bin/chmod g+w /sys/class/backlight/%k/brightness\"")))
+
+;; Touchpad and keyboard configuration
+(define %xorg-libinput-config
+  "Section \"InputClass\"
+  Identifier \"Touchpads\"
+  Driver \"libinput\"
+  MatchDevicePath \"/dev/input/event*\"
+  MatchIsTouchpad \"on\"
+
+  Option \"Tapping\" \"on\"
+  Option \"TappingDrag\" \"on\"
+  Option \"DisableWhileTyping\" \"on\"
+  Option \"MiddleEmulation\" \"on\"
+  Option \"ScrollMethod\" \"twofinger\"
+EndSection
+Section \"InputClass\"
+  Identifier \"Keyboards\"
+  Driver \"libinput\"
+  MatchDevicePath \"/dev/input/event*\"
+  MatchIsKeyboard \"on\"
+EndSection
+")
+
+;; Sudoers file content
+(define %sudoers-specification
+  (plain-file "sudoers" "\
+root ALL=(ALL) ALL
+%wheel ALL=(ALL) NOPASSWD: ALL\n"))
+
+(operating-system
+ (kernel linux)
+ (firmware (list linux-firmware))
+ (locale "en_US.utf8")
+ (timezone "Europe/Berlin")
+ (keyboard-layout (keyboard-layout "de"))
+ (host-name "cerebrum")
+ (sudoers-file %sudoers-specification)
+ (users (cons* (user-account
+                (name "siatwe")
+                (comment "Simon Attila Weis")
+                (group "users")
+                (home-directory "/home/siatwe")
+                (supplementary-groups '(
+                                        "wheel"     ;; sudo
+                                        "netdev"    ;; network devices
+                                        "kvm"
+                                        "tty"
+                                        "input"
+                                        "lp"        ;; control bluetooth devices
+                                        "audio"     ;; control audio devices
+                                        "video")))  ;; control video devices
+
+               %base-user-accounts))
+
+ (packages (append (list
+                    bspwm
+                    sxhkd
+                    rofi
+                    polybar
+                    alacritty
+                    git
+                    vim
+                    emacs
+                    bluez
+                    bluez-alsa
+                    pulseaudio
+                    blueman
+                    tlp
+                    openssh
+                    xf86-input-libinput
+                    nss-certs     ;; for HTTPS access
+                    gvfs)         ;; for user mounts
+                   %base-packages))
+
+ ;; Define all the needed services
+ (services
+  (append
+   (list (service gnome-desktop-service-type)
+         (service cups-service-type)
+         (service nix-service-type)
+         (bluetooth-service #:auto-enable? #t)
+         ;;(simple-service 'custom-udev-rules udev-service-type (list nvidia-driver))
+         (set-xorg-configuration
+          (xorg-configuration
+           ;;(modules (cons* nvidia-driver %default-xorg-modules))
+           ;;(drivers '("nvidia"))
+           (keyboard-layout keyboard-layout)
+           (extra-config (list %xorg-libinput-config)))))
+   (modify-services %desktop-services
+                    (elogind-service-type config =>
+                                          (elogind-configuration (inherit config)
+                                                                 (handle-lid-switch-external-power 'suspend)))
+                    (udev-service-type config =>
+                                       (udev-configuration (inherit config)
+                                                           (rules (cons %backlight-udev-rule
+                                                                        (udev-configuration-rules config))))))))
+
+ (bootloader
+  (bootloader-configuration
+   (bootloader grub-efi-bootloader)
+   (targets (list "/boot/efi"))
+   (keyboard-layout keyboard-layout)))
+ (swap-devices
+  (list (uuid "4e817749-6eb3-4dfd-95db-9922a80c3521")))
+ (file-systems
+  (cons* (file-system
+          (mount-point "/boot/efi")
+          (device (uuid "224A-100F" 'fat32))
+          (type "vfat"))
+         (file-system
+          (mount-point "/")
+          (device
+           (uuid "c92cf171-3cdf-41c6-9b1c-b6f33b877e38"
+                 'ext4))
+          (type "ext4"))
+         %base-file-systems)))
+#+END_SRC
