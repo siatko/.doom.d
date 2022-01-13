@@ -1,5 +1,5 @@
-#+TITLE: Emacs Configuration
 #+property: header-args:emacs-lisp :tangle config.el
+#+TITLE: Emacs Configuration
 #+property: header-args :mkdirp yes :comments no
 #+STARTUP: fold
 
@@ -138,7 +138,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        ;;idris                ;
        ;;json                 ; At least it ain't XML
        ;;(java +meghanada)    ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)      ; all(hope(abandon(ye(who(enter(here))))))
+       ;;(javascript +lsp)      ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia                ; a better, faster MATLAB
        ;;kotlin               ; a better, slicker Java(Script)
        ;;latex                ; writing papers in Emacs has never been so fun
@@ -151,7 +151,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        ;;nix                  ; I hereby declare "nix geht mehr!"
        ;;ocaml                ; an objective camel
        (org +dragndrop +present +hugo)         ; organize your plain life in plain text
-       (php +lsp)             ; perl's insecure younger brother
+       ;;(php +lsp)             ; perl's insecure younger brother
        ;;plantuml             ; diagrams for confusing people more
        ;;purescript           ; javascript, but functional
        ;;python               ; beautiful is better than ugly
@@ -163,24 +163,24 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        ;;(ruby +rails)        ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala                ; java, but good
-       ;;scheme               ; a fully conniving family of lisps
+       (scheme +guile)               ; a fully conniving family of lisps
        sh                     ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity             ; do you need a blockchain? No.
        ;;swift                ; who asked for emoji variables?
        ;;terra                ; Earth and Moon in alignment for performance.
-       web                  ; the tubes
-       yaml                   ; JSON, but readable
+       ;;web                  ; the tubes
+       ;;yaml                   ; JSON, but readable
 
        :email
-       mu4e
+       ;;mu4e
        ;;notmuch
        ;;(wanderlust +gmail)
 
        :app
        ;;calendar
        ;;irc                  ; how neckbeards socialize
-       (rss +org)             ; emacs as an RSS reader
+       ;;(rss +org)             ; emacs as an RSS reader
        ;;twitter              ; twitter client https://twitter.com/vnought
 
        :config
@@ -231,10 +231,10 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 *** Fonts
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
-(setq doom-variable-pitch-font (font-spec :family "Overpass" :size 20))
-(use-package! mixed-pitch
-  :hook
-  (text-mode . mixed-pitch-mode))
+;;(setq doom-variable-pitch-font (font-spec :family "Overpass" :size 20))
+;;(use-package! mixed-pitch
+;;  :hook
+;;  (text-mode . mixed-pitch-mode))
 #+END_SRC
 *** Theme And Transparency
 #+BEGIN_SRC emacs-lisp
@@ -370,25 +370,25 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 #+END_SRC
 *** Elfeed
 #+BEGIN_SRC emacs-lisp
-(after! elfeed
-  (setq elfeed-search-filter "@2-weeks-ago"))
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-(require 'elfeed)
-(defun elfeed-v-mpv (url)
-  "Watch a video from URL in MPV"
-  (async-shell-command (format "mpv %s" (string-replace "=" "\\=" (string-replace "?" "\\?" url)))))
-
-(defun elfeed-view-mpv (&optional use-generic-p)
-  "Youtube-feed link"
-  (interactive "P")
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-             do (elfeed-untag entry 'unread)
-             when (elfeed-entry-link entry)
-             do (elfeed-v-mpv it))
-    (mapc #'elfeed-search-update-entry entries)
-    (unless (use-region-p) (forward-line))))
-(define-key elfeed-search-mode-map (kbd "v") 'elfeed-view-mpv)
+;;(after! elfeed
+;;  (setq elfeed-search-filter "@2-weeks-ago"))
+;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+;;(require 'elfeed)
+;;(defun elfeed-v-mpv (url)
+;;  "Watch a video from URL in MPV"
+;;  (async-shell-command (format "mpv %s" (string-replace "=" "\\=" (string-replace "?" "\\?" url)))))
+;;
+;;(defun elfeed-view-mpv (&optional use-generic-p)
+;;  "Youtube-feed link"
+;;  (interactive "P")
+;;  (let ((entries (elfeed-search-selected)))
+;;    (cl-loop for entry in entries
+;;             do (elfeed-untag entry 'unread)
+;;             when (elfeed-entry-link entry)
+;;             do (elfeed-v-mpv it))
+;;    (mapc #'elfeed-search-update-entry entries)
+;;    (unless (use-region-p) (forward-line))))
+;;(define-key elfeed-search-mode-map (kbd "v") 'elfeed-view-mpv)
 #+END_SRC
 *** LSP Treemacs
 #+BEGIN_SRC emacs-lisp
