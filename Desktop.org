@@ -127,31 +127,21 @@ sh $HOME/.screenlayout/dualmonitor.sh
 sxhkd &
 # statusbar
 $HOME/.config/polybar/launch.sh &
-# compositor
-picom -CGb &
-# wlan
-sudo netctl start @home &
-# redshift bluelight filter
-redshift-gtk -l '47.7303:12.8816' &
-# optimus-manager
-optimus-manager-qt &
 # wallpaper
 sh $HOME/Projects/unsblash/unsblash.sh -k nasa -r 2560x1440 &
-# bluetooth
-blueman-applet &
 # wm fix phpstorm
 wmname LG3D &
 # dunst
 dunst &
-# fusuma (gestures)
-fusuma &
 # nextcloud
 nextcloud &
 # emacs
 emacs &
-# ptxconf (wacom)
-ptxconf &
-# volume control
+# network manager
+nm-applet &
+# bluetooth manager
+blueman-applet &
+# volume
 volctl &
 
 # set workspaces
@@ -1348,8 +1338,8 @@ echo " $updates"
 **** sxhkdrc
 #+BEGIN_SRC text :tangle ~/.config/sxhkd/sxhkdrc :mkdirp yes
 ## Application hotkeys Run rofi application launcher
-#super + d
-#   rofi -show run -display-run ""
+super + d
+   rofi -show run -display-run ""
 
 # Run rofi window switcher
 super + w rofi -location 0 -show window -display-window '' -show-icons -icon-theme papirus
@@ -1360,32 +1350,24 @@ super + Return
 
 # Open firefox
 super + shift + Return
-    qutebrowser
+    nyxt
 
 # File manager
 super + e
     thunar
 
-# Ping
-shift + F9
-    mh-ping
-
 # Screenshot
 super + shift + s
     flameshot gui
 
-# Toggle touchpad
-super + F4
-    sh ~/.doom.d/scripts/toggle-touchpad.sh
-
 ## Media keys
 # Volume
-super + F2
-    pactl set-sink-volume 0 +1%
-super + F1
-    pactl set-sink-volume 0 -1%
-super + F3
-    pactl set-sink-mute 0 toggle
+#super + F2
+#    pactl set-sink-volume 0 +1%
+#super + F1
+#    pactl set-sink-volume 0 -1%
+#super + F3
+#    pactl set-sink-mute 0 toggle
 
 # Screen backlight
 super + shift + F2
@@ -1508,7 +1490,6 @@ super + alt + shift + {h,j,k,l}
 # Move a floating window
 super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
-
 #+END_SRC
 *** zsh
 **** zshrc
