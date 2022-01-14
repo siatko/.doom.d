@@ -1119,7 +1119,7 @@ module-margin-left = 2
 module-margin-right = 2
 font-0 = FontAwesome:size=13;0
 font-1 = JetBrainsMono:pixelsize=13;0
-modules-right = wlan cpu memory eth temperature_cpu temperature_gpu root arch-updates battery date bspwm
+modules-right = wlan cpu memory eth temperature_cpu temperature_gpu root battery date bspwm
 modules-center =
 modules-left =
 tray-position = left
