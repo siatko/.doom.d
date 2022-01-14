@@ -1,5 +1,6 @@
 #+TITLE: Guix
 
+* System
 #+BEGIN_SRC scheme
 (use-modules
  (gnu)
@@ -24,7 +25,6 @@
  desktop
  networking
  ssh
- nix
  xorg)
 
 ;; Allow members of the "video" group to change the screen brightness.
@@ -115,7 +115,6 @@ root ALL=(ALL) ALL
   (append
    (list (service gnome-desktop-service-type)
          (service cups-service-type)
-         (service nix-service-type)
          (bluetooth-service #:auto-enable? #t)
          ;;(simple-service 'custom-udev-rules udev-service-type (list nvidia-driver))
          (set-xorg-configuration
@@ -152,4 +151,75 @@ root ALL=(ALL) ALL
                  'ext4))
           (type "ext4"))
          %base-file-systems)))
+#+END_SRC
+* Channels
+#+BEGIN_SRC scheme
+(list (channel
+       (name 'guix)
+       (url "https://git.savannah.gnu.org/git/guix.git")
+       (branch "master")
+       ;;(commit
+       ;;  "7e91d5d58c50fa64f41218c9c8157a4e8dbb3107")
+       (introduction
+        (make-channel-introduction
+         "9edb3f66fd807b096b48283debdcddccfea34bad"
+         (openpgp-fingerprint
+          "BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA"))))
+      (channel
+       (name 'nonguix)
+       (url "https://gitlab.com/nonguix/nonguix")
+       (introduction
+        (make-channel-introduction
+         "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+         (openpgp-fingerprint
+          "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5")))))
+#+END_SRC
+* Home
+#+BEGIN_SRC scheme
+(use-modules
+ (gnu home)
+ (gnu packages)
+ (gnu services)
+ (guix gexp)
+ (gnu home services shells))
+
+(home-environment
+ (packages
+  (map (compose list specification->package+output)
+       (list "wmname"
+             "flatpak"
+             "flameshot"
+             "thunar"
+             "volctl"
+             "unzip"
+             "zip"
+             "ncurses"
+             "gst-plugins-bad"
+             "gst-plugins-ugly"
+             "gstreamer"
+             "nyxt"
+             "network-manager-applet"
+             "python-pip"
+             "light"
+             "font-overpass"
+             "font-hack"
+             "font-jetbrains-mono"
+             "fd"
+             "ripgrep"
+             "steam"
+             "vim")))
+ (services
+  (list (service
+         home-bash-service-type
+         (home-bash-configuration
+          (aliases
+           '(("grep='grep --color" . "auto")
+             ("ll" . "ls -l")
+             ("ls='ls -p --color" . "auto")))
+          (bashrc
+           (list (local-file "/home/siatwe/home/.bashrc" "bashrc")))
+          (bash-profile
+           (list (local-file
+                  "/home/siatwe/home/.bash_profile"
+                  "bash_profile"))))))))
 #+END_SRC
