@@ -27,6 +27,7 @@
  dbus
  networking
  ssh
+ sddm
  xorg)
 
 ;; Allow members of the "video" group to change the screen brightness.
@@ -122,6 +123,10 @@ root ALL=(ALL) ALL
          (simple-service 'dbus-extras
                          dbus-root-service-type
                          (list blueman))
+         ;; https://gitgud.io/znavko/guix-configs/-/blob/master/config-gnome-wayland.scm
+         (sddm-service
+          (sddm-configuration
+           (display-server "wayland")))
          (set-xorg-configuration
           (xorg-configuration
            (keyboard-layout keyboard-layout)
