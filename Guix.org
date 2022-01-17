@@ -24,6 +24,7 @@
 (use-service-modules
  cups
  desktop
+ dbus
  networking
  ssh
  xorg)
@@ -118,11 +119,11 @@ root ALL=(ALL) ALL
    (list (service xfce-desktop-service-type)
          (service cups-service-type)
          (bluetooth-service #:auto-enable? #t)
-         ;;(simple-service 'custom-udev-rules udev-service-type (list nvidia-driver))
+         (simple-service 'dbus-extras
+                         dbus-root-service-type
+                         (list blueman))
          (set-xorg-configuration
           (xorg-configuration
-           ;;(modules (cons* nvidia-driver %default-xorg-modules))
-           ;;(drivers '("nvidia"))
            (keyboard-layout keyboard-layout)
            (extra-config (list %xorg-libinput-config)))))
    (modify-services %desktop-services
