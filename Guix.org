@@ -4,30 +4,27 @@
 #+BEGIN_SRC scheme :tangle ~/.config/guix/system.scm :mkdirp yes
 (use-modules
  (gnu)
+ (gnu packages linux)
  (nongnu packages linux)
  (gnu packages version-control)
- (gnu packages emacs)
  (gnu packages gnome)
- (gnu packages linux)
  (gnu packages audio)
  (gnu packages pulseaudio)
  (gnu packages xorg)
  (gnu packages certs)
- (gnu packages wm)
- (gnu packages dunst)
  (gnu packages networking)
  (gnu packages ssh)
  (gnu packages terminals)
  (gnu packages xdisorg)
- (gnu packages vim))
+ (gnu packages vim)
+ (srfi srfi-1))
 
 (use-service-modules
- cups
  desktop
  dbus
  networking
- ssh
  sddm
+ ssh
  xorg)
 
 ;; Allow members of the "video" group to change the screen brightness.
@@ -70,6 +67,7 @@ root ALL=(ALL) ALL
 
 (operating-system
  (kernel linux)
+ (kernel-arguments '("loglevel=1,quiet"))
  (firmware (list linux-firmware))
  (locale "en_US.utf8")
  (timezone "Europe/Berlin")
@@ -94,19 +92,11 @@ root ALL=(ALL) ALL
                %base-user-accounts))
 
  (packages (append (list
-                    bspwm
-                    sxhkd
-                    rofi
-                    dunst
-                    polybar
-                    alacritty
                     git
                     vim
-                    emacs
                     bluez
                     bluez-alsa
                     pulseaudio
-                    blueman
                     tlp
                     openssh
                     xf86-input-libinput
@@ -117,28 +107,33 @@ root ALL=(ALL) ALL
  ;; Define all the needed services
  (services
   (append
-   (list (service xfce-desktop-service-type)
-         (service cups-service-type)
+   (list (service gnome-desktop-service-type)
+         (service sddm-service-type
+                  (sddm-configuration
+                   (display-server "wayland")
+                   ;;(themes-directory "/usr/themes/sddm")
+                   ;;(theme "maya")
+                   ))
          (bluetooth-service #:auto-enable? #t)
          (simple-service 'dbus-extras
                          dbus-root-service-type
                          (list blueman))
-         ;; https://gitgud.io/znavko/guix-configs/-/blob/master/config-gnome-wayland.scm
-         (sddm-service
-          (sddm-configuration
-           (display-server "wayland")))
-         (set-xorg-configuration
-          (xorg-configuration
-           (keyboard-layout keyboard-layout)
-           (extra-config (list %xorg-libinput-config)))))
-   (modify-services %desktop-services
-                    (elogind-service-type config =>
-                                          (elogind-configuration (inherit config)
-                                                                 (handle-lid-switch-external-power 'suspend)))
-                    (udev-service-type config =>
-                                       (udev-configuration (inherit config)
-                                                           (rules (cons %backlight-udev-rule
-                                                                        (udev-configuration-rules config))))))))
+         ;;https://gitgud.io/znavko/guix-configs/-/blob/master/config-gnome-wayland.scm
+         ;;(set-xorg-configuration
+         ;; (xorg-configuration
+         ;;  (keyboard-layout keyboard-layout)
+         ;;  (extra-config (list %xorg-libinput-config))))
+         )
+   (remove (lambda (service)
+             (eq? (service-kind service) gdm-service-type))
+           (modify-services %desktop-services
+                            (elogind-service-type config =>
+                                                  (elogind-configuration (inherit config)
+                                                                         (handle-lid-switch-external-power 'suspend)))
+                            (udev-service-type config =>
+                                               (udev-configuration (inherit config)
+                                                                   (rules (cons %backlight-udev-rule
+                                                                                (udev-configuration-rules config)))))))))
 
  (bootloader
   (bootloader-configuration
@@ -149,17 +144,17 @@ root ALL=(ALL) ALL
   (list (swap-space
          (target
           ;; TODO: After fresh install copy the correct uuid from /etc/config.scm
-          (uuid "892319e9-ebb3-4a86-835c-7222681672a0")))))
+          (uuid "e134618a-5227-4bda-ab2b-88b7003c2565")))))
  (file-systems
   (cons* (file-system
           (mount-point "/boot/efi")
-          (device (uuid "A578-3ECC" 'fat32))
+          (device (uuid "224A-100F" 'fat32))
           (type "vfat"))
          (file-system
           (mount-point "/")
           (device
            ;; TODO: After fresh install copy the correct uuid from /etc/config.scm
-           (uuid "c0bb735a-9ca3-469a-96c0-4e9f0ada230a"
+           (uuid "ce6eea9b-908c-42c6-b1d9-b0fcf0e02b16"
                  'ext4))
           (type "ext4"))
          %base-file-systems)))
