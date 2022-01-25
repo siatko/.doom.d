@@ -1332,7 +1332,9 @@ fi
 
 updates=$(("$updates_arch" + "$updates_aur"))
 
-echo " $updates"
+if ! [ "$updates" -eq "0" ]; then
+    echo " $updates"
+fi
 #+END_SRC
 *** sxhkd
 **** sxhkdrc
