@@ -324,9 +324,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (setq org-log-done 'time)
 #+END_SRC
 
-#+RESULTS:
-: time
-
 ** Eshell
 #+BEGIN_SRC emacs-lisp
 (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history       )
