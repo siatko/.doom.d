@@ -204,7 +204,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! mixed-pitch)
 (package! tree-sitter)
 (package! tree-sitter-langs)
-(package! mpv)
 (package! git-auto-commit-mode)
 (package! mixed-pitch)
 (package! anki-editor)
@@ -212,7 +211,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! app-launcher
   :recipe (:host github :repo "SebastienWae/app-launcher"))
 (package! hackernews)
-(package! org-tanglesync)
+(package! osm)
 #+END_SRC
 * CONFIG.el
 ** General
@@ -320,7 +319,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 
 (setq org-agenda-span 100
       org-agenda-start-on-weekday nil
-      org-agenda-start-day "-3d")
+      org-agenda-start-day "-31d")
 (setq org-log-done 'time)
 #+END_SRC
 

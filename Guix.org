@@ -496,12 +496,10 @@ alias ll='ls -l'
 alias grep='grep --color=auto'
 #+END_SRC
 * i3
-#+title: I3
-
-#+BEGIN_SRC init
+** i3
+#+BEGIN_SRC init i3/config
 set $mod Mod4
 font pango: JetBrainsMono 12
-for_window [class="^.*"] border pixel 0
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -509,6 +507,8 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id copyq
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec --no-startup-id picom
+exec --no-startup-id feh --bg-center ~/Pictures/Wallpaper/pa1.png
+exec --no-startup-id sh ~/.screenlayout/work.sh
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
 bindsym $mod+F1 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
@@ -518,7 +518,8 @@ floating_modifier $mod
 bindsym $mod+Return exec gnome-terminal
 bindsym $mod+Shift+Return exec google-chrome --password-store=gnome
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run -b
+bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -541,7 +542,8 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout toggle split
+bindsym $mod+e exec --no-startup-id nautilus
 bindsym $mod+Shift+space floating toggle
 #bindsym $mod+space focus mode_toggle
 bindsym $mod+space exec --no-startup-id copyq toggle
@@ -593,23 +595,48 @@ bindsym Escape mode "default"
 bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 bar {
   separator_symbol "::"
-  position bottom
+  position top
   status_command i3status
+  colors {
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
 }
+default_border none
+# floating enabled
+for_window [class="terminal"] floating enable
+for_window [class="Telegram"] floating enable
+for_window [class="^.*"] border pixel 1
 #+END_SRC
-
+** i3status
 #+BEGIN_SRC init
-
 general {
         interval = 5
+        output_format = "i3bar"
+        colors = true
+        color_good = "#50FA7B"
+        color_degraded = "#F1FA8C"
+        color_bad = "#FF5555"
 }
 
 order += "disk /"
 order += "battery 0"
 order += "memory"
-order += "cpu_temperature 0"
 order += "load"
 order += "volume master"
 order += "tztime local"
@@ -660,11 +687,6 @@ tztime berlin {
 
 load {
         format = "CPU: %1min %5min %15min"
-}
-
-cpu_temperature 0 {
-        format = "T: %degrees °C"
-        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input"
 }
 
 memory {
