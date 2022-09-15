@@ -207,7 +207,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! git-auto-commit-mode)
 ;;(package! mixed-pitch)
 ;;(package! anki-editor)
-;;(package! org-web-tools)
+(package! org-web-tools)
 ;;(package! hackernews)
 ;;(package! osm)
 #+END_SRC
@@ -430,3 +430,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
  :desc "Maximize window"
  "em" #'maximize-window)
 #+END_SRC
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO2GIgjDMOhraVFq7OkJivNLa9c09lvcKGNhhWzw2KBv9yeAPxStg0s7KrQ7oq9nNZZbtxLUm8x2STkDd11Qk7HufSaJmuCfYrjxKLjOikApwVnUHHjQzeg18VlAHu1ZJDxGdveVvO+OjliYcQ2Cdu+ebK7U8be4C00GIJG8ORqtsTxg3mp9LoKiz7m6nSq7ucwaRQyhLO2kL9Hco4mFuxrjOQ8h3whIA6lKd4NQ8GwT44eC/e+02CpZFBtwgJIDbRUD1IeNrn6qfLX7u+H7/uQ2JsU9Zm/BA7aBWDIB2ztQyknL2Q64ZzO+KfoL/FqSCU3GkmiNr9UoZu4sap586wfKZfCmBP8SSU4IQuDebphYR1g66x9H8uKpduSTI/Nask5sAJ6a/6Oju7mrZ5njgAvrWsohnNl55n9fIF6TqUrROZI9ma8MFvueKL5FenfpRFZYD48TiS+G/XpiZTvvv2vl10UXhYga5ijfw386Dri6cT5DduB+MNOOQQFv29GmU= u0_a383@localhost
