@@ -208,8 +208,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 (package! mixed-pitch)
 (package! anki-editor)
 (package! org-web-tools)
-(package! app-launcher
-  :recipe (:host github :repo "SebastienWae/app-launcher"))
 (package! hackernews)
 (package! osm)
 #+END_SRC
@@ -230,10 +228,10 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 *** Fonts
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
-;;(setq doom-variable-pitch-font (font-spec :family "Overpass" :size 20))
-;;(use-package! mixed-pitch
-;;  :hook
-;;  (text-mode . mixed-pitch-mode))
+(setq doom-variable-pitch-font (font-spec :family "Ubuntu" :size 20))
+(use-package! mixed-pitch
+  :hook
+  (text-mode . mixed-pitch-mode))
 #+END_SRC
 *** Theme And Transparency
 #+BEGIN_SRC emacs-lisp
@@ -304,13 +302,11 @@ Custom packages for which there is no embedding in Doom Emacs yet.
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
-                                 (timeline . "  % s")
-                                 (todo .
-                                       " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-                                 (tags .
-                                       " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+(setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
+                                 (todo . " %i %-12:c")
+                                 (tags . " %i %-12:c")
                                  (search . " %i %-12:c")))
+
 
 (setq org-agenda-format-date (lambda (date) (concat "\n"
                                                     (make-string (window-width) 9472)
@@ -397,28 +393,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
   :config
   (setq projectile-project-search-path '("/data/55/" "/data/53/" "/data/Projects/")))
 #+END_SRC
-*** MPV
-#+BEGIN_SRC emacs-lisp
-(org-link-set-parameters "mpv" :follow #'mpv-play)
-
-(defun org-mpv-complete-link (&optional arg)
-  (replace-regexp-in-string
-   "file:" "mpv:"
-   (org-link-complete-file arg)
-   t t))
-
-(defun my:mpv/org-metareturn-insert-playback-position ()
-  (when-let ((item-beg (org-in-item-p)))
-    (when (and (not org-timer-start-time)
-               (mpv-live-p)
-               (save-excursion
-                 (goto-char item-beg)
-                 (and (not (org-invisible-p)) (org-at-item-timer-p))))
-      (mpv-insert-playback-position t))))
-
-(add-hook 'org-open-at-point-functions #'mpv-seek-to-position-at-point)
-(add-hook 'org-metareturn-hook #'my:mpv/org-metareturn-insert-playback-position)
-#+END_SRC
 *** Tree Sitter
 #+BEGIN_SRC emacs-lisp
 (use-package! tree-sitter
@@ -433,9 +407,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
   :config
   (setq-default gac-automatically-push-p t)
   (setq-default gac-automatically-add-new-files-p t))
-#+END_SRC
-*** Org Tanglesync
-#+BEGIN_SRC emacs-lisp
 #+END_SRC
 ** Functions
 *** Minify JS or LESS

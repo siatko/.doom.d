@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Check for required binaries
 for COMMAND in "feh" "wget"; do
-    command -v "${COMMAND}" >/dev/null 2>&1
-    if [[ $? -ne 0 ]]; then
-        echo "I require ${COMMAND} but it's not installed. Abort."
-        exit 1
+    if ! command -v ${COMMAND} &> /dev/null
+    then
+        echo "This script requires ${COMMAND} to be installed and in your path."
+        exit
     fi
 done
 
@@ -16,25 +17,35 @@ help()
    echo
    echo "Syntax: scriptTemplate [-h|k|d|m]"
    echo "options:"
-   echo "h     Print this Help."
-   echo "k     Keywords separated by comma without space, e.g.: nature,mountains"
-   echo "d     Save the wallpapers in this path"
-   echo "m     Maximum number of wallpapers to save"
+   echo "h     Print this help."
+   echo "k     Keywords separated by comma without space, e.g.: nature,mountains."
+   echo "m     Maximum number of wallpapers to save."
+   echo "r     Wallpaper resolution WIDTHxHEIGHT, e.g.: 2560x1440"
    echo
 }
 
-while getopts "hk:d:m:" arg; do
+# Set default values
+KEYWORDS=nature
+MAX_TO_SAVE=5
+RESOLUTION=1920x1080
+
+# Get options
+while getopts "hk:d:m:r:" arg; do
    case $arg in
       h) help
          exit;;
-      k) echo ${OPTARG}
-         exit;;
-      d) echo ${OPTARG}
-         exit;;
-      m) echo ${OPTARG}
-         exit;;
+      k) KEYWORDS=${OPTARG};;
+      m) MAX_TO_SAVE=${OPTARG};;
+      r) RESOLUTION=${OPTARG};;
      \?) # Invalid option
          echo "Error: Invalid option"
          exit;;
    esac
 done
+
+# Create dir if necessary
+mkdir -p ~/.unblash
+
+TIMESTAMP=$(date +%s)
+wget https://source.unsplash.com/random/${RESOLUTION}/?${KEYWORDS} -O ~/.unblash/${KEYWORDS/,/_}-${RESOLUTION}-${TIMESTAMP}.jpg
+feh --bg-center ~/.unblash/${KEYWORDS/,/_}-${RESOLUTION}-${TIMESTAMP}.jpg
