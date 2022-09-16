@@ -200,7 +200,7 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 ;;(package! lsp-treemacs)
 (package! visual-fill-column)
 ;;(package! org-bullets)
-;;(package! evil-matchit)
+(package! evil-matchit)
 ;;(package! mixed-pitch)
 ;;(package! tree-sitter)
 ;;(package! tree-sitter-langs)
@@ -228,10 +228,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
 *** Fonts
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
-(setq doom-variable-pitch-font (font-spec :family "Ubuntu" :size 20))
-(use-package! mixed-pitch
-  :hook
-  (text-mode . mixed-pitch-mode))
 #+END_SRC
 *** Theme And Transparency
 #+BEGIN_SRC emacs-lisp
