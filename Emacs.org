@@ -77,7 +77,7 @@ files every time we save the file or call =M-x org-babel-tangle= manually.
        vc                     ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell                 ; the elisp shell that works everywhere
+       eshell                 ; the elisp shell that works everywhere
        ;;shell                ; simple shell REPL for Emacs
        ;;term                 ; basic terminal emulator for Emacs
        ;;vterm                  ; the best terminal emulation in Emacs
@@ -292,12 +292,6 @@ Custom packages for which there is no embedding in Doom Emacs yet.
   ;;:hook (org-mode . siatwe/org-mode-visual-fill)
   )
 
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
 (setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
                                  (todo . " %i %-12:c")
                                  (tags . " %i %-12:c")
@@ -397,35 +391,3 @@ Custom packages for which there is no embedding in Doom Emacs yet.
                  (match-string 1 url)))
       (message "This does not seem to be a valid Youtube URL."))))
 #+END_SRC
-** Key Mappings
-*** Evil leader
-#+BEGIN_SRC emacs-lisp
-(map!
-
- :leader
- :desc "Elfeed"
- "ef" #'elfeed
-
- :leader
- :desc "Outline/Symbols"
- "es" #'lsp-treemacs-symbols
-
- :leader
- :desc "Decrypt entry"
- "ex" #'org-decrypt-entry
-
- :leader
- :desc "Adjust font size"
- "ea" #'+hydra/text-zoom/body
-
- :leader
- :desc "Launch app-launcher"
- "d" #'app-launcher-run-app
-
- :leader
- :desc "Maximize window"
- "em" #'maximize-window)
-#+END_SRC
-
-
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO2GIgjDMOhraVFq7OkJivNLa9c09lvcKGNhhWzw2KBv9yeAPxStg0s7KrQ7oq9nNZZbtxLUm8x2STkDd11Qk7HufSaJmuCfYrjxKLjOikApwVnUHHjQzeg18VlAHu1ZJDxGdveVvO+OjliYcQ2Cdu+ebK7U8be4C00GIJG8ORqtsTxg3mp9LoKiz7m6nSq7ucwaRQyhLO2kL9Hco4mFuxrjOQ8h3whIA6lKd4NQ8GwT44eC/e+02CpZFBtwgJIDbRUD1IeNrn6qfLX7u+H7/uQ2JsU9Zm/BA7aBWDIB2ztQyknL2Q64ZzO+KfoL/FqSCU3GkmiNr9UoZu4sap586wfKZfCmBP8SSU4IQuDebphYR1g66x9H8uKpduSTI/Nask5sAJ6a/6Oju7mrZ5njgAvrWsohnNl55n9fIF6TqUrROZI9ma8MFvueKL5FenfpRFZYD48TiS+G/XpiZTvvv2vl10UXhYga5ijfw386Dri6cT5DduB+MNOOQQFv29GmU= u0_a383@localhost
