@@ -222,14 +222,6 @@
  :desc "Maximize window"
  "em" #'maximize-window)
 
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (setq +ivy-buffer-preview t)
-
-(defun siatwe/org-babel-tangle-config ()
-  (when (string-equal (file-name-directory (buffer-file-name))
-                      (expand-file-name doom-private-dir))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
 
 ;;(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'siatwe/org-babel-tangle-config)))
