@@ -4,10 +4,10 @@
       calendar-longitude 12.88)
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
-(setq doom-variable-pitch-font (font-spec :family "Ubuntu" :size 20))
-(use-package! mixed-pitch
-  :hook
-  (text-mode . mixed-pitch-mode))
+;;(setq doom-variable-pitch-font (font-spec :family "Ubuntu" :size 20))
+;;(use-package! mixed-pitch
+;;  :hook
+;;  (text-mode . mixed-pitch-mode))
 
 (setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
