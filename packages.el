@@ -1,17 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 
-(package! key-chord)
-(package! lsp-treemacs)
-(package! visual-fill-column)
 (package! org-bullets)
 (package! evil-matchit)
-(package! mixed-pitch)
-(package! tree-sitter)
-(package! tree-sitter-langs)
 (package! git-auto-commit-mode)
-(package! mixed-pitch)
-(package! anki-editor)
-(package! org-web-tools)
 (package! hackernews)
-(package! org-mind-map)
 (package! osm)
