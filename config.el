@@ -5,7 +5,7 @@
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
 
-(setq doom-theme 'modus-vivendi)
+(setq doom-theme 'doom-dracula)
 (doom-themes-visual-bell-config)
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
@@ -51,11 +51,6 @@
                                                     "\n"
                                                     (org-agenda-format-date-aligned date))))
 
-(setq org-agenda-span 100
-      org-agenda-start-on-weekday nil
-      org-agenda-start-day "-31d")
-(setq org-log-done 'time)
-
 (use-package! evil
   :config
   (setq-default evil-kill-on-visual-paste nil))
@@ -67,4 +62,19 @@
 (use-package! git-auto-commit-mode
   :config
   (setq-default gac-automatically-push-p t)
-  (setq-default gac-automatically-add-new-files-p t))
+  (setq-default gac-automatically-add-new-files-p t)
+
+  ;; Advise the `gac-push' function to pull before pushing and refresh the buffer
+  (defun gac-pull-before-push (&rest _args)
+    "Pull from the current repo before pushing and refresh the buffer."
+    (let ((current-file (buffer-file-name)))
+      (shell-command "git pull")
+      (when current-file
+        (with-current-buffer (find-buffer-visiting current-file)
+          (revert-buffer t t t)))))
+  (advice-add 'gac-push :before #'gac-pull-before-push))
+
+(setq org-log-done 'time)
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-start-day "-31d")
+(setq org-agenda-span 100)
