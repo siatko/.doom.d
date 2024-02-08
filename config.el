@@ -10,6 +10,7 @@
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,siatwe/frame-transparency))
+(toggle-frame-maximized)
 
 (setq display-line-numbers-type t)
 
@@ -24,32 +25,6 @@
 (global-hl-line-mode +1)
 
 (setq-default fill-column 80)
-
-(setq org-directory "~/.org")
-(setq org-ellipsis " ▾")
-(require 'org-crypt)
-(after! org
-  (add-to-list 'org-modules 'org-habit))
-(org-crypt-use-before-save-magic)
-(setq calendar-week-start-day 1)
-(setq org-tags-exclude-from-inheritance '("crypt"))
-
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-(setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
-                                 (todo . " %i %-12:c")
-                                 (tags . " %i %-12:c")
-                                 (search . " %i %-12:c")))
-
-
-(setq org-agenda-format-date (lambda (date) (concat "\n"
-                                                    (make-string (window-width) 9472)
-                                                    "\n"
-                                                    (org-agenda-format-date-aligned date))))
 
 (use-package! evil
   :config
@@ -74,7 +49,48 @@
           (revert-buffer t t t)))))
   (advice-add 'gac-push :before #'gac-pull-before-push))
 
+
 (setq org-log-done 'time)
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-start-day "-31d")
 (setq org-agenda-span 100)
+
+(custom-set-variables
+ '(org-agenda-start-day "-31d")
+ '(org-agenda-span 100))
+
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq org-agenda-start-day "-31d")
+            (setq org-agenda-span 100)))
+
+(setq org-agenda-custom-commands
+      '(("w" "Agenda for the last 100 days"
+         agenda ""
+         ((org-agenda-start-day "-31d")
+          (org-agenda-span 100)))))
+
+(setq org-directory "~/.org")
+(setq org-ellipsis " ▾")
+(require 'org-crypt)
+
+(org-crypt-use-before-save-magic)
+(setq calendar-week-start-day 1)
+(setq org-tags-exclude-from-inheritance '("crypt"))
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
+                                 (todo . " %i %-12:c")
+                                 (tags . " %i %-12:c")
+                                 (search . " %i %-12:c")))
+
+
+(setq org-agenda-format-date (lambda (date) (concat "\n"
+                                                    (make-string (window-width) 9472)
+                                                    "\n"
+                                                    (org-agenda-format-date-aligned date))))
