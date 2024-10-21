@@ -6,11 +6,11 @@
        ;;layout               ; auie,ctsrnm is the superior home row
 
        :completion
-       (company +childframe)  ; the ultimate code completion backend
+       ;;(company +childframe)  ; the ultimate code completion backend
        ;;helm                 ; the *other* search engine for love and life
        ;;ido                  ; the other *other* search engine...
-       (ivy +fuzzy +icons +prescient) ; a search engine for love and life
-       ;;vertico                ; the search engine of the future
+       ;;(ivy +fuzzy +icons +prescient) ; a search engine for love and life
+       vertico                ; the search engine of the future
 
 
        :ui
@@ -19,15 +19,15 @@
        ;;doom-dashboard         ; a nifty splash screen for Emacs
        ;;doom-quit            ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column            ; a `fill-column' indicator
-       hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       hydra
+       ;;hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       ;;hydra
        ;;indent-guides        ; highlighted indent columns
        ;;(ligatures)            ; ligatures and symbols to make your code pretty again
        ;;minimap              ; show a map of the code on the side
        (modeline +light)      ; snazzy, Atom-inspired modeline, plus API
-       nav-flash              ; blink cursor line after big motions
+       ;;nav-flash              ; blink cursor line after big motions
        ;;neotree              ; a project drawer, like NERDTree for vim
-       ophints                ; highlight the region an operation acts on
+       ;;ophints                ; highlight the region an operation acts on
        (popup +defaults)      ; tame sudden yet inevitable temporary windows
        ;;tabs                 ; a tab bar for Emacs
        ;;treemacs               ; a project drawer, like neotree but cooler
@@ -53,17 +53,17 @@
        word-wrap              ; soft wrapping with language-aware indent
 
        :emacs
-       dired                  ; making dired pretty [functional]
+       ;;dired                  ; making dired pretty [functional]
        electric               ; smarter, keyword-based electric-indent
        ibuffer                ; interactive buffer management
-       (undo +tree)           ; persistent, smarter undo for your inevitable mistakes
+       ;;(undo +tree)           ; persistent, smarter undo for your inevitable mistakes
        ;;vc                     ; version-control and Emacs, sitting in a tree
 
        :term
        eshell                 ; the elisp shell that works everywhere
        ;;shell                ; simple shell REPL for Emacs
        ;;term                 ; basic terminal emulator for Emacs
-       vterm                  ; the best terminal emulation in Emacs
+       ;;vterm                  ; the best terminal emulation in Emacs
 
        :checkers
        ;;syntax               ; tasing you for every semicolon you forget
@@ -129,11 +129,11 @@
        ;;factor
        ;;ledger               ; an accounting system in Emacs
        ;;lua                  ; one-based indices? one-based indices
-       markdown               ; writing docs for people to ignore
+       ;;markdown               ; writing docs for people to ignore
        ;;nim                  ; python + lisp at the speed of c
        ;;nix                  ; I hereby declare "nix geht mehr!"
        ;;ocaml                ; an objective camel
-       (org +dragndrop +present +hugo)         ; organize your plain life in plain text
+       (org +dragndrop +crypt +roam2)         ; organize your plain life in plain text
        ;;(php +lsp)             ; perl's insecure younger brother
        ;;plantuml             ; diagrams for confusing people more
        ;;purescript           ; javascript, but functional
@@ -147,7 +147,7 @@
        ;;rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala                ; java, but good
        ;;(scheme +guile)               ; a fully conniving family of lisps
-       sh                     ; she sells {ba,z,fi}sh shells on the C xor
+       ;;sh                     ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity             ; do you need a blockchain? No.
        ;;swift                ; who asked for emoji variables?

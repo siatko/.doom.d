@@ -1,11 +1,11 @@
-(setq user-full-name "Simon Weis"
-      user-mail-address "simonattilaweis@tutanota.com")
+(setq user-full-name "Simon Kosina"
+      user-mail-address "siatko@proton.me")
 (setq calendar-latitude 47.73
       calendar-longitude 12.88)
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'modus-vivendi)
 (doom-themes-visual-bell-config)
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
@@ -68,21 +68,23 @@
       '(("w" "Agenda for the last 100 days"
          agenda ""
          ((org-agenda-start-day "-31d")
-          (org-agenda-span 100)))))
+          (org-agenda-span 100)))
+        ("f" "Future dates with entries"
+         agenda ""
+         ((org-agenda-time-grid nil)
+          (org-agenda-entry-types '(:timestamp :sexp))
+          (org-agenda-span 'year)
+          (org-agenda-start-day "-31d")
+          (org-agenda-span 100)
+          (org-agenda-show-all-dates nil)
+          (org-agenda-overriding-header "Future dates with entries")))))
 
 (setq org-directory "~/.org")
-(setq org-ellipsis " ▾")
 (require 'org-crypt)
 
 (org-crypt-use-before-save-magic)
 (setq calendar-week-start-day 1)
 (setq org-tags-exclude-from-inheritance '("crypt"))
-
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
                                  (todo . " %i %-12:c")
@@ -94,3 +96,5 @@
                                                     (make-string (window-width) 9472)
                                                     "\n"
                                                     (org-agenda-format-date-aligned date))))
+(setq system-time-locale "C")
+(setq projectile-enable-caching nil)
