@@ -99,18 +99,16 @@
 (setq system-time-locale "C")
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
-
-(defun org-attach-open-with-xdg-open (file)
-  "Open an attached file using xdg-open."
-  (start-process "xdg-open" nil "xdg-open" file))
-
-(defun org-attach-open-custom ()
-  "Custom function to open attachments using xdg-open."
+(defun org-attach-open-inline-image-with-xdg-open ()
+  "Open an inline image attachment using xdg-open."
   (interactive)
-  (let ((file (org-attach-get-attached-file)))
-    (if file
-        (org-attach-open-with-xdg-open file)
+  (let* ((link (org-element-context))
+         (path (when (and (eq (org-element-type link) 'link)
+                          (string= (org-element-property :type link) "attachment"))
+                 (org-attach-expand (org-element-property :path link)))))
+    (if path
+        (start-process "xdg-open" nil "xdg-open" path)
       (message "No attachment found"))))
 
-;; Override the default org-attach-open function
-(advice-add 'org-attach-open :override #'org-attach-open-custom)
+;; Optionally, bind the function to a key, e.g., C-c i
+(global-set-key (kbd "C-c i") 'org-attach-open-inline-image-with-xdg-open)
