@@ -104,7 +104,9 @@
   "In dired, open the file named on this line."
   (interactive)
   (let ((file (dired-get-file-for-visit)))
-    (start-process "xdg-open" nil "xdg-open" file)))
+    (if (string-match-p (image-file-name-regexp) file)
+        (start-process "xdg-open" nil "xdg-open" file)
+      (dired-find-file))))
 
 (with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "C-c o") 'my-dired-open-file))
+  (define-key dired-mode-map (kbd "RET") 'my-dired-open-file))
