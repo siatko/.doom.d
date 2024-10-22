@@ -99,3 +99,19 @@
 (setq system-time-locale "C")
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
+
+(defun open-image-with-xdg-open (file)
+  "Open an image file using xdg-open."
+  (interactive "fSelect image file: ")
+  (start-process "xdg-open" nil "xdg-open" file))
+
+;; Optionally, bind the function to a key, e.g., C-c o
+;;(global-set-key (kbd "C-c o") 'open-image-with-xdg-open)
+
+;; Alternatively, you can set it up to open images automatically when you try to view them
+(add-hook 'image-mode-hook
+          (lambda ()
+            (let ((file (buffer-file-name)))
+              (when file
+                (open-image-with-xdg-open file)
+                (kill-buffer)))))
