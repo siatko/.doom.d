@@ -100,18 +100,18 @@
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
 
-(defun org-attach-open-inline-image-with-xdg-open ()
-  "Open an inline image attachment using xdg-open."
-  (interactive)
-  (let* ((link (org-element-context))
-         (path (when (and (eq (org-element-type link) 'link)
-                          (string= (org-element-property :type link) "attachment"))
-                 (org-attach-open (org-element-property :path link)))))
-    (if path
-        (if (file-exists-p path)
-            (start-process "xdg-open" nil "xdg-open" path)
-          (message "Attachment file does not exist: %s" path))
-      (message "No attachment found or not an attachment link"))))
+(defun open-image-with-xdg-open (file)
+  "Open an image file using xdg-open."
+  (interactive "fSelect image file: ")
+  (start-process "xdg-open" nil "xdg-open" file))
 
-;; Optionally, bind the function to a key, e.g., C-c i
-(global-set-key (kbd "C-c i") 'org-attach-open-inline-image-with-xdg-open)
+;; Optionally, bind the function to a key, e.g., C-c o
+(global-set-key (kbd "C-c o") 'open-image-with-xdg-open)
+
+;; Alternatively, you can set it up to open images automatically when you try to view them
+(add-hook 'image-mode-hook
+          (lambda ()
+            (let ((file (buffer-file-name)))
+              (when file
+                (open-image-with-xdg-open file)
+                (kill-buffer)))))
