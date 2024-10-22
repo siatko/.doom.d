@@ -99,16 +99,19 @@
 (setq system-time-locale "C")
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
+
 (defun org-attach-open-inline-image-with-xdg-open ()
   "Open an inline image attachment using xdg-open."
   (interactive)
   (let* ((link (org-element-context))
          (path (when (and (eq (org-element-type link) 'link)
                           (string= (org-element-property :type link) "attachment"))
-                 (org-attach-expand (org-element-property :path link)))))
+                 (org-attach-open (org-element-property :path link)))))
     (if path
-        (start-process "xdg-open" nil "xdg-open" path)
-      (message "No attachment found"))))
+        (if (file-exists-p path)
+            (start-process "xdg-open" nil "xdg-open" path)
+          (message "Attachment file does not exist: %s" path))
+      (message "No attachment found or not an attachment link"))))
 
 ;; Optionally, bind the function to a key, e.g., C-c i
 (global-set-key (kbd "C-c i") 'org-attach-open-inline-image-with-xdg-open)
