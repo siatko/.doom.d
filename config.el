@@ -98,3 +98,4 @@
                                                     (org-agenda-format-date-aligned date))))
 (setq system-time-locale "C")
 (setq projectile-enable-caching nil)
+(setq browse-url-browser-function 'browse-url-xdg-open)
