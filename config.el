@@ -5,7 +5,7 @@
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
 
-(setq doom-theme 'modus-vivendi)
+(setq doom-theme 'solarized-dark)
 (doom-themes-visual-bell-config)
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
@@ -80,7 +80,6 @@
           (org-agenda-overriding-header "Future dates with entries")))))
 
 (setq org-directory "~/.org")
-(require 'org-crypt)
 
 (org-crypt-use-before-save-magic)
 (setq calendar-week-start-day 1)
@@ -109,3 +108,10 @@
     (message "Opening %s done" file)))
 
 (global-set-key (kbd "C-c o") 'dired-open-file)
+
+(after! projectile
+  (add-to-list 'projectile-globally-ignored-directories "~/.org/roam")
+  (add-to-list 'projectile-globally-ignored-directories "~/.org/.git")
+  (add-to-list 'projectile-globally-ignored-directories "~/.org/.attach")
+  (add-to-list 'projectile-globally-ignored-files "~/.org/.orgids")
+  (add-to-list 'projectile-globally-ignored-files "~/.org/.dir-locals.el"))
