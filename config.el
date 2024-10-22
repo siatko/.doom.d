@@ -5,7 +5,7 @@
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
 
-(setq doom-theme 'solarized-dark)
+(setq doom-theme 'doom-solarized-dark)
 (doom-themes-visual-bell-config)
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
