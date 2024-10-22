@@ -100,13 +100,10 @@
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
 
-(defun my-dired-open-file ()
+(defun dired-open-file ()
   "In dired, open the file named on this line."
   (interactive)
-  (let ((file (dired-get-file-for-visit)))
-    (if (string-match-p (image-file-name-regexp) file)
-        (start-process "xdg-open" nil "xdg-open" file)
-      (dired-find-file))))
-
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'my-dired-open-file))
+  (let* ((file (dired-get-filename nil t)))
+    (message "Opening %s..." file)
+    (call-process "xdg-open" nil 0 nil file)
+    (message "Opening %s done" file)))
