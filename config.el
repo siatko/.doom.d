@@ -107,3 +107,5 @@
     (message "Opening %s..." file)
     (call-process "termux-open" nil 0 nil file)
     (message "Opening %s done" file)))
+
+(global-set-key (kbd "C-c o") 'dired-open-file)
