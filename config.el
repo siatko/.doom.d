@@ -100,18 +100,17 @@
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
 
-(defun open-image-with-xdg-open (file)
-  "Open an image file using xdg-open."
-  (interactive "fSelect image file: ")
+(defun org-attach-open-with-xdg-open (file)
+  "Open an attached file using xdg-open."
   (start-process "xdg-open" nil "xdg-open" file))
 
-;; Optionally, bind the function to a key, e.g., C-c o
-;;(global-set-key (kbd "C-c o") 'open-image-with-xdg-open)
+(defun org-attach-open-custom ()
+  "Custom function to open attachments using xdg-open."
+  (interactive)
+  (let ((file (org-attach-get-attached-file)))
+    (if file
+        (org-attach-open-with-xdg-open file)
+      (message "No attachment found"))))
 
-;; Alternatively, you can set it up to open images automatically when you try to view them
-(add-hook 'image-mode-hook
-          (lambda ()
-            (let ((file (buffer-file-name)))
-              (when file
-                (open-image-with-xdg-open file)
-                (kill-buffer)))))
+;; Override the default org-attach-open function
+(advice-add 'org-attach-open :override #'org-attach-open-custom)
