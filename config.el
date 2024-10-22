@@ -100,25 +100,11 @@
 (setq projectile-enable-caching nil)
 (setq browse-url-browser-function 'browse-url-xdg-open)
 
-(defun open-image-with-xdg-open (file)
-  "Open an image file using xdg-open."
-  (interactive "fSelect image file: ")
-  (start-process "xdg-open" nil "xdg-open" file))
-
-;; Optionally, bind the function to a key, e.g., C-c o
-(global-set-key (kbd "C-c o") 'open-image-with-xdg-open)
-
-;; Alternatively, you can set it up to open images automatically when you try to view them
-(defun org-attach-open-inline-image-with-xdg-open ()
-  "Open an inline image attachment using xdg-open."
+(defun my-dired-open-file ()
+  "In dired, open the file named on this line."
   (interactive)
-  (let* ((link (org-element-context))
-         (path (when (and (eq (org-element-type link) 'link)
-                          (string= (org-element-property :type link) "attachment"))
-                 (org-attach-expand (org-element-property :path link)))))
-    (if path
-        (start-process "xdg-open" nil "xdg-open" path)
-      (message "No attachment found"))))
+  (let ((file (dired-get-file-for-visit)))
+    (start-process "xdg-open" nil "xdg-open" file)))
 
-;; Optionally, bind the function to a key, e.g., C-c i
-(global-set-key (kbd "C-c i") 'org-attach-open-inline-image-with-xdg-open)
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "C-c o") 'my-dired-open-file))
