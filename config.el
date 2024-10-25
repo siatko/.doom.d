@@ -1,7 +1,5 @@
 (setq user-full-name "Simon Kosina"
       user-mail-address "siatko@proton.me")
-(setq calendar-latitude 47.73
-      calendar-longitude 12.88)
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
 
@@ -34,35 +32,14 @@
   :config
   (global-evil-matchit-mode 1))
 
-(use-package! git-auto-commit-mode
-  :config
-  (setq-default gac-automatically-push-p t)
-  (setq-default gac-automatically-add-new-files-p t)
-
-  ;; Advise the `gac-push' function to pull before pushing and refresh the buffer
-  (defun gac-pull-before-push (&rest _args)
-    "Pull from the current repo before pushing and refresh the buffer."
-    (let ((current-file (buffer-file-name)))
-      (shell-command "git pull")
-      (when current-file
-        (with-current-buffer (find-buffer-visiting current-file)
-          (revert-buffer t t t)))))
-  (advice-add 'gac-push :before #'gac-pull-before-push))
-
-
-(setq org-log-done 'time)
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-start-day "-31d")
 (setq org-agenda-span 100)
-
-(custom-set-variables
- '(org-agenda-start-day "-31d")
- '(org-agenda-span 100))
-
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq org-agenda-start-day "-31d")
-            (setq org-agenda-span 100)))
+(setq calendar-week-start-day 1)
+(setq system-time-locale "C")
+(setq projectile-enable-caching nil)
+(setq browse-url-browser-function 'browse-url-xdg-open)
+(setq org-directory "~/Documents/Org")
 
 (setq org-agenda-custom-commands
       '(("w" "Agenda for the last 100 days"
@@ -79,27 +56,17 @@
           (org-agenda-show-all-dates nil)
           (org-agenda-overriding-header "Future dates with entries")))))
 
-(setq org-directory "~/.org")
-
-(org-crypt-use-before-save-magic)
-(setq calendar-week-start-day 1)
-(setq org-tags-exclude-from-inheritance '("crypt"))
-
 (setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
                                  (todo . " %i %-12:c")
                                  (tags . " %i %-12:c")
                                  (search . " %i %-12:c")))
 
-
 (setq org-agenda-format-date (lambda (date) (concat "\n"
                                                     (make-string (window-width) 9472)
                                                     "\n"
                                                     (org-agenda-format-date-aligned date))))
-(setq system-time-locale "C")
-(setq projectile-enable-caching nil)
-(setq browse-url-browser-function 'browse-url-xdg-open)
 
-(defun dired-open-file ()
+(defun dired-open-file-externally ()
   "In dired, open the file named on this line."
   (interactive)
   (let* ((file (dired-get-filename nil t)))
@@ -109,9 +76,10 @@
 
 (global-set-key (kbd "C-c o") 'dired-open-file)
 
-(after! projectile
-  (add-to-list 'projectile-globally-ignored-directories "~/.org/roam")
-  (add-to-list 'projectile-globally-ignored-directories "~/.org/.git")
-  (add-to-list 'projectile-globally-ignored-directories "~/.org/.attach")
-  (add-to-list 'projectile-globally-ignored-files "~/.org/.orgids")
-  (add-to-list 'projectile-globally-ignored-files "~/.org/.dir-locals.el"))
+;;(after! projectile
+;;  (setq projectile-globally-ignored-directories
+;;        (append '("~/.org/.git")
+;;                projectile-globally-ignored-directories)))
+
+;;(org-crypt-use-before-save-magic)
+;;(setq org-tags-exclude-from-inheritance '("crypt"))
