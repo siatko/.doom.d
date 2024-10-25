@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: php_inline
-# key: phpl
-# --
-<?= $0 ?>
