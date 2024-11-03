@@ -2,3 +2,4 @@
 
 (package! evil-matchit)
 (package! osm)
+(package! denote)

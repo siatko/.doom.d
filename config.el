@@ -3,7 +3,7 @@
 
 (setq doom-font (font-spec :family "JetBrainsMono" :size 20))
 
-(setq doom-theme 'doom-solarized-dark)
+(setq doom-theme 'modus-vivendi)
 (doom-themes-visual-bell-config)
 (defvar siatwe/frame-transparency '(100 . 100))
 (set-frame-parameter (selected-frame) 'alpha siatwe/frame-transparency)
@@ -32,6 +32,12 @@
   :config
   (global-evil-matchit-mode 1))
 
+(use-package! denote
+  :config
+  (setq denote-directory (expand-file-name "~/Documents/Org")))
+
+
+
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-start-day "-31d")
 (setq org-agenda-span 100)
@@ -56,10 +62,10 @@
           (org-agenda-show-all-dates nil)
           (org-agenda-overriding-header "Future dates with entries")))))
 
-(setq org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
-                                 (todo . " %i %-12:c")
-                                 (tags . " %i %-12:c")
-                                 (search . " %i %-12:c")))
+(setq org-agenda-prefix-format '((agenda . "%i %?-12t%b% s")
+                                 (todo . " %i")
+                                 (tags . " %i")
+                                 (search . " %i")))
 
 (setq org-agenda-format-date (lambda (date) (concat "\n"
                                                     (make-string (window-width) 9472)
@@ -75,11 +81,3 @@
     (message "Opening %s done" file)))
 
 (global-set-key (kbd "C-c o") 'dired-open-file)
-
-;;(after! projectile
-;;  (setq projectile-globally-ignored-directories
-;;        (append '("~/.org/.git")
-;;                projectile-globally-ignored-directories)))
-
-;;(org-crypt-use-before-save-magic)
-;;(setq org-tags-exclude-from-inheritance '("crypt"))
